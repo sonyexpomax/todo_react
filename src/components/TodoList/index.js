@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TodoListItem from '../TodoListItem';
+import NewTask from '../NewTask';
 import './style.css';
 
 class TodoList extends Component{
@@ -16,6 +17,10 @@ class TodoList extends Component{
         this.props.onChange(id);
     };
 
+    addTask = (task) => {
+
+    };
+
     render(){
         return (
             <div>
@@ -27,6 +32,8 @@ class TodoList extends Component{
                         return <TodoListItem key={item.id} task={item.text} onRemove = {this.removeItem} onChange = {this.changeItem} />
                     })}
                 </ol>
+                <button onClick={this.addTask}>Add task</button>
+                {/*<NewTask />*/}
             </div>
         )
     }
