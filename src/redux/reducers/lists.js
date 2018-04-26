@@ -6,6 +6,13 @@ export default function lists(state = initialState, action) {
             return {
                 ...action.payload
             };
+        case 'ADD_LIST':
+            return {
+                ...state,
+                ...action.payload
+            };
+        case 'REMOVE_LIST':
+            return state.filter(item => item.id !== action.payload);
         case 'CHANGE_NAME':
             return {};
     }

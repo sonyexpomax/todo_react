@@ -13,6 +13,16 @@ class TodoListItem extends Component{
         this.props.onRemove(this.props.task.id);
     };
 
+    moveDownHandler = (e) => {
+        e.preventDefault();
+
+    };
+
+    moveUpHandler = (e) => {
+        e.preventDefault();
+
+    };
+
     render(){
         return (
             <div className={'task'}>
@@ -29,6 +39,18 @@ class TodoListItem extends Component{
                     ref = {this.props.task.id}
                     onClick = {this.removeHandler}
                 >x</button>
+                <button
+                    className={'task-up'}
+                    title={'Move higher'}
+                    onClick={this.moveUpHandler}>
+                    UP
+                </button>
+                <button
+                    className={'task-down'}
+                    title={'Move below'}
+                    onClick={this.moveDownHandler}>
+                    DOWN
+                </button>
             </div>
         )
     }
