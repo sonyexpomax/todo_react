@@ -1,78 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Router, Route } from 'react-router';
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit } from '../actions'
-import Picker from '../components/Picker'
-import Posts from '../components/Posts'
+import { connect } from 'react-redux';
+import TodoList from '../TodoList';
+import LoginPage from '../LoginPage';
+import RegistrationPage from '../RegistrationPage';
+// import RegisterPage from '../RegisterPage';
+import Todo from '../Todo';
+import './style.css';
 
 class App extends Component {
+
     static propTypes = {
       //
     };
 
-    componentDidMount() {
-        const { dispatch, selectedSubreddit } = this.props;
-        dispatch(fetchPostsIfNeeded(selectedSubreddit))
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
-            const { dispatch, selectedSubreddit } = nextProps
-            dispatch(fetchPostsIfNeeded(selectedSubreddit))
-        }
-    }
-
-    handleChange = nextSubreddit => {
-        this.props.dispatch(selectSubreddit(nextSubreddit))
-    }
-
-    handleRefreshClick = e => {
-        e.preventDefault()
-
-        const { dispatch, selectedSubreddit } = this.props
-        dispatch(invalidateSubreddit(selectedSubreddit))
-        dispatch(fetchPostsIfNeeded(selectedSubreddit))
-    }
-
     render(){
+        // let firstPage = this.props.userInfo.token ?  <TodoList /> : <LoginForm />;
         return (
             <div>
-                <h1>Task lists</h1>
-                {this.props.testStore.lists.map(list => (
-                    <TodoList
-                        key={list.id}
-                        tasks={list.tasks}
-                        onRemoveTask = {this.removeTask}
-                        onAddTask = {this.addTask}
-                        onChangeTask = {this.changeTaskState}
-                        onAddList = {this.addList}
-                        onRemoveList = {this.removeList}
-                        onRenameList = {this.renameList}
-                    />
-                ))}
-                <button onClick={this.addList}>Add new list</button>
+                <LoginPage />
+                <RegistrationPage />
+                {/*firstPage*/}
+                {/*<Router>*/}
+                    {/*<div>*/}
+                        {/*<Route exact path='/' component={Todo} />*/}
+                        {/*<Route path="/login" component={LoginPage} />*/}
+                        {/*/!*<Route path="/register" component={RegisterPage} />*!/*/}
+                    {/*</div>*/}
+                {/*</Router>*/}
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => {
-    const { selectedSubreddit, postsBySubreddit } = state
-    const {
-        isFetching,
-        lastUpdated,
-        items: posts
-    } = postsBySubreddit[selectedSubreddit] || {
-        isFetching: true,
-        items: []
-    }
 
-    return {
-        selectedSubreddit,
-        posts,
-        isFetching,
-        lastUpdated
-    }
-}
-
-export default connect(mapStateToProps)(App)
+export default connect()(App)

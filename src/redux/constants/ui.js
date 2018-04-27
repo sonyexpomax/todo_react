@@ -1,0 +1,2 @@
+export const START_REQUEST = 'START_REQUEST';
+export const STOP_REQUEST = 'STOP_REQUEST';

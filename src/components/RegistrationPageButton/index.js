@@ -5,7 +5,7 @@ import './style.css';
 const LoginPageButton = (props) => {
     const {isRequest, signIn} = props;
     return (
-        <button className={'btn-sign-in'} disabled={isRequest} onClick={signIn}>Sign In</button>
+        <button className={'btn-sign-in'} disabled={isRequest} onClick={signIn}>Send</button>
     )
 };
 

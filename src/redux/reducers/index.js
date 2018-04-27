@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
-
 import lists from './lists';
 import tasks from './tasks';
-import userInfo from './user_info'
+import user from './user'
+import ui from './ui';
 
 export default combineReducers({
     lists,
     tasks,
-    userInfo
+    user,
+    ui
 })
