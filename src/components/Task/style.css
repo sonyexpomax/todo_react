@@ -1,0 +1,48 @@
+.task{
+    width: 95%;
+    margin: 10px 0 5px 0;
+}
+
+.task i {
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    display: inline-block;
+    padding: 2px;
+    height: 4px;
+    width: 4px;
+    margin-right:10px;
+    float: right;
+}
+.task i:hover{
+    cursor: pointer;
+    border-color: #4f100f;
+}
+
+.task .up {
+    margin-top:5px;
+    transform: rotate(-135deg);
+}
+
+.task .down {
+    transform: rotate(45deg);
+}
+.task-remove{
+    margin-top: -2px;
+    padding: 3px 7px;
+    border-radius: 100%;
+    background-color: #ca1200;
+    color: #ffffff;
+    border: none;
+    float: right;
+}
+.task-remove:hover {
+    cursor: pointer;
+    background-color: #900d00;
+}
+
+.task:hover{
+    background-color: #d8d8d8
+}
+.task-finished{
+    text-decoration: line-through;
+}

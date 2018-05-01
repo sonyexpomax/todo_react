@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function loginUser(email, password) {
     const requestOptions = { email, password };
-console.log(requestOptions);
+    console.log(requestOptions);
 
     return axios.post('http://localhost:3000/auth/sign_in', requestOptions)
         .then(response => {

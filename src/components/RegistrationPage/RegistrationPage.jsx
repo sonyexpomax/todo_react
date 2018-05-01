@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RegistrationPageButton from '../RegistrationPageButton';
-// import { selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit } from '../actions'
 import { registerAction } from '../../redux/actions/authentificate';
 import './style.css';
 
@@ -47,21 +46,21 @@ class RegistrationPage extends Component {
 
     render() {
         return (
-            <div className={'login'}>
+            <div className={'register'}>
                 <h2>Registration</h2>
                 <form onSubmit={this.onSubmit}>
-
-                    <p className={'login-label'}><label>Email:</label>
+                    <p className={'register-label'}><label>Email:</label>
                         <input type="email" name="email" value={this.state.email} onChange={this.onEmailChange}/>
                     </p>
-                    <p className={'login-label'}><label>Password:</label>
+                    <p className={'register-label'}><label>Password:</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/>
                     </p>
-                    <p className={'login-label'}><label>Confirm password:</label>
+                    <p className={'register-label'}><label>Confirm password:</label>
                         <input type="confirm_password" name="confirm_password" value={this.state.passwordConfirm} onChange={this.onPasswordConfirmChange}/>
                     </p>
-                    <button type={'submit'}>ok</button>
-                    <RegistrationPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
+                    <p>
+                        <RegistrationPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
+                    </p>
                 </form>
             </div>
         );

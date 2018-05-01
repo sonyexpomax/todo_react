@@ -1,0 +1,96 @@
+.list-head{
+    padding: 10px 20px;
+    background-color: #dcdcdc;
+}
+.list-line{
+    width: 100%;
+    color: #222222;
+    margin: 0;
+}
+.list-head-text{
+    width: 70%;
+    display: inline-block;
+    vertical-align: top;
+}
+.list-head-text h2{
+    margin: 0 0 0 30px;
+    padding: 0 10px;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+}
+.list-head-text input{
+    margin: 0 0 0 30px;
+    padding: 1px 10px;
+    display: inline-block;
+    font-size: 19px;
+
+}
+
+.list-head-text h2[contenteditable=true]{
+    border: solid 1px #900d00;
+}
+.list ol{
+    margin:10px 0 0 40px;
+}
+
+.list-head i {
+    border-right: 4px solid;
+    border-bottom: 4px solid;
+    float: left;
+    padding: 2px;
+    height: 4px;
+    width: 4px;
+    margin-right:10px;
+}
+.list-head i:hover{
+    cursor: pointer;
+    border-color: #4f100f;
+}
+.empty-list{
+    margin: 10px 40px;
+}
+
+.arrow-right {
+    margin-top:5px;
+    transform: rotate(-45deg);
+}
+
+.arrow-down{
+    transform: rotate(45deg);
+}
+.rename-list, .remove-list{
+    font-weight: 400;
+    font-size: 16px;
+    margin-left: 10px;
+}
+.rename-list:hover, .remove-list:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.rename-list{
+    color: #176004;
+}
+.remove-list{
+    color: #900d00;
+}
+.list-head-actions{
+    display: inline-block;
+    float: right;
+    width: 15%;
+}
+
+.list-head-text button{
+    width: 10%;
+    border-radius: 0  5px 5px 0;
+    background-color: #3b8e00;
+    color: #ffffff;
+    border: 1px solid #5d5d5d;
+    font-family: "Source Code Pro", Monaco, monospace;
+    font-size: 16px;
+    padding: 4px 0;
+}
+.list-head-text button:hover{
+    background-color: #215000;
+    cursor: pointer;
+}

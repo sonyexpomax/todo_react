@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import LoginPageButton from '../LoginPageButton';
-// import { selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit } from '../actions'
 import { loginAction } from '../../redux/actions/authentificate';
 import './style.css';
-
-const propTypes = {
-    //
-};
 
 class LoginPage extends Component {
 
     constructor(props) {
         super(props);
-
-        // this.props.dispatch(userActions.logout());
 
         this.state = {
             login: '',
@@ -45,20 +38,19 @@ class LoginPage extends Component {
             <div className={'login'}>
                 <h2>Login</h2>
                 <form onSubmit={this.onSubmit}>
-                        <p className={'login-label'}><label>Login:</label>
-                            <input type="text" name="login" value={this.state.login} onChange={this.onLoginChange}/>
-                        </p>
-
+                    <p className={'login-label'}><label>Login:</label>
+                        <input type="text" name="login" value={this.state.login} onChange={this.onLoginChange}/>
+                    </p>
                     <p className={'login-label'}><label>Password:</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/>
                     </p>
-                    <LoginPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
+                    <p>
+                        <LoginPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
+                    </p>
                 </form>
             </div>
         );
     }
 }
-
-LoginPage.propTypes = propTypes;
 
 export default LoginPage;

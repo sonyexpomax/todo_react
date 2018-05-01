@@ -1,25 +1,22 @@
 import React, { Component } from "react";
+import NewTask from './Newtask';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './style.css';
 
-class NewTask extends Component{
+const propTypes = {
+//
+};
 
-    addTask = (e) => {
-        e.preventDefault();
-        this.props.onFormSubmit(this.refs.taskInput.value);
-        this.refs.taskInput.value = '';
+const NewTaskContainer = (props) => <NewTask {...props} />;
+
+NewTaskContainer.propTypes = propTypes;
+
+function mapStateToProps(store) {
+    return {
+        isRequest: store.ui.button
     };
-
-    render(){
-        return (
-            <div>
-                <h3>Add new task</h3>
-                <form onSubmit={this.addTask} className={'add-form'}>
-                    <input ref='taskInput' placeholder="input task name" className={'add-text'} />
-                    <button type="submit" className={'add-button'}>Add</button>
-                </form>
-            </div>
-        );
-    }
 }
-export default NewTask;
+
+export default connect(mapStateToProps)(NewTaskContainer)
