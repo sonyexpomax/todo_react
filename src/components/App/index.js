@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import LoginPage from '../LoginPage';
 import RegistrationPage from '../RegistrationPage';
 import TodoLists from '../TodoLists';
-import NewTask from '../NewTask';
 
 import './style.css';
 
