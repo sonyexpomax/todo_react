@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React  from "react";
 import TodoList from './TodoList';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,9 +11,9 @@ const TodoListContainer = (props) => <TodoList {...props} />;
 
 TodoListContainer.propTypes = propTypes;
 
-function mapStateToProps(store) {
+function mapStateToProps(store, ownProps) {
     return {
-        tasks: store.tasks //.items.filter(item => item.listId === this.props.list.id)
+        tasks: store.tasks.items.filter(item => item.list_id === ownProps.list.id)
     };
 }
 

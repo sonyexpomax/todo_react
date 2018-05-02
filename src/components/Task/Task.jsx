@@ -25,13 +25,13 @@ class Task extends Component{
 
     render(){
         return (
-            <div className={ !this.props.task.isFinished ? 'task' : 'task task-finished'}>
+            <div className={ !this.props.task.is_done ? 'task' : 'task task-finished'}>
                 <input
                     type = "checkbox"
                     onChange = {this.changeStateHandler}
-                    defaultChecked = {this.props.task.isFinished}
+                    defaultChecked = {this.props.task.is_done}
                 />
-                {this.props.task.text}
+                {this.props.task.content}
                 <button
                     className = {'task-remove'}
                     title = {'Remove'}

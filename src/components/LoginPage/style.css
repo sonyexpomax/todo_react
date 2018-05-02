@@ -26,3 +26,11 @@
     border-radius: 5px;
     border: 1px solid #222222;
 }
+.registration-link{
+    text-align: center;
+    margin: 0 auto;
+}
+.registration-link a{
+    text-decoration: none;
+
+}

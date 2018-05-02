@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import NewTask from './Newtask';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import './style.css';
+import {addTaskAction} from "../../redux/actions/tasks";
 
 const propTypes = {
 //
@@ -19,4 +20,10 @@ function mapStateToProps(store) {
     };
 }
 
-export default connect(mapStateToProps)(NewTaskContainer)
+function mapDispatchToProps (dispatch) {
+    return ({
+        createTask: (content, listId) =>  dispatch(addTaskAction(content, listId))
+    });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewTaskContainer)

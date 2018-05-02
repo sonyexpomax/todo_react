@@ -5,27 +5,39 @@ function loginUser(email, password) {
     console.log(requestOptions);
 
     return axios.post('http://localhost:3000/auth/sign_in', requestOptions)
-        .then(response => {
-            console.log(response.ok);
-            console.log(response.headers);
-            if (!response.ok) {
-                console.log('++');
-                return Promise.reject(response.statusText);
-            }
-            return response;
-        })
-        .then(user => {
-            console.log(user);
-            if (user && user.token) {
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
-            return user;
+        .then(
+            response => {
+                console.log(response);
+                return response.headers;
+            },
+            error => {
+                console.error(error);
+            })
+        .then(headers => {
+            console.log(headers);
+            localStorage.setItem('access-token', headers['access-token']);
+            localStorage.setItem('client', headers.client);
+            localStorage.setItem('uid', headers.uid);
+            return headers;
         });
 }
 
 function logoutUser() {
-    localStorage.removeItem('user');
+    return axios.delete('http://localhost:3000/auth/sign_out')
+        .then(
+            response => {
+                return response;
+            },
+            error => {
+                console.error(error);
+            })
+        .then(res => {
+            console.log(res);
+            localStorage.removeItem('access-token');
+            localStorage.removeItem('client');
+            localStorage.removeItem('uid');
+            return res;
+        });
 }
 
 function registerUser(email, password, password_confirmation) {

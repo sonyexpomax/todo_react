@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import NewList from './NewList';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

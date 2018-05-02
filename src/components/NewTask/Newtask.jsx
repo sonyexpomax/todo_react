@@ -20,7 +20,7 @@ class NewTask extends Component{
         const { newTask } = this.state;
         const { dispatch } = this.props;
         if (newTask) {
-            dispatch(addTaskAction(this.props.listId, newTask));
+            this.props.createTask(newTask, this.props.listId);
         }
     };
 

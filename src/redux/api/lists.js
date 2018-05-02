@@ -1,94 +1,85 @@
-// import axios from 'axios';
-const lists = [
-    {
-        id: 1,
-        name: 'first list',
-    },
-    {
-        id: 3,
-        name: 'second list',
-    },
-    {
-        id: 4,
-        name: 'third list',
-    }
-];
+import axios from 'axios';
 
-function getLists() {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve(lists);
-        }, 100);
-    })
+function getLists(token,client,uid) {
+    let headers = {
+        headers: {
+            'access-token': token,
+            'client': client,
+            'uid': uid
+        }
+    };
+
+    console.log(headers);
+        return axios.get('http://localhost:3000/v1/lists', headers)
+            .then(
+                response => {
+                    console.log(response.data);
+                    return response.data;
+                },
+                error => {
+                    console.error(error);
+                })
+}
+
+
+function addList(token, client, uid, list) {
+    let headers = {
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    console.log(list);
+    return axios.post('http://localhost:3000/v1/lists', {label:list}, {'headers' : headers})
         .then(
             response => {
-                return response;
+                console.log(response.data);
+                return response.data;
             },
             error => {
                 console.error(error);
             })
-        .then(lists => {
-            return lists;
-        });
 }
 
-function addList(listName) {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve('ok');
-        }, 100);
-    })
+
+function removeList(token, client, uid, listId) {
+console.log(listId);
+    let headers = {
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    return axios.delete(`http://localhost:3000/v1/lists/${listId}`, {'headers' : headers})
         .then(
             response => {
-                return response;
+                console.log(response.data);
+                return response.data;
             },
             error => {
                 console.error(error);
             })
-        .then(res => {
-            return res;
-        });
 }
 
-function renameList(listId, newName) {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve({
-                id: listId,
-                name: newName
-            });
-        }, 100);
-    })
+
+function renameList(token, client, uid, listId, newName) {
+    console.log(listId);
+    let headers = {
+       'Access-Control-Allow-Origin': '*',
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    return axios.put(`http://localhost:3000/v1/lists/${listId}`, {label: newName}, {'headers' : headers})
         .then(
             response => {
-                return response;
+                console.log(response.data);
+                return response.data;
             },
             error => {
                 console.error(error);
             })
-        .then(res => {
-            return res;
-        });
 }
-
-function removeList(listId) {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve(listId);
-        }, 100);
-    })
-        .then(
-            response => {
-                return response;
-            },
-            error => {
-                console.error(error);
-            })
-        .then(res => {
-            return res;
-        });
-}
-
-
 
 export {getLists,removeList,renameList,addList};

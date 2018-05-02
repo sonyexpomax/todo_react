@@ -13,6 +13,7 @@ export default function lists(state = initialState, action) {
                 isFetching: true,
             });
         case taskConstants.GET_TASKS_SUCCESS:
+            console.log(action);
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.tasks
@@ -54,7 +55,6 @@ export default function lists(state = initialState, action) {
                 isFetching: true,
             });
         case taskConstants.REMOVE_TASK_SUCCESS:
-            console.log(action);
             return Object.assign({}, state,
                 {
                     items: state.items.filter(item => item.id !== action.task),
@@ -67,25 +67,26 @@ export default function lists(state = initialState, action) {
                 isFetching: true,
             });
         case taskConstants.CHANGE_TASK_STATE_SUCCESS:
+            console.log(action);
             return Object.assign({}, state,
                 {
                     items: state.items.map(task =>
                         (task.id === action.task)
-                            ? {...task, isFinished: !task.isFinished}
+                            ? {...task, is_done: !task.is_done}
                             : task
                     ),
                     isFetching: false
                 });
 
-        case taskConstants.MOVE_TASK_ABOVE_REQUEST:
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
-        case taskConstants.MOVE_TASK_ABOVE_SUCCESS:
-            let newTaskList = state.items.splice(action.task.taskId+1, 0, this.splice(action.task.taskId, 1)[0]);
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
+        // case taskConstants.MOVE_TASK_ABOVE_REQUEST:
+        //     return Object.assign({}, state, {
+        //         isFetching: true,
+        //     });
+        // case taskConstants.MOVE_TASK_ABOVE_SUCCESS:
+        //     let newTaskList = state.items.splice(action.task.taskId+1, 0, this.splice(action.task.taskId, 1)[0]);
+        //     return Object.assign({}, state, {
+        //         isFetching: true,
+        //     });
 
 
     }

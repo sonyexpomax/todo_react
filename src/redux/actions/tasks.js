@@ -1,6 +1,7 @@
 import taskConstants from '../constants/task';
 
 import {addTask, removeTask, getTasks, changeTaskState, showFinishedTasks, showAllTasks} from '../api/tasks';
+import {addList, getLists, renameList} from "../api/lists";
 
 const getTaskRequest = (tasks) => { return { type: taskConstants.GET_TASKS_REQUEST, tasks } };
 const getTaskSuccess = (tasks) => { return { type: taskConstants.GET_TASKS_SUCCESS, tasks } };
@@ -23,14 +24,20 @@ const showFinishedTasksSuccess = () => { return { type: taskConstants.SHOW_FINIS
 const findMaxTaskId = () => { return { type: taskConstants.FIND_MAX_TASK_ID } };
 const increaseMaxTaskId = () => { return { type: taskConstants.INCREASE_MAX_TASK_ID } };
 
+
 function getTasksAction() {
-    return dispatch => {
+    return (dispatch, getState) => {
+
+        const token = getState().user.user['access-token'];
+        const client = getState().user.user['client'];
+        const uid = getState().user.user['uid'];
+
         dispatch(getTaskRequest());
-        getTasks()
+        getTasks(token,client,uid)
             .then(
                 tasks => {
+                    console.log(tasks);
                     dispatch(getTaskSuccess(tasks));
-                    dispatch(findMaxTaskId());
                 },
                 error => {
                     console.error(error);
@@ -39,24 +46,41 @@ function getTasksAction() {
     };
 }
 
-function addTaskAction(listId, text) {
-    console.info('addTaskAction');
-    return dispatch => {
-        dispatch(addTaskRequest({
-            listId:listId,
-            text:text
-        }));
-        addTask({
-            listId:listId,
-            text:text
-        })
+function addTaskAction(content, listId) {
+    console.log(content,listId);
+    return (dispatch, getState) => {
+
+        const token = getState().user.user['access-token'];
+        const client = getState().user.user['client'];
+        const uid = getState().user.user['uid'];
+
+        dispatch(addTaskRequest(listId));
+        addTask(token,client,uid, content, listId)
             .then(
-                res => {
-                    dispatch(increaseMaxTaskId());
-                    dispatch(addTaskSuccess({
-                        listId:listId,
-                        text:text
-                    }));
+                task => {
+                    console.log(task);
+                    // dispatch(addTaskSuccess(content, listId));
+                },
+                error => {
+                    console.error(error);
+                }
+            );
+    };
+}
+
+function changeTaskStateAction(taskId) {
+    return (dispatch, getState) => {
+
+        const token = getState().user.user['access-token'];
+        const client = getState().user.user['client'];
+        const uid = getState().user.user['uid'];
+
+        dispatch(changeTaskStateRequest(taskId));
+        changeTaskState(token, client, uid, taskId)
+            .then(
+                response => {
+                    console.log(response);
+                    dispatch(changeTaskStateSuccess(response));
                 },
                 error => {
                     console.error(error);
@@ -80,20 +104,7 @@ function removeTaskAction(taskId) {
     };
 }
 
-function changeTaskStateAction(taskId) {
-    return dispatch => {
-        dispatch(changeTaskStateRequest(taskId));
-        changeTaskState(taskId)
-            .then(
-                res => {
-                    dispatch(changeTaskStateSuccess(taskId));
-                },
-                error => {
-                    console.error(error);
-                }
-            );
-    };
-}
+
 
 function moveTaskAbove() {
     
