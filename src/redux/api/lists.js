@@ -9,18 +9,15 @@ function getLists(token,client,uid) {
         }
     };
 
-    console.log(headers);
-        return axios.get('http://localhost:3000/v1/lists', headers)
-            .then(
-                response => {
-                    console.log(response.data);
-                    return response.data;
-                },
-                error => {
-                    console.error(error);
-                })
+    return axios.get('http://localhost:3000/v1/lists', headers)
+        .then(
+            response => {
+                return response.data;
+            },
+            error => {
+                console.error(error);
+            })
 }
-
 
 function addList(token, client, uid, list) {
     let headers = {
@@ -29,11 +26,9 @@ function addList(token, client, uid, list) {
         'uid': uid
     };
 
-    console.log(list);
     return axios.post('http://localhost:3000/v1/lists', {label:list}, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
                 return response.data;
             },
             error => {
@@ -41,9 +36,7 @@ function addList(token, client, uid, list) {
             })
 }
 
-
 function removeList(token, client, uid, listId) {
-console.log(listId);
     let headers = {
         'access-token': token,
         'client': client,
@@ -53,7 +46,6 @@ console.log(listId);
     return axios.delete(`http://localhost:3000/v1/lists/${listId}`, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
                 return response.data;
             },
             error => {
@@ -61,9 +53,7 @@ console.log(listId);
             })
 }
 
-
 function renameList(token, client, uid, listId, newName) {
-    console.log(listId);
     let headers = {
        'Access-Control-Allow-Origin': '*',
         'access-token': token,
@@ -74,7 +64,6 @@ function renameList(token, client, uid, listId, newName) {
     return axios.put(`http://localhost:3000/v1/lists/${listId}`, {label: newName}, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
                 return response.data;
             },
             error => {

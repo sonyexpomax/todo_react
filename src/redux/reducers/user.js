@@ -14,10 +14,7 @@ let initialState = {
 export default function lists(state = initialState, action) {
     switch (action.type) {
         case LOGIN_REQUEST:
-            return {
-                loggingIn: true,
-                user: action.user
-            };
+            return {loggingIn: true, user: action.user};
         case LOGIN_SUCCESS:
             return {
                 loggedIn: true,
@@ -25,9 +22,7 @@ export default function lists(state = initialState, action) {
                 user: action.user
             };
         case LOGOUT_REQUEST:
-            return Object.assign({}, state, {
-                loggingOut: true
-            });
+            return {...state, loggingOut: true};
         case LOGOUT_SUCCESS:
             return {
                 loggedIn: false,

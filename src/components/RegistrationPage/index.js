@@ -1,13 +1,16 @@
 import RegistrationPage from './RegistrationPage';
 import React  from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {registerAction} from "../../redux/actions/authentificate";
 import './style.css';
+import PropTypes from 'prop-types';
 
 const RegistrationPageContainer = (props) => <RegistrationPage {...props} />;
 
-RegistrationPageContainer.propTypes = propTypes;
+RegistrationPageContainer.propTypes = {
+    register: PropTypes.func,
+    isRequest: PropTypes.bool
+};
 
 function mapStateToProps(store) {
     return {

@@ -1,13 +1,13 @@
-.new-task{
+.td-new-task-wrap{
     padding:0 20px;
 
 }
-.new-task h3{
+.td-new-task-wrap h3{
     color: #4f100f;
     padding: 0;
     margin: 0;
 }
-.add-task-text{
+.td-new-task-add-text{
     width: 90%;
     font-family: "Source Code Pro", Monaco, monospace;
     font-size: 16px;
@@ -17,7 +17,7 @@
     border-right: none;
     padding: 5px 0;
 }
-.add-task-btn{
+.td-new-task-add-btn{
     width: 9%;
     border-radius: 0  5px 5px 0;
     margin:10px 0 ;
@@ -28,10 +28,10 @@
     font-size: 16px;
     padding: 5px 0;
 }
-.add-task-btn:hover{
+.td-new-task-add-btn:hover{
     background-color: #215000;
     cursor: pointer;
 }
-.add-form{
+.td-new-task-add-form{
     margin: 0 10px 0 30px;
 }

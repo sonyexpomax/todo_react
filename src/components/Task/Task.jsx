@@ -1,44 +1,48 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import './style.css';
 
 class Task extends Component{
 
-    changeStateHandler = () => {
-        this.props.changeTaskState(this.props.task.id);
-    };
-
     removeHandler = (e) => {
         e.preventDefault();
-        this.props.removeTask(this.props.task.id);
+        this.props.removeTask();
     };
 
     moveDownHandler = (e) => {
         e.preventDefault();
-        this.props.moveTaskDown(this.props.task.id);
+        this.props.moveTaskDown();
     };
 
     moveUpHandler = (e) => {
         e.preventDefault();
-        this.props.moveTaskUp(this.props.task.id);
+        this.props.moveTaskUp();
     };
 
     render(){
+        let upButton = this.props.isFirst ?
+            <i className="td-task-up-disable"></i> :
+            <i className="td-task-up" onClick={this.moveUpHandler} title={'Move up'}></i>;
+        let downButton = this.props.isLast ?
+            <i className="td-task-down-disable"></i> :
+            <i className="td-task-down" onClick={this.moveDownHandler} title={'Move down'}></i>;
         return (
-            <div className={ !this.props.task.is_done ? 'task' : 'task task-finished'}>
+            <div className={ !this.props.task.is_done ? 'td-task-wrap' : 'td-task-wrap td-task-finished'}>
                 <input
                     type = "checkbox"
-                    onChange = {this.changeStateHandler}
+                    onChange = {this.props.changeTaskState}
                     defaultChecked = {this.props.task.is_done}
                 />
                 {this.props.task.content}
                 <button
-                    className = {'task-remove'}
+                    className = 'td-task-remove'
                     title = {'Remove'}
                     ref = {this.props.task.id}
                     onClick = {this.removeHandler}
                 >x</button>
-                <i className="up" onClick={this.moveUpHandler} title={'Move upper'}></i>
-                <i className="down" onClick={this.moveDownHandler} title={'Move bellow'}></i>
+
+                {upButton}
+                {downButton}
             </div>
         )
     }
@@ -46,10 +50,12 @@ class Task extends Component{
 
 Task.propTypes = {
     task: PropTypes.object,
-    moveTaskDown: PropTypes.function,
-    moveTaskUp: PropTypes.function,
-    removeTask: PropTypes.function,
-    changeTaskState: PropTypes.function
+    isFirst: PropTypes.bool,
+    isLast: PropTypes.bool,
+    moveTaskDown: PropTypes.func,
+    moveTaskUp: PropTypes.func,
+    removeTask: PropTypes.func,
+    changeTaskState: PropTypes.func
 };
 
 

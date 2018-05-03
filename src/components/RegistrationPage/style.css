@@ -1,4 +1,4 @@
-.register{
+.td-registration-page-wrap{
     /*margin-top: 10%;*/
     width:60%;
     margin: 5% auto;
@@ -6,24 +6,25 @@
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.register h2{
+.td-registration-page-wrap h2{
     width: 100%;
     margin: 10px auto;
     text-align: center;
 }
-.register p{
+.td-registration-page-wrap p{
     width: 60%;
     margin: 0 auto;
     padding: 5px 0;
 }
-.register p label{
+.td-registration-page-wrap p label{
     width: 50px;
 }
-.register p input{
-    width: 100%;
+.td-registration-page-wrap p input{
+    width: 97%;
+    padding: 1.5%;
     font-family: "Source Code Pro", Monaco, monospace;
     font-size: 16px;
     margin: 5px 0;
-    border-radius: 5px;
     border: 1px solid #222222;
+    border-bottom: 4px solid #222222;
 }

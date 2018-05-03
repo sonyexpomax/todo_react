@@ -5,13 +5,13 @@ import './style.css';
 const LoginPageButton = (props) => {
     const {isRequest, signIn} = props;
     return (
-        <button className={'btn-sign-in'} disabled={isRequest} onClick={signIn}>Sign In</button>
+        <button className='td-login-page-btn-wrap' disabled={isRequest} onClick={signIn}>Sign In</button>
     )
 };
 
 LoginPageButton.propTypes = {
     isRequest: PropTypes.bool,
-    signIg: PropTypes.function,
+    signIg: PropTypes.func,
 };
 
 export default LoginPageButton;

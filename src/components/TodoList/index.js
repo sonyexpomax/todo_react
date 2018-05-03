@@ -1,21 +1,22 @@
 import React  from "react";
 import TodoList from './TodoList';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {renameListAction,removeListAction} from "../../redux/actions/list";
-
-const propTypes = {
-    list: PropTypes.object,
-};
+import PropTypes from 'prop-types';
 
 const TodoListContainer = (props) => <TodoList {...props} />;
 
-TodoListContainer.propTypes = propTypes;
+TodoListContainer.propTypes = {
+    list: PropTypes.object,
+    tasks: PropTypes.array,
+    renameList: PropTypes.func,
+    removeList: PropTypes.func
+};
 
 function mapStateToProps(store, ownProps) {
-    return {
-        tasks: store.tasks.items.filter(item => item.list_id === ownProps.list.id)
-    };
+    let tasksTemp = store.tasks.items.filter(item => item.listId === ownProps.list.id);
+    let tasks = tasksTemp[0] ? tasksTemp[0].tasks : [];
+    return {tasks: tasks};
 }
 
 function mapDispatchToProps (dispatch) {

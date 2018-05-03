@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
-import {Switch, Redirect} from 'react-router';
-import PropTypes from 'prop-types'
+import {Switch} from 'react-router';
+import PropTypes from 'prop-types';
 import LoginPage from '../LoginPage';
 import RegistrationPage from '../RegistrationPage';
 import TodoLists from '../TodoLists';
@@ -10,16 +10,7 @@ import './style.css';
 
 class App extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
-    static propTypes = {
-        //
-    };
-
     requireAuth = (nextState, replace, cb) => {
-        console.log(this.props);
         if (!this.props.loggedIn) {
             replace({
                 pathname: '/sign_in'
@@ -37,12 +28,7 @@ class App extends Component {
         cb();
     };
 
-
     render(){
-        console.log('loggedIn', this.props.loggedIn);
-
-        // let firstPage = this.props.userInfo.token ?  <TodoList /> : <LoginForm />;
-
         return (
             <BrowserRouter>
                 <Switch>
@@ -55,5 +41,8 @@ class App extends Component {
     }
 }
 
+App.propTypes = {
+    loggedIn: PropTypes.bool
+};
 
 export default App

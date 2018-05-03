@@ -1,15 +1,13 @@
 import App from './App';
 import React  from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-const propTypes = {
-//
-};
+import PropTypes from 'prop-types';
 
 const AppContainer = (props) => <App {...props} />;
 
-AppContainer.propTypes = propTypes;
+AppContainer.propTypes = {
+    loggedIn: PropTypes.bool
+};
 
 function mapStateToProps(store) {
     return {

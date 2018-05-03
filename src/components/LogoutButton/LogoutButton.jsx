@@ -1,21 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React  from 'react';
+import PropTypes from 'prop-types';
 import './style.css';
 
-class LogoutButton extends Component{
-    onSignOut = (e) => {
-        e.preventDefault();
-        this.props.signOut();
-    };
-    render() {
-        return (
-             <button className={'btn-sign-out'} onClick={this.onSignOut}>Log out</button>
-        )
-    }
-}
+const LogoutButton = (props) => {
+    return (
+        <div className='td-logout-btn-wrap' onClick={props.signOut}>Log out</div>
+    )
+};
 
 LogoutButton.propTypes = {
-    singOut: PropTypes.function,
+    singOut: PropTypes.func
 };
 
 export default LogoutButton;

@@ -1,4 +1,4 @@
-.list-head{
+.td-todo-list-head{
     padding: 10px 20px;
     background-color: #dcdcdc;
 }
@@ -7,34 +7,28 @@
     color: #222222;
     margin: 0;
 }
-.list-head-text{
+.td-todo-list-head-text{
     width: 75%;
     display: inline-block;
     vertical-align: top;
 }
-.list-head-text h2{
+.td-todo-list-head-text h2{
     margin: 0 0 0 30px;
     padding: 0 10px;
     display: inline-block;
     font-size: 20px;
     font-weight: 600;
 }
-.list-head-text input{
+.td-todo-list-head-text input{
     margin: 0 0 0 30px;
     padding: 1px 10px;
     display: inline-block;
     font-size: 19px;
-
 }
-
-.list-head-text h2[contenteditable=true]{
-    border: solid 1px #900d00;
-}
-.list ol{
+.td-todo-list-wrap ol{
     margin:10px 0 0 40px;
 }
-
-.list-head i {
+.td-todo-list-head i {
     border-right: 4px solid;
     border-bottom: 4px solid;
     float: left;
@@ -43,44 +37,41 @@
     width: 4px;
     margin-right:10px;
 }
-.list-head i:hover{
+.td-todo-list-head i:hover{
     cursor: pointer;
     border-color: #4f100f;
 }
 .empty-list{
     margin: 10px 40px;
 }
-
-.arrow-right {
+.td-todo-list-arrow-right {
     margin-top:5px;
     transform: rotate(-45deg);
 }
-
-.arrow-down{
+.td-todo-list-arrow-down{
     transform: rotate(45deg);
 }
-.rename-list, .remove-list{
+.td-todo-list-rename, .td-todo-list-remove{
     font-weight: 400;
     font-size: 16px;
     margin-left: 10px;
 }
-.rename-list:hover, .remove-list:hover{
+.td-todo-list-rename:hover, .td-todo-list-remove:hover{
     cursor: pointer;
     text-decoration: underline;
 }
-.rename-list{
+.td-todo-list-rename{
     color: #176004;
 }
-.remove-list{
+.td-todo-list-remove{
     color: #900d00;
 }
-.list-head-actions{
+.td-todo-list-head-actions{
     display: inline-block;
     float: right;
     width: 20%;
 }
-
-.list-head-text button{
+.td-todo-list-head-text button{
     width: 10%;
     border-radius: 0  5px 5px 0;
     background-color: #3b8e00;
@@ -90,7 +81,7 @@
     font-size: 16px;
     padding: 4px 0;
 }
-.list-head-text button:hover{
+.td-todo-list-head-text button:hover{
     background-color: #215000;
     cursor: pointer;
 }

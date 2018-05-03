@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import TodoListItem from '../Task';
+import Task from '../Task';
 import NewTask from '../NewTask';
+import PropTypes from 'prop-types';
 import './style.css';
 
 class TodoList extends Component{
@@ -44,12 +45,14 @@ class TodoList extends Component{
             (<h2>List "{this.props.list.label}"</h2>) :
             (<input type='text' value={this.state.name} onChange={this.onChangeName}/>);
 
-        let tasks = this.props.tasks.length ?
+        let tasks = this.props.tasks.length > 0 ?
             (<ol>
-                {this.props.tasks.map((item) => {
+                {this.props.tasks.map((item, index) => {
+                    let isFirst = (index === 0);
+                    let isLast = (index === (this.props.tasks.length - 1));
                     return (
                         <li key={item.id}>
-                            <TodoListItem task={item} />
+                            <Task task={item} isFirst={isFirst} isLast={isLast} />
                         </li>
                     )
                 })}
@@ -57,21 +60,21 @@ class TodoList extends Component{
             (<p className={'empty-list'}>List is empty</p>);
 
         return (
-            <div className={'list'}>
-                <div className={'list-head'}>
-                    <div className={'list-head-text'}>
-                        <i onClick={this.onChangeState} className = {!this.state.isOpen ? 'arrow-right' : 'arrow-down' }></i>
+            <div className='td-todo-list-wrap'>
+                <div className='td-todo-list-head'>
+                    <div className='td-todo-list-head-text'>
+                        <i onClick={this.onChangeState} className = {!this.state.isOpen ? 'td-todo-list-arrow-right' : 'td-todo-list-arrow-down' }></i>
                         {headText}
                         <button
                             onClick={this.setChangeName}
-                            className={'list-head-text'}
+                            className='td-todo-list-head-text'
                             style={{display: this.state.isEditable ? 'inline-block' : 'none' }}>
                             Save
                         </button>
                     </div>
-                    <div className={'list-head-actions'}>
-                        <small className={'remove-list'} onClick={this.onRemove}>delete</small>
-                        <small className={'rename-list'} onClick={this.onEdit}>rename</small>
+                    <div className='td-todo-list-head-actions'>
+                        <small className='td-todo-list-remove' onClick={this.onRemove}>delete</small>
+                        <small className='td-todo-list-rename' onClick={this.onEdit}>rename</small>
                     </div>
                 </div>
                 <div style={{display: this.state.isOpen ? 'block' : 'none' }}>
@@ -87,8 +90,8 @@ class TodoList extends Component{
 TodoList.propTypes = {
     list: PropTypes.object,
     tasks: PropTypes.array,
-    renameList: PropTypes.function,
-    removeList: PropTypes.function
+    renameList: PropTypes.func,
+    removeList: PropTypes.func
 };
 
 export default TodoList;

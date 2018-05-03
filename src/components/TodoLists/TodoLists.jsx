@@ -3,23 +3,21 @@ import './style.css';
 import TodoList from '../TodoList';
 import NewList from '../NewList';
 import LogoutButton from '../LogoutButton';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class TodoLists extends Component{
 
-    constructor(props){
-        super(props);
-    }
-
     componentDidMount(){
         this.props.getLists();
-        this.props.getTasks();
     }
 
     render(){
-        console.log(this.props.lists.items);
         return (
-            <div className={'lists'}>
-                <LogoutButton />
+            <div className={'td-todo-lists-wrap'}>
+                <Link to="/login">
+                    <LogoutButton />
+                </Link>
                 <h1>Task lists</h1>
                 {(this.props.lists.items) ?
                     this.props.lists.items.map(list => (
@@ -35,8 +33,8 @@ class TodoLists extends Component{
 
 TodoLists.propTypes = {
     lists: PropTypes.object,
-    getLists: PropTypes.function,
-    getTasks: PropTypes.function
+    getLists: PropTypes.func,
+    getTasks: PropTypes.func
 };
 
 export default TodoLists;

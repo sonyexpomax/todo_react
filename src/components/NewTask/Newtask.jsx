@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { addTaskAction } from '../../redux/actions/tasks';
+import PropTypes from 'prop-types';
 import './style.css';
 
 class NewTask extends Component{
@@ -21,14 +21,15 @@ class NewTask extends Component{
         if (newTask) {
             this.props.createTask(newTask, this.props.listId);
         }
+        this.setState({newTask: ''});
     };
 
     render(){
         return (
-            <div className={'new-task'}>
-                <form onSubmit={this.onSubmit} className={'add-form'}>
-                    <input onChange={this.onChangeName} placeholder="Add new task in this list" className={'add-task-text'} />
-                    <button type="submit" className={'add-task-btn'}>Add</button>
+            <div className='td-new-task-wrap'>
+                <form onSubmit={this.onSubmit} className='td-new-task-add-form'>
+                    <input onChange={this.onChangeName} placeholder="Add new task in this list" className='td-new-task-add-text' value={this.state.newTask}/>
+                    <button type="submit" className='td-new-task-add-btn'>Add</button>
                 </form>
             </div>
         );
@@ -37,7 +38,7 @@ class NewTask extends Component{
 
 NewTask.propTypes = {
     listId: PropTypes.number,
-    createTask: PropTypes.function,
+    createTask: PropTypes.func,
 };
 
 export default NewTask;

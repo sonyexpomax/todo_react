@@ -1,17 +1,15 @@
 import React from "react";
 import NewList from './NewList';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {addListAction} from "../../redux/actions/list";
 import './style.css';
-
-const propTypes = {
-//
-};
+import PropTypes from 'prop-types'
 
 const NewListContainer = (props) => <NewList {...props} />;
 
-NewListContainer.propTypes = propTypes;
+NewListContainer.propTypes = {
+    addList: PropTypes.func,
+};
 
 function mapDispatchToProps (dispatch) {
     return ({
@@ -19,4 +17,4 @@ function mapDispatchToProps (dispatch) {
     });
 }
 
-export default connect(null, mapDispatchToProps())(NewListContainer)
+export default connect(null, mapDispatchToProps)(NewListContainer)

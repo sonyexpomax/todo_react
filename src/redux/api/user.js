@@ -2,19 +2,15 @@ import axios from 'axios';
 
 function loginUser(email, password) {
     const requestOptions = { email, password };
-    console.log(requestOptions);
-
     return axios.post('http://localhost:3000/auth/sign_in', requestOptions)
         .then(
             response => {
-                console.log(response);
                 return response.headers;
             },
             error => {
                 console.error(error);
             })
         .then(headers => {
-            console.log(headers);
             localStorage.setItem('access-token', headers['access-token']);
             localStorage.setItem('client', headers.client);
             localStorage.setItem('uid', headers.uid);
@@ -32,7 +28,6 @@ function logoutUser() {
                 console.error(error);
             })
         .then(res => {
-            console.log(res);
             localStorage.removeItem('access-token');
             localStorage.removeItem('client');
             localStorage.removeItem('uid');
@@ -51,10 +46,8 @@ function registerUser(email, password, password_confirmation) {
     return axios.post('http://localhost:3000/auth/', options)
         .then(response => {
             if (!response.ok) {
-                console.log(response);
                 return Promise.reject(response.statusText);
             }
-            console.log('-');
             return response.json();
         }
     );

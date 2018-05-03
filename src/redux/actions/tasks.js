@@ -1,9 +1,12 @@
 import taskConstants from '../constants/task';
 
-import {addTask, removeTask, getTasks, changeTaskState, moveTaskUp, moveTaskDown} from '../api/tasks';
+import {addTask, removeTask, getTasks, getTasksByListId, changeTaskState, moveTaskUp, moveTaskDown} from '../api/tasks';
 
 const getTaskRequest = (tasks) => { return { type: taskConstants.GET_TASKS_REQUEST, tasks } };
 const getTaskSuccess = (tasks) => { return { type: taskConstants.GET_TASKS_SUCCESS, tasks } };
+
+export const getTasksByListIdRequest = (tasks) => { return { type: taskConstants.GET_TASKS_BY_LIST_ID_REQUEST, tasks } };
+export const getTasksByListIdSuccess = (tasks) => { return { type: taskConstants.GET_TASKS_BY_LIST_ID_SUCCESS, tasks } };
 
 const addTaskRequest = (task) => { return { type: taskConstants.ADD_TASK_REQUEST, task } };
 const addTaskSuccess = (task) => { return { type: taskConstants.ADD_TASK_SUCCESS, task } };
@@ -15,10 +18,13 @@ const changeTaskStateRequest = (task) => { return { type: taskConstants.CHANGE_T
 const changeTaskStateSuccess = (task) => { return { type: taskConstants.CHANGE_TASK_STATE_SUCCESS, task } };
 
 const moveTaskUpRequest = (task) => { return { type: taskConstants.MOVE_TASK_UP_REQUEST,task } };
-const moveTaskUpSuccess = (task) => { return { type: taskConstants.MOVE_TASK_UP_SUCCESS,task } };
+const moveTaskUpSuccess = (tasks) => { return { type: taskConstants.MOVE_TASK_UP_SUCCESS,tasks } };
 
 const moveTaskDownRequest = (task) => { return { type: taskConstants.MOVE_TASK_DOWN_REQUEST,task}};
-const moveTaskDownSuccess = (task) => { return { type: taskConstants.MOVE_TASK_DOWN_SUCCESS,task}};
+const moveTaskDownSuccess = (tasks) => { return { type: taskConstants.MOVE_TASK_DOWN_SUCCESS,tasks}};
+
+const setNewList = (listId) => { return { type: taskConstants.SET_NEW_LIST, listId }};
+
 
 function getTasksAction() {
     return (dispatch, getState) => {
@@ -31,7 +37,6 @@ function getTasksAction() {
         getTasks(token,client,uid)
             .then(
                 tasks => {
-                    console.log(tasks);
                     dispatch(getTaskSuccess(tasks));
                 },
                 error => {
@@ -41,8 +46,28 @@ function getTasksAction() {
     };
 }
 
+function getTasksByListIdAction(listId) {
+    return (dispatch, getState) => {
+
+        const token = getState().user.user['access-token'];
+        const client = getState().user.user['client'];
+        const uid = getState().user.user['uid'];
+
+        dispatch(getTasksByListIdRequest(listId));
+        getTasksByListId(token,client,uid, listId)
+            .then(
+                tasks => {
+                    dispatch(getTasksByListIdSuccess({items:tasks, listId: listId}));
+                },
+                error => {
+                    console.error(error);
+                }
+            );
+    };
+}
+
 function addTaskAction(content, listId) {
-    console.log(content,listId);
+
     return (dispatch, getState) => {
 
         const token = getState().user.user['access-token'];
@@ -53,7 +78,6 @@ function addTaskAction(content, listId) {
         addTask(token,client,uid, content, listId)
             .then(
                 task => {
-                    console.log(task);
                     dispatch(addTaskSuccess(task));
                 },
                 error => {
@@ -74,7 +98,6 @@ function changeTaskStateAction(taskId) {
         changeTaskState(token, client, uid, taskId)
             .then(
                 response => {
-                    console.log(response);
                     dispatch(changeTaskStateSuccess(response));
                 },
                 error => {
@@ -95,7 +118,7 @@ function removeTaskAction(taskId) {
         removeTask(token, client, uid, taskId)
             .then(
                 response => {
-                    dispatch(removeTaskSuccess(taskId));
+                    dispatch(removeTaskSuccess(response));
                 },
                 error => {
                     console.error(error);
@@ -114,8 +137,8 @@ function moveUpTaskAction(taskId) {
         dispatch(moveTaskUpRequest(taskId));
         moveTaskUp(token, client, uid, taskId)
             .then(
-                response => {
-                    dispatch(moveTaskUpSuccess(response));
+                tasks => {
+                    dispatch(moveTaskUpSuccess(tasks));
                 },
                 error => {
                     console.error(error);
@@ -134,8 +157,8 @@ function moveDownTaskAction(taskId) {
         dispatch(moveTaskDownRequest(taskId));
         moveTaskDown(token, client, uid, taskId)
             .then(
-                response => {
-                    dispatch(moveTaskDownSuccess(response));
+                tasks => {
+                    dispatch(moveTaskDownSuccess(tasks));
                 },
                 error => {
                     console.error(error);
@@ -144,5 +167,10 @@ function moveDownTaskAction(taskId) {
     };
 }
 
+function setNewListAction(listId) {
+    return (dispatch) => {
+        dispatch(setNewList(listId));
+    };
+}
 
-export {getTasksAction, addTaskAction, removeTaskAction, changeTaskStateAction, moveDownTaskAction, moveUpTaskAction};
+export {getTasksAction,getTasksByListIdAction, addTaskAction, removeTaskAction, changeTaskStateAction, moveDownTaskAction, moveUpTaskAction, setNewListAction};

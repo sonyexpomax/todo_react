@@ -1,15 +1,13 @@
 import {
     LOGIN_SUCCESS,
     LOGIN_REQUEST,
-    LOGIN_FAILURE,
-    LOGOUT,
     REGISTER_FAILURE,
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
     LOGOUT_SUCCESS,
     LOGOUT_REQUEST
 } from '../constants/authentificate';
-import { browserHistory } from 'react-router';
+// import { browserHistory } from 'react-router';
 
 import {logoutUser, loginUser, registerUser} from '../api/user';
 import { startRequest, stopRequest } from  '../ui/button';
@@ -35,7 +33,7 @@ function loginAction(email, password) {
 
                     // window.location.assign('/lists');
                     // browserHistory.push('/lists');
-                    console.info(user);
+                    // console.info(user);
                 },
                 error => {
                     // dispatch(loginFailure(error));
@@ -52,7 +50,7 @@ function registerAction(email, password, password_confirmation ) {
         dispatch(registrationRequest(email));
         registerUser(email, password, password_confirmation)
             .then(
-                user => {
+                response => {
                     dispatch(registrationSuccess());
                     dispatch(stopRequest());
                 },
@@ -69,7 +67,7 @@ function logoutAction() {
         dispatch(logoutRequest());
         logoutUser()
             .then(
-                res => {
+                response => {
                     dispatch(logoutSuccess());
                 },
                 error => {
@@ -78,6 +76,5 @@ function logoutAction() {
             );
     };
 }
-
 
 export {loginAction, registerAction, logoutAction};

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import './style.css';
 
 class NewList extends Component{
@@ -6,7 +7,7 @@ class NewList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            newList: '',
+            newList: ''
         };
     }
 
@@ -20,15 +21,16 @@ class NewList extends Component{
         if (newList) {
             this.props.addList(newList);
         }
+        this.setState({newList:''});
     };
 
     render(){
         return (
-            <div className={'new-list'}>
+            <div className='td-new-list-wrap'>
                 <h1> Add new list </h1>
-                <form onSubmit={this.onSubmit} className={'add-form'}>
-                    <input onChange={this.onChangeName} placeholder="Input list name" className={'add-list-text'} />
-                    <button type="submit" className={'add-list-btn'}>Add</button>
+                <form onSubmit={this.onSubmit}>
+                    <input onChange={this.onChangeName} placeholder="Input list name" className='td-new-list-add-list-text' value={this.state.newList}/>
+                    <button type="submit" className='td-new-list-add-list-btn'>Add</button>
                 </form>
             </div>
         );
@@ -36,7 +38,7 @@ class NewList extends Component{
 }
 
 NewList.propTypes = {
-    addList: PropTypes.function,
+    addList: PropTypes.func,
 };
 
 export default NewList;

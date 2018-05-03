@@ -1,4 +1,4 @@
-.btn-sign-in{
+.td-login-page-btn-wrap{
     width: 100%;
     padding: 5px;
     border-radius: 5px;
@@ -9,4 +9,8 @@
     font-family: "Source Code Pro", Monaco, monospace;
     font-weight: 600;
     font-size: 14px;
+}
+.td-login-page-btn-wrap:hover{
+    background-color: #275e00;
+    cursor: pointer;
 }

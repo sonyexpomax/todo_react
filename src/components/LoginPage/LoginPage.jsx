@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import LoginPageButton from '../LoginPageButton';
 import './style.css';
 
@@ -12,14 +12,23 @@ class LoginPage extends Component {
         this.state = {
             login: '',
             password: '',
-            submitted: false
+            submitted: false,
+            valid: false
         };
     }
+
+    validate = (val) => {
+        let pattr =  /^[a-z\-0-9_.]+@[a-z\-0-9_]+\.[a-z]{2,5}$/i;
+        if(val.match(pattr)){
+            return true;
+        }
+        return false;
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
         const { login, password } = this.state;
-        if (login && password) {
+        if (login && password && this.validate(login)) {
             this.props.signIn(login, password);
         }
     };
@@ -29,27 +38,32 @@ class LoginPage extends Component {
     };
 
     onLoginChange = (e) => {
-        this.setState({login: e.target.value});
+        this.setState({
+            login: e.target.value,
+            valid: this.validate(e.target.value)
+        });
+
     };
 
     render() {
+        let validateColor = (this.state.valid === true) ? "green" : "red";
         return (
-            <div className={'login'}>
+            <div className={'td-login-page-wrap'}>
                 <h2>Login</h2>
-                <Link to='/lists'>Lists</Link>
-                <form onSubmit={this.onSubmit}>
-                    <p className={'login-label'}><label>Login:</label>
-                        <input type="text" name="login" value={this.state.login} onChange={this.onLoginChange}/>
+                <form>
+                    <p className='td-login-page-label'><label>Email:</label>
+                        <input type="text" name="login" value={this.state.login} onChange={this.onLoginChange} style={{borderColor:validateColor}} />
                     </p>
-                    <p className={'login-label'}><label>Password:</label>
+                    <p className='td-login-page-label'><label>Password:</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/>
                     </p>
                     <p>
-                        <LoginPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
+                        <LoginPageButton isRequset={this.props.isRequest} signIn={this.onSubmit}/>
                     </p>
                 </form>
-                <div className={'registration-link'}>
-                    <Link to={`/registration`} >Registration</Link>
+                <div className='td-login-page-registration-link'>
+                    <Link to='/registration' className='td-login-page-link'>Registration</Link>
+                    <Link to='/lists' className='td-login-page-link'>Lists</Link>
                 </div>
 
             </div>
@@ -57,9 +71,9 @@ class LoginPage extends Component {
     }
 }
 
-LoginPage.PropTypes = {
-    signIn: PropTypes.function,
-    isRequest: PropTypes.boolean
+LoginPage.propTypes = {
+    signIn: PropTypes.func,
+    isRequest: PropTypes.bool
 };
 
 export default LoginPage;

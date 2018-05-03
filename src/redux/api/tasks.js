@@ -10,7 +10,6 @@ function getTasks(token, client, uid) {
         }
     };
 
-    console.log(headers);
     return axios.get('http://localhost:3000/v1/tasks', headers)
         .then(
             response => {
@@ -21,9 +20,26 @@ function getTasks(token, client, uid) {
             })
 }
 
-function changeTaskState(token, client, uid, taskId) {
-    console.log(taskId);
+function getTasksByListId(token, client, uid, listId) {
+    let headers = {
+        headers: {
+            'access-token': token,
+            'client': client,
+            'uid': uid
+        }
+    };
 
+    return axios.get(`http://localhost:3000/v1/list_tasks/${listId}`, headers)
+        .then(
+            response => {
+                return response.data;
+            },
+            error => {
+                console.error(error);
+            })
+}
+
+function changeTaskState(token, client, uid, taskId) {
     let headers = {
         'Access-Control-Allow-Origin': '*',
         'access-token': token,
@@ -34,7 +50,7 @@ function changeTaskState(token, client, uid, taskId) {
     return axios.put(`http://localhost:3000/v1/tasks/${taskId}`, {id:taskId}, {'headers' : headers})
         .then(
             response => {
-                return response.data.id;
+                return response.data;
             },
             error => {
                 console.error(error);
@@ -48,12 +64,10 @@ function addTask(token, client, uid, content, listId) {
         'uid': uid
     };
 
-    console.log(content, listId);
-    return axios.post('http://localhost:3000/v1/tasks', {content:content, listId:listId}, {'headers' : headers})
+    return axios.post('http://localhost:3000/v1/tasks', {content:content, list_id:listId}, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
-                // return response.data;
+                return response.data;
             },
             error => {
                 console.error(error);
@@ -61,7 +75,7 @@ function addTask(token, client, uid, content, listId) {
 }
 
 function removeTask(token, client, uid, taskId) {
-    console.log(taskId);
+
     let headers = {
         'access-token': token,
         'client': client,
@@ -71,7 +85,6 @@ function removeTask(token, client, uid, taskId) {
     return axios.delete(`http://localhost:3000/v1/tasks/${taskId}`, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
                 return response.data;
             },
             error => {
@@ -81,17 +94,17 @@ function removeTask(token, client, uid, taskId) {
 
 function moveTaskUp(token, client, uid, taskId) {
     let headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': "DELETE, POST, PUT, GET, PATCH",
         'access-token': token,
         'client': client,
         'uid': uid
     };
 
-    console.log(taskId);
-    return axios.put(`http://localhost:3000/v1/tasks/${taskId}/up`, {id:taskId}, {'headers' : headers})
+    return axios.patch(`http://localhost:3000/v1/tasks/${taskId}/up`, {}, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
-                // return response.data;
+                return response.data;
             },
             error => {
                 console.error(error);
@@ -100,21 +113,21 @@ function moveTaskUp(token, client, uid, taskId) {
 
 function moveTaskDown(token, client, uid, taskId) {
     let headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': "DELETE, POST, PUT, GET, PATCH",
         'access-token': token,
         'client': client,
         'uid': uid
     };
 
-    console.log(taskId);
-    return axios.put(`http://localhost:3000/v1/tasks/${taskId}/down`, {id:taskId}, {'headers' : headers})
+    return axios.patch(`http://localhost:3000/v1/tasks/${taskId}/down`, {}, {'headers' : headers})
         .then(
             response => {
-                console.log(response.data);
-                // return response.data;
+                return response.data;
             },
             error => {
                 console.error(error);
             })
 }
 
-export {getTasks, removeTask, addTask, changeTaskState, moveTaskDown, moveTaskUp};
+export {getTasks, getTasksByListId, removeTask, addTask, changeTaskState, moveTaskDown, moveTaskUp};

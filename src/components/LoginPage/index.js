@@ -1,18 +1,16 @@
 import LoginPage from './LoginPage';
 import React  from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {loginAction} from "../../redux/actions/authentificate";
-
+import PropTypes from 'prop-types';
 import './style.css';
-
-const propTypes = {
-//
-};
 
 const LoginPageContainer = (props) => <LoginPage {...props} />;
 
-LoginPageContainer.propTypes = propTypes;
+LoginPageContainer.propTypes = {
+    signIn: PropTypes.func,
+    isRequest: PropTypes.bool
+};
 
 function mapStateToProps(store) {
     return {

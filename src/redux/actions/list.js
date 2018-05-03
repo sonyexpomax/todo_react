@@ -7,11 +7,10 @@ import {
     RENAME_LIST_REQUEST,
     REMOVE_LIST_SUCCESS,
     REMOVE_LIST_REQUEST,
-    FIND_MAX_LIST_ID,
-    INCREASE_MAX_LIST_ID
 } from '../constants/list';
 
 import {getLists,addList,renameList,removeList} from '../api/lists';
+import {getTasksByListIdAction, setNewListAction} from '../actions/tasks'
 
 const listRequest = (lists) => { return { type: GET_LISTS_REQUEST, lists } };
 const listSuccess = (lists) => { return { type: GET_LISTS_SUCCESS, lists } };
@@ -21,8 +20,6 @@ const renameListRequest = (list) => { return { type: RENAME_LIST_REQUEST, list }
 const renameListSuccess = (list) => { return { type: RENAME_LIST_SUCCESS, list } };
 const removeListRequest = (list) => { return { type: REMOVE_LIST_REQUEST, list } };
 const removeListSuccess = (list) => { return { type: REMOVE_LIST_SUCCESS, list } };
-const findMaxListId = () => { return { type: FIND_MAX_LIST_ID } };
-const increaseMaxListId = () => { return { type: INCREASE_MAX_LIST_ID } };
 
 function getListsAction() {
     return (dispatch, getState) => {
@@ -36,9 +33,17 @@ function getListsAction() {
             .then(
                 lists => {
                     dispatch(listSuccess(lists));
+                    return lists;
                 },
                 error => {
                     console.error(error);
+                }
+            )
+            .then(
+                lists => {
+                    lists.forEach(list => {
+                        dispatch(getTasksByListIdAction(list.id));
+                    });
                 }
             );
     };
@@ -56,11 +61,17 @@ function addListAction(list) {
             .then(
                 list => {
                     dispatch(addListSuccess(list));
+                    return list
                 },
                 error => {
                     console.error(error);
                 }
-            );
+            )
+            .then(
+                list => {
+                    dispatch(setNewListAction(list.id));
+                }
+        );
     };
 }
 
@@ -95,7 +106,6 @@ function renameListAction(listId, newName) {
         renameList(token,client,uid, listId, newName)
             .then(
                 list => {
-                    console.info(list);
                     dispatch(renameListSuccess(list));
                 },
                 error => {
@@ -104,6 +114,5 @@ function renameListAction(listId, newName) {
             );
     };
 }
-
 
 export {getListsAction, addListAction, removeListAction,renameListAction};
