@@ -1,33 +1,20 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
-import {Switch} from 'react-router';
-import PropTypes from 'prop-types'
+import App from './App';
+import React  from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginPage from '../LoginPage';
-import RegistrationPage from '../RegistrationPage';
-import TodoLists from '../TodoLists';
 
-import './style.css';
+const propTypes = {
+//
+};
 
-class App extends Component {
+const AppContainer = (props) => <App {...props} />;
 
-    static propTypes = {
-      //
+AppContainer.propTypes = propTypes;
+
+function mapStateToProps(store) {
+    return {
+        loggedIn: store.user.loggedIn
     };
-
-    render(){
-        // let firstPage = this.props.userInfo.token ?  <TodoList /> : <LoginForm />;
-        return (
-            <BrowserRouter >
-                <Switch>
-                    <Route path='/lists' component={TodoLists} />
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/registration" component={RegistrationPage} />
-                </Switch>
-            </BrowserRouter>
-        );
-    }
 }
 
-
-export default connect()(App)
+export default connect(mapStateToProps)(AppContainer)

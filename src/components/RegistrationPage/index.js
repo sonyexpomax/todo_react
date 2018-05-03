@@ -1,13 +1,9 @@
 import RegistrationPage from './RegistrationPage';
-import React, { Component } from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import {registerAction} from "../../redux/actions/authentificate";
 import './style.css';
-
-const propTypes = {
-//
-};
 
 const RegistrationPageContainer = (props) => <RegistrationPage {...props} />;
 
@@ -19,4 +15,10 @@ function mapStateToProps(store) {
     };
 }
 
-export default connect(mapStateToProps)(RegistrationPageContainer)
+function mapDispatchToProps (dispatch) {
+    return ({
+        register: (email, password, passwordConfirm) =>  dispatch(registerAction(email, password, passwordConfirm))
+    });
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(RegistrationPageContainer)

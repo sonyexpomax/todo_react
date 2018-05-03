@@ -29,18 +29,22 @@ export default function lists(state = initialState, action) {
                 items: action.lists
             });
         case ADD_LIST_REQUEST:
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
-        case ADD_LIST_SUCCESS:
-            let newList = {
-                id: state.maxListId,
-                name: action.listName
+            return {
+                ...state, isFetching: true
             };
+        case ADD_LIST_SUCCESS:
+            console.log(action.list.label);
+            // let newList = {
+            //     id: action.list.id,
+            //     name: action.list.label
+            // };
+            // return {
+            //     newList, ...state
+            // }
             return Object.assign({}, state, {
                 items: [
                     ...state.items,
-                    newList
+                    action.list
                 ],
                 isFetching: false
             });
@@ -62,7 +66,7 @@ export default function lists(state = initialState, action) {
         case RENAME_LIST_SUCCESS:
             let newState = state.items.map((item)=>{
                 if(item.id == action.list.id){
-                    item.name = action.list.name;
+                    item.label = action.list.label;
                 }
                 return item;
             });

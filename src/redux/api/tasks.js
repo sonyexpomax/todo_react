@@ -1,172 +1,120 @@
 // import axios from 'axios';
+import axios from "axios/index";
 
-const tasks = [
-            {
-                id: 132,
-                listId: 1,
-                text: 'aaaaa a aa aaaaaaa aa aaaa',
-                isFinished: 1,
-            },
-            {
-                id: 133,
-                listId: 1,
-                text: 'v v vvv v v v v vvvvvvvvvvvvvv',
-                isFinished: 0,
-            },
-            {
-                id: 130,
-                listId: 3,
-                text: 'c c ccccc c c c c c c c ',
-                isFinished: 0,
-            },
-            {
-                id: 134,
-                listId: 4,
-                text: 'fffdfsdfs sdfsdfs dfs dfsdfs',
-                isFinished: 1,
-            },
-            {
-                id: 232,
-                listId: 1,
-                text: 'arrrrrrrrrrrrr',
-                isFinished: 1,
-            },
-            {
-                id: 233,
-                listId: 4,
-                text: 'uuuuuuuuuuuuuuuuuuuuuuu',
-                isFinished: 0,
-            },
-            {
-                id: 200,
-                listId: 3,
-                text: 'ooooooooooooooo ',
-                isFinished: 1,
-            },
-            {
-                id: 32,
-                listId: 1,
-                text: 'ayyyyyyyyyyyyyaaa',
-                isFinished: 0,
-            },
-            {
-                id: 13,
-                listId: 4,
-                text: 'rrrrrrrrrrrrrrvvvvvv',
-                isFinished: 1,
-            },
-            {
-                id: 30,
-                listId: 3,
-                text: 'erggrgereger',
-                isFinished: 0,
-            },
-            {
-                id: 34,
-                listId: 4,
-                text: 'fkkkkkkkkkkkkkkkkkkkkks'
-            }
-];
+function getTasks(token, client, uid) {
+    let headers = {
+        headers: {
+            'access-token': token,
+            'client': client,
+            'uid': uid
+        }
+    };
 
-function getTasks() {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve(tasks);
-        }, 600);
-    })
+    console.log(headers);
+    return axios.get('http://localhost:3000/v1/tasks', headers)
         .then(
-            tasks => {
-                return tasks;
-            },
-            error => {
-                console.error(error);
-            })
-        .then(tasks => {
-            console.log(tasks);
-            return tasks;
-        });
-}
-
-
-function addTask(task) {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve('ok');
-        }, 100);
-    })
-        .then(
-            response => task,
-            error => console.error(error)
-        )
-        // .then(
-        //     res => res
-        // );
-}
-
-function removeTask(task) {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve('ok');
-        }, 100);
-    })
-        .then(
-            res => {
-                return task;
-            },
-            error => {
-                console.error(error);
-            })
-        // .then(res => {
-        //     return res;
-        // });
-}
-
-function changeTaskState(task) {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve('ok');
-        }, 100);
-    })
-        .then(
-            res => {
-                return task;
-            },
-            error => {
-                console.error(error);
-            })
-    // .then(res => {
-    //     return res;
-    // });
-}
-
-function showAllTasks() {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve('ok');
-        }, 100);
-    })
-        .then(
-            res => {
-                return res;
+            response => {
+                return response.data;
             },
             error => {
                 console.error(error);
             })
 }
 
-function showFinishedTasks() {
-    return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-            resolve('ok');
-        }, 100);
-    })
+function changeTaskState(token, client, uid, taskId) {
+    console.log(taskId);
+
+    let headers = {
+        'Access-Control-Allow-Origin': '*',
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    return axios.put(`http://localhost:3000/v1/tasks/${taskId}`, {id:taskId}, {'headers' : headers})
         .then(
-            res => {
-                return res;
+            response => {
+                return response.data.id;
             },
             error => {
                 console.error(error);
             })
 }
 
-export {getTasks, removeTask, addTask, changeTaskState, showAllTasks, showFinishedTasks};
+function addTask(token, client, uid, content, listId) {
+    let headers = {
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    console.log(content, listId);
+    return axios.post('http://localhost:3000/v1/tasks', {content:content, listId:listId}, {'headers' : headers})
+        .then(
+            response => {
+                console.log(response.data);
+                // return response.data;
+            },
+            error => {
+                console.error(error);
+            })
+}
+
+function removeTask(token, client, uid, taskId) {
+    console.log(taskId);
+    let headers = {
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    return axios.delete(`http://localhost:3000/v1/tasks/${taskId}`, {'headers' : headers})
+        .then(
+            response => {
+                console.log(response.data);
+                return response.data;
+            },
+            error => {
+                console.error(error);
+            })
+}
+
+function moveTaskUp(token, client, uid, taskId) {
+    let headers = {
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    console.log(taskId);
+    return axios.put(`http://localhost:3000/v1/tasks/${taskId}/up`, {id:taskId}, {'headers' : headers})
+        .then(
+            response => {
+                console.log(response.data);
+                // return response.data;
+            },
+            error => {
+                console.error(error);
+            })
+}
+
+function moveTaskDown(token, client, uid, taskId) {
+    let headers = {
+        'access-token': token,
+        'client': client,
+        'uid': uid
+    };
+
+    console.log(taskId);
+    return axios.put(`http://localhost:3000/v1/tasks/${taskId}/down`, {id:taskId}, {'headers' : headers})
+        .then(
+            response => {
+                console.log(response.data);
+                // return response.data;
+            },
+            error => {
+                console.error(error);
+            })
+}
+
+export {getTasks, removeTask, addTask, changeTaskState, moveTaskDown, moveTaskUp};

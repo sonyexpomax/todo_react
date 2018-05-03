@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RegistrationPageButton from '../RegistrationPageButton';
-import { registerAction } from '../../redux/actions/authentificate';
 import './style.css';
-
-const propTypes = {
-    //
-};
 
 class RegistrationPage extends Component {
 
@@ -25,9 +20,8 @@ class RegistrationPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const { email, password, passwordConfirm } = this.state;
-        const { dispatch } = this.props;
         if (email && password) {
-            dispatch(registerAction(email, password, passwordConfirm));
+            this.props.register(email, password, passwordConfirm);
         }
     };
 
@@ -67,6 +61,8 @@ class RegistrationPage extends Component {
     }
 }
 
-RegistrationPage.propTypes = propTypes;
+RegistrationPage.propTypes = {
+    register: PropTypes.function,
+};
 
 export default RegistrationPage;

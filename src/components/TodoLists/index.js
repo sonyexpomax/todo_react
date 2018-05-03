@@ -1,11 +1,9 @@
 import TodoLists from './TodoLists';
-import React, { Component } from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-const propTypes = {
-    lists: PropTypes.object,
-};
+import {getListsAction} from "../../redux/actions/list";
+import {getTasksAction} from "../../redux/actions/tasks";
 
 const TodoListsContainer = (props) => <TodoLists {...props} />;
 
@@ -17,4 +15,11 @@ function mapStateToProps(store) {
     };
 }
 
-export default connect(mapStateToProps)(TodoListsContainer)
+function mapDispatchToProps (dispatch) {
+    return ({
+        getLists: () =>  dispatch(getListsAction()),
+        getTasks: () =>  dispatch(getTasksAction()),
+    });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListsContainer)

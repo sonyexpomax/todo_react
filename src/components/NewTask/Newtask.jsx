@@ -18,9 +18,8 @@ class NewTask extends Component{
     onSubmit = (e) => {
         e.preventDefault();
         const { newTask } = this.state;
-        const { dispatch } = this.props;
         if (newTask) {
-            dispatch(addTaskAction(this.props.listId, newTask));
+            this.props.createTask(newTask, this.props.listId);
         }
     };
 
@@ -35,6 +34,11 @@ class NewTask extends Component{
         );
     }
 }
+
+NewTask.propTypes = {
+    listId: PropTypes.number,
+    createTask: PropTypes.function,
+};
 
 export default NewTask;
 

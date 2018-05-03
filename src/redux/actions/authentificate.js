@@ -5,8 +5,11 @@ import {
     LOGOUT,
     REGISTER_FAILURE,
     REGISTER_REQUEST,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    LOGOUT_SUCCESS,
+    LOGOUT_REQUEST
 } from '../constants/authentificate';
+import { browserHistory } from 'react-router';
 
 import {logoutUser, loginUser, registerUser} from '../api/user';
 import { startRequest, stopRequest } from  '../ui/button';
@@ -17,7 +20,9 @@ const registrationFailure = (error) => { return { type: REGISTER_FAILURE, error 
 
 const loginRequest = (user) => { return { type: LOGIN_REQUEST, user } };
 const loginSuccess = (user) => { return { type: LOGIN_SUCCESS, user } };
-const loginFailure = (error) => { return { type: LOGIN_FAILURE, error } };
+
+const logoutRequest = (user) => { return { type: LOGOUT_REQUEST, user } };
+const logoutSuccess = (user) => { return { type: LOGOUT_SUCCESS, user } };
 
 function loginAction(email, password) {
     return dispatch => {
@@ -27,12 +32,14 @@ function loginAction(email, password) {
             .then(
                 user => {
                     dispatch(loginSuccess(user));
-                    dispatch(stopRequest());
+
+                    // window.location.assign('/lists');
+                    // browserHistory.push('/lists');
                     console.info(user);
                 },
                 error => {
-                    dispatch(loginFailure(error));
-                    dispatch(stopRequest());
+                    // dispatch(loginFailure(error));
+                    // dispatch(stopRequest());
                     console.error(error);
                 }
             );
@@ -58,8 +65,18 @@ function registerAction(email, password, password_confirmation ) {
 }
 
 function logoutAction() {
-    logoutUser();
-    return { type: LOGOUT };
+    return dispatch => {
+        dispatch(logoutRequest());
+        logoutUser()
+            .then(
+                res => {
+                    dispatch(logoutSuccess());
+                },
+                error => {
+                    console.error(error);
+                }
+            );
+    };
 }
 
 

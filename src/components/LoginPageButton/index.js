@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import PropTypes from 'prop-types'
 import './style.css';
 
@@ -10,7 +10,8 @@ const LoginPageButton = (props) => {
 };
 
 LoginPageButton.propTypes = {
-    //
+    isRequest: PropTypes.bool,
+    signIg: PropTypes.function,
 };
 
 export default LoginPageButton;

@@ -1,37 +1,36 @@
 import React, { Component } from "react";
 import './style.css';
-import { removeTaskAction, changeTaskStateAction } from '../../redux/actions/tasks';
 
 class Task extends Component{
 
     changeStateHandler = () => {
-        this.props.dispatch(changeTaskStateAction(this.props.task.id))
+        this.props.changeTaskState(this.props.task.id);
     };
 
     removeHandler = (e) => {
         e.preventDefault();
-        this.props.dispatch(removeTaskAction(this.props.task.id))
-        // this.props.onRemove(this.props.task.id);
+        this.props.removeTask(this.props.task.id);
     };
 
     moveDownHandler = (e) => {
         e.preventDefault();
-
+        this.props.moveTaskDown(this.props.task.id);
     };
 
     moveUpHandler = (e) => {
         e.preventDefault();
+        this.props.moveTaskUp(this.props.task.id);
     };
 
     render(){
         return (
-            <div className={ !this.props.task.isFinished ? 'task' : 'task task-finished'}>
+            <div className={ !this.props.task.is_done ? 'task' : 'task task-finished'}>
                 <input
                     type = "checkbox"
                     onChange = {this.changeStateHandler}
-                    defaultChecked = {this.props.task.isFinished}
+                    defaultChecked = {this.props.task.is_done}
                 />
-                {this.props.task.text}
+                {this.props.task.content}
                 <button
                     className = {'task-remove'}
                     title = {'Remove'}
@@ -44,5 +43,14 @@ class Task extends Component{
         )
     }
 }
+
+Task.propTypes = {
+    task: PropTypes.object,
+    moveTaskDown: PropTypes.function,
+    moveTaskUp: PropTypes.function,
+    removeTask: PropTypes.function,
+    changeTaskState: PropTypes.function
+};
+
 
 export default Task;

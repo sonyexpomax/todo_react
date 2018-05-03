@@ -1,12 +1,15 @@
 import {
-    LOGIN_FAILURE,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGOUT
+    LOGOUT_REQUEST,
+    LOGOUT_SUCCESS
 } from '../constants/authentificate'
 
-let user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? { loggedIn: true, user } : {};
+let initialState = {
+    loggedIn: false,
+    loggingIn: false,
+    user: {}
+};
 
 export default function lists(state = initialState, action) {
     switch (action.type) {
@@ -18,10 +21,19 @@ export default function lists(state = initialState, action) {
         case LOGIN_SUCCESS:
             return {
                 loggedIn: true,
+                loggingIn:false,
                 user: action.user
             };
-        case LOGOUT:
-            return {};
+        case LOGOUT_REQUEST:
+            return Object.assign({}, state, {
+                loggingOut: true
+            });
+        case LOGOUT_SUCCESS:
+            return {
+                loggedIn: false,
+                loggingIn: false,
+                user: {}
+            };
         default:
             return state
     }

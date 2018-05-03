@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import LoginPageButton from '../LoginPageButton';
-import { loginAction } from '../../redux/actions/authentificate';
 import './style.css';
 
 class LoginPage extends Component {
@@ -19,9 +19,8 @@ class LoginPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const { login, password } = this.state;
-        const { dispatch } = this.props;
         if (login && password) {
-            dispatch(loginAction(login, password));
+            this.props.signIn(login, password);
         }
     };
 
@@ -37,6 +36,7 @@ class LoginPage extends Component {
         return (
             <div className={'login'}>
                 <h2>Login</h2>
+                <Link to='/lists'>Lists</Link>
                 <form onSubmit={this.onSubmit}>
                     <p className={'login-label'}><label>Login:</label>
                         <input type="text" name="login" value={this.state.login} onChange={this.onLoginChange}/>
@@ -48,9 +48,18 @@ class LoginPage extends Component {
                         <LoginPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
                     </p>
                 </form>
+                <div className={'registration-link'}>
+                    <Link to={`/registration`} >Registration</Link>
+                </div>
+
             </div>
         );
     }
 }
+
+LoginPage.PropTypes = {
+    signIn: PropTypes.function,
+    isRequest: PropTypes.boolean
+};
 
 export default LoginPage;

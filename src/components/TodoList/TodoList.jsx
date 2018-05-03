@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import TodoListItem from '../Task';
 import NewTask from '../NewTask';
 import './style.css';
-import { renameListAction, removeListAction } from '../../redux/actions/list';
-import { showFinishedTasksAction, showAllTasksAction } from '../../redux/actions/tasks';
 
 class TodoList extends Component{
 
@@ -12,15 +10,9 @@ class TodoList extends Component{
         this.state = {
             isOpen: false,
             isEditable: false,
-            name: this.props.list.name,
+            name: this.props.list.label,
         };
     }
-
-    // componentDidMount(){
-    //     console.log('did mount todo lists');
-    //     const { dispatch } = this.props;
-    //     dispatch(getTasksAction());
-    // }
 
     onChangeState = (e) => {
         e.preventDefault();
@@ -34,7 +26,7 @@ class TodoList extends Component{
 
     setChangeName = (e) => {
         e.preventDefault();
-        this.props.dispatch(renameListAction(this.props.list.id, this.state.name));
+        this.props.renameList(this.props.list.id, this.state.name);
         this.setState({isEditable: !this.state.isEditable});
     };
 
@@ -44,24 +36,17 @@ class TodoList extends Component{
 
     onRemove = (e) => {
         e.preventDefault();
-        this.props.dispatch(removeListAction(this.props.list.id));
-    };
-
-    onChangeFilter = (e) => {
-        // let filter = e.target.value;
-        // if(filter==='')
-        // this.props.dispatch(removeListAction(e.target.value));
+        this.props.removeList(this.props.list.id);
     };
 
     render(){
-        let listTasks = this.props.tasks.items.filter(item => item.listId === this.props.list.id);
         let headText = !this.state.isEditable ?
-            (<h2>List "{this.state.name}"</h2>) :
+            (<h2>List "{this.props.list.label}"</h2>) :
             (<input type='text' value={this.state.name} onChange={this.onChangeName}/>);
 
-        let tasks = listTasks.length ?
+        let tasks = this.props.tasks.length ?
             (<ol>
-                {listTasks.map((item) => {
+                {this.props.tasks.map((item) => {
                     return (
                         <li key={item.id}>
                             <TodoListItem task={item} />
@@ -89,10 +74,6 @@ class TodoList extends Component{
                         <small className={'rename-list'} onClick={this.onEdit}>rename</small>
                     </div>
                 </div>
-                {/*<select name="filter" onChange={this.onChangeFilter}>*/}
-                    {/*<option value="SHOW_ALL">All</option>*/}
-                    {/*<option value="SHOW_FINISHED">Finished</option>*/}
-                {/*</select>*/}
                 <div style={{display: this.state.isOpen ? 'block' : 'none' }}>
                     {tasks}
                     <NewTask listId = {this.props.list.id}/>
@@ -102,5 +83,12 @@ class TodoList extends Component{
         )
     }
 }
+
+TodoList.propTypes = {
+    list: PropTypes.object,
+    tasks: PropTypes.array,
+    renameList: PropTypes.function,
+    removeList: PropTypes.function
+};
 
 export default TodoList;

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { addListAction } from '../../redux/actions/list';
 import './style.css';
 
 class NewList extends Component{
@@ -18,9 +17,8 @@ class NewList extends Component{
     onSubmit = (e) => {
         e.preventDefault();
         const { newList } = this.state;
-        const { dispatch } = this.props;
         if (newList) {
-            dispatch(addListAction(newList));
+            this.props.addList(newList);
         }
     };
 
@@ -36,5 +34,9 @@ class NewList extends Component{
         );
     }
 }
+
+NewList.propTypes = {
+    addList: PropTypes.function,
+};
 
 export default NewList;
