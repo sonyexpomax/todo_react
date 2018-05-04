@@ -1,8 +1,8 @@
-import React from "react";
-import Task from './Task';
+import {moveUpTaskAction, moveDownTaskAction, changeTaskStateAction, removeTaskAction} from '../../redux/actions/tasks';
 import { connect } from 'react-redux';
-import {moveUpTaskAction,moveDownTaskAction,changeTaskStateAction,removeTaskAction} from "../../redux/actions/tasks";
 import PropTypes from 'prop-types';
+import React from 'react';
+import Task from './Task';
 const TaskContainer = (props) => <Task {...props} />;
 
 TaskContainer.propTypes = {
@@ -17,11 +17,11 @@ TaskContainer.propTypes = {
 
 function mapDispatchToProps (dispatch, ownProps) {
     return ({
-        removeTask: () =>  dispatch(removeTaskAction(ownProps.task.id)),
-        changeTaskState: () =>  dispatch(changeTaskStateAction(ownProps.task.id)),
-        moveTaskUp: () =>  dispatch(moveUpTaskAction(ownProps.task.id)),
-        moveTaskDown: () =>  dispatch(moveDownTaskAction(ownProps.task.id)),
+        removeTask: () => dispatch(removeTaskAction(ownProps.task.id)),
+        changeTaskState: () => dispatch(changeTaskStateAction(ownProps.task.id)),
+        moveTaskUp: () => dispatch(moveUpTaskAction(ownProps.task.id)),
+        moveTaskDown: () => dispatch(moveDownTaskAction(ownProps.task.id))
     });
 }
 
-export default connect(null, mapDispatchToProps)(TaskContainer)
+export default connect(null, mapDispatchToProps)(TaskContainer);

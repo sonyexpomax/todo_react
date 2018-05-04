@@ -1,33 +1,31 @@
-import React, { Component } from "react";
 import './style.css';
-import TodoList from '../TodoList';
-import NewList from '../NewList';
-import LogoutButton from '../LogoutButton';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LogoutButton from '../LogoutButton';
+import NewList from '../NewList';
+import PropTypes from 'prop-types';
+import TodoList from '../TodoList';
 
 class TodoLists extends Component{
 
-    componentDidMount(){
+    componentDidMount () {
         this.props.getLists();
     }
 
-    render(){
+    render () {
         return (
             <div className={'td-todo-lists-wrap'}>
-                <Link to="/login">
+                <Link to='/login'>
                     <LogoutButton />
                 </Link>
                 <h1>Task lists</h1>
-                {(this.props.lists.items) ?
-                    this.props.lists.items.map(list => (
-                    <TodoList key={list.id} list={list} />
-                    ))
-                    : ''
+                {(this.props.lists.items)
+                    ? this.props.lists.items.map(list => (<TodoList key={list.id} list={list} />))
+                    : <p>No lists</p>
                 }
                 <NewList/>
             </div>
-        )
+        );
     }
 }
 

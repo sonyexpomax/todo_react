@@ -23,18 +23,16 @@ const moveTaskUpSuccess = (tasks) => { return { type: taskConstants.MOVE_TASK_UP
 const moveTaskDownRequest = (task) => { return { type: taskConstants.MOVE_TASK_DOWN_REQUEST,task}};
 const moveTaskDownSuccess = (tasks) => { return { type: taskConstants.MOVE_TASK_DOWN_SUCCESS,tasks}};
 
-const setNewList = (listId) => { return { type: taskConstants.SET_NEW_LIST, listId }};
+const setNewList = (listId) => { return { type: taskConstants.SET_NEW_LIST, listId } };
 
-
-function getTasksAction() {
+function getTasksAction () {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(getTaskRequest());
-        getTasks(token,client,uid)
+        getTasks(token, client, uid)
             .then(
                 tasks => {
                     dispatch(getTaskSuccess(tasks));
@@ -46,18 +44,17 @@ function getTasksAction() {
     };
 }
 
-function getTasksByListIdAction(listId) {
+function getTasksByListIdAction (listId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(getTasksByListIdRequest(listId));
-        getTasksByListId(token,client,uid, listId)
+        getTasksByListId(token, client, uid, listId)
             .then(
                 tasks => {
-                    dispatch(getTasksByListIdSuccess({items:tasks, listId: listId}));
+                    dispatch(getTasksByListIdSuccess({ items: tasks, listId: listId}));
                 },
                 error => {
                     console.error(error);
@@ -66,16 +63,14 @@ function getTasksByListIdAction(listId) {
     };
 }
 
-function addTaskAction(content, listId) {
-
+function addTaskAction (content, listId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(addTaskRequest(listId));
-        addTask(token,client,uid, content, listId)
+        addTask(token, client, uid, content, listId)
             .then(
                 task => {
                     dispatch(addTaskSuccess(task));
@@ -87,9 +82,8 @@ function addTaskAction(content, listId) {
     };
 }
 
-function changeTaskStateAction(taskId) {
+function changeTaskStateAction (taskId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
@@ -107,9 +101,8 @@ function changeTaskStateAction(taskId) {
     };
 }
 
-function removeTaskAction(taskId) {
+function removeTaskAction (taskId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
@@ -127,9 +120,8 @@ function removeTaskAction(taskId) {
     };
 }
 
-function moveUpTaskAction(taskId) {
+function moveUpTaskAction (taskId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
@@ -147,9 +139,8 @@ function moveUpTaskAction(taskId) {
     };
 }
 
-function moveDownTaskAction(taskId) {
+function moveDownTaskAction (taskId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
@@ -167,10 +158,10 @@ function moveDownTaskAction(taskId) {
     };
 }
 
-function setNewListAction(listId) {
+function setNewListAction (listId) {
     return (dispatch) => {
         dispatch(setNewList(listId));
     };
 }
 
-export {getTasksAction,getTasksByListIdAction, addTaskAction, removeTaskAction, changeTaskStateAction, moveDownTaskAction, moveUpTaskAction, setNewListAction};
+export {getTasksAction, getTasksByListIdAction, addTaskAction, removeTaskAction, changeTaskStateAction, moveDownTaskAction, moveUpTaskAction, setNewListAction};

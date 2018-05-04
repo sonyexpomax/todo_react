@@ -9,8 +9,8 @@ import {
     REMOVE_LIST_REQUEST,
 } from '../constants/list';
 
-import {getLists,addList,renameList,removeList} from '../api/lists';
-import {getTasksByListIdAction, setNewListAction} from '../actions/tasks'
+import {getLists, addList, renameList, removeList} from '../api/lists';
+import {getTasksByListIdAction, setNewListAction} from '../actions/tasks';
 
 const listRequest = (lists) => { return { type: GET_LISTS_REQUEST, lists } };
 const listSuccess = (lists) => { return { type: GET_LISTS_SUCCESS, lists } };
@@ -21,15 +21,14 @@ const renameListSuccess = (list) => { return { type: RENAME_LIST_SUCCESS, list }
 const removeListRequest = (list) => { return { type: REMOVE_LIST_REQUEST, list } };
 const removeListSuccess = (list) => { return { type: REMOVE_LIST_SUCCESS, list } };
 
-function getListsAction() {
+function getListsAction () {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(listRequest());
-        getLists(token,client,uid)
+        getLists(token, client, uid)
             .then(
                 lists => {
                     dispatch(listSuccess(lists));
@@ -49,19 +48,18 @@ function getListsAction() {
     };
 }
 
-function addListAction(list) {
+function addListAction (list) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(addListRequest(list));
-        addList(token,client,uid, list)
+        addList(token, client, uid, list)
             .then(
                 list => {
                     dispatch(addListSuccess(list));
-                    return list
+                    return list;
                 },
                 error => {
                     console.error(error);
@@ -71,11 +69,11 @@ function addListAction(list) {
                 list => {
                     dispatch(setNewListAction(list.id));
                 }
-        );
+            );
     };
 }
 
-function removeListAction(listId) {
+function removeListAction (listId) {
     return (dispatch, getState) => {
 
         const token = getState().user.user['access-token'];
@@ -83,9 +81,9 @@ function removeListAction(listId) {
         const uid = getState().user.user['uid'];
 
         dispatch(removeListRequest(listId));
-        removeList(token,client,uid, listId)
+        removeList(token, client, uid, listId)
             .then(
-                response => {
+                () => {
                     dispatch(removeListSuccess(listId));
                 },
                 error => {
@@ -95,15 +93,14 @@ function removeListAction(listId) {
     };
 }
 
-function renameListAction(listId, newName) {
+function renameListAction (listId, newName) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(renameListRequest(listId));
-        renameList(token,client,uid, listId, newName)
+        renameList(token, client, uid, listId, newName)
             .then(
                 list => {
                     dispatch(renameListSuccess(list));
@@ -115,4 +112,4 @@ function renameListAction(listId, newName) {
     };
 }
 
-export {getListsAction, addListAction, removeListAction,renameListAction};
+export {getListsAction, addListAction, removeListAction, renameListAction};

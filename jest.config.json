@@ -1,0 +1,21 @@
+{
+  "collectCoverage": true,
+  "globals": {
+    "widow": true
+  },
+  "moduleDirectories": ["node_modules", "src", "src/locales", "__mocks__"],
+  "moduleNameMapper": {
+    "^.+\\.(css|scss)$": "identity-obj-proxy"
+  },
+  "setupFiles": [
+    "raf/polyfill"
+  ],
+  "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup.js",
+  "testRegex": "/__tests__/.*.test.js$",
+  "testPathIgnorePatterns": ["<rootDir>/__tests__/coverage"],
+  "coveragePathIgnorePatterns": ["<rootDir>/__tests__", "<rootDir>/__mocks__",
+    "<rootDir>/src/platform", "<rootDir>/src/default", "<rootDir>/src/urls",
+    "<rootDir>/src/utils", "<rootDir>/src/components/CustomComponentSelect",
+    "<rootDir>/src/components/data", "<rootDir>/src/validate", "<rootDir>/src/constans",
+    "<rootDir>/src/chart", "<rootDir>/src/api", "<rootDir>/src/webSocketClient", "<rootDir>/src/configApi"]
+}

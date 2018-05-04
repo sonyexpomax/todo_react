@@ -1,6 +1,7 @@
 .td-registration-page-wrap{
     /*margin-top: 10%;*/
     width:60%;
+    max-width: 700px;
     margin: 5% auto;
     border: solid 1px #8e8e8e;
     border-radius: 5px;

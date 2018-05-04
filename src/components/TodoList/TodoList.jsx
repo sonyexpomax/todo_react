@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import Task from '../Task';
+// import './style.css';
+import React, { Component } from 'react';
 import NewTask from '../NewTask';
 import PropTypes from 'prop-types';
-import './style.css';
+import Task from '../Task';
 
 class TodoList extends Component{
 
-    constructor(props){
+    constructor (props) {
         super(props);
         this.state = {
             isOpen: false,
             isEditable: false,
-            name: this.props.list.label,
+            name: this.props.list.label
         };
     }
 
@@ -41,12 +41,12 @@ class TodoList extends Component{
     };
 
     render(){
-        let headText = !this.state.isEditable ?
-            (<h2>List "{this.props.list.label}"</h2>) :
-            (<input type='text' value={this.state.name} onChange={this.onChangeName}/>);
+        let headText = !this.state.isEditable
+            ? (<h2>List '{this.props.list.label}'</h2>)
+            : (<input type='text' value={this.state.name} onChange={this.onChangeName}/>);
 
-        let tasks = this.props.tasks.length > 0 ?
-            (<ol>
+        let tasks = this.props.tasks.length > 0
+            ? (<ol>
                 {this.props.tasks.map((item, index) => {
                     let isFirst = (index === 0);
                     let isLast = (index === (this.props.tasks.length - 1));
@@ -54,10 +54,10 @@ class TodoList extends Component{
                         <li key={item.id}>
                             <Task task={item} isFirst={isFirst} isLast={isLast} />
                         </li>
-                    )
+                    );
                 })}
-            </ol>) :
-            (<p className={'empty-list'}>List is empty</p>);
+            </ol>)
+            : (<p className={'empty-list'}>List is empty</p>);
 
         return (
             <div className='td-todo-list-wrap'>
@@ -83,7 +83,7 @@ class TodoList extends Component{
                 </div>
                 <hr className={'list-line'}/>
             </div>
-        )
+        );
     }
 }
 

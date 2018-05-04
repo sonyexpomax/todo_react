@@ -1,5 +1,6 @@
 .td-todo-lists-wrap{
     width:80%;
+    max-width: 700px;
     margin: 5% auto;
     border-radius: 5px;
     border: solid 1px #8e8e8e;

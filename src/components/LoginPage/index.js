@@ -1,9 +1,9 @@
-import LoginPage from './LoginPage';
-import React  from 'react';
-import { connect } from 'react-redux';
-import {loginAction} from "../../redux/actions/authentificate";
-import PropTypes from 'prop-types';
 import './style.css';
+import { connect } from 'react-redux';
+import {loginAction} from '../../redux/actions/authentificate';
+import LoginPage from './LoginPage';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const LoginPageContainer = (props) => <LoginPage {...props} />;
 
@@ -12,15 +12,15 @@ LoginPageContainer.propTypes = {
     isRequest: PropTypes.bool
 };
 
-function mapStateToProps(store) {
+function mapStateToProps (store) {
     return {
         isRequest: store.ui.button
     };
 }
 function mapDispatchToProps (dispatch) {
     return ({
-        signIn: (login, password) =>  dispatch(loginAction(login, password))
+        signIn: (login, password) => dispatch(loginAction(login, password))
     });
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(LoginPageContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPageContainer)

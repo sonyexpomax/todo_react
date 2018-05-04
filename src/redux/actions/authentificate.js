@@ -10,7 +10,7 @@ import {
 // import { browserHistory } from 'react-router';
 
 import {logoutUser, loginUser, registerUser} from '../api/user';
-import { startRequest, stopRequest } from  '../ui/button';
+import { startRequest, stopRequest } from '../ui/button';
 
 const registrationRequest = (user) => { return { type: REGISTER_REQUEST, user } };
 const registrationSuccess = (user) => { return { type: REGISTER_SUCCESS, user } };
@@ -22,7 +22,7 @@ const loginSuccess = (user) => { return { type: LOGIN_SUCCESS, user } };
 const logoutRequest = (user) => { return { type: LOGOUT_REQUEST, user } };
 const logoutSuccess = (user) => { return { type: LOGOUT_SUCCESS, user } };
 
-function loginAction(email, password) {
+function loginAction (email, password) {
     return dispatch => {
         dispatch(startRequest());
         dispatch(loginRequest({ email }));
@@ -44,13 +44,13 @@ function loginAction(email, password) {
     };
 }
 
-function registerAction(email, password, password_confirmation ) {
+function registerAction (email, password, passwordConfirmation) {
     return dispatch => {
         dispatch(startRequest());
         dispatch(registrationRequest(email));
-        registerUser(email, password, password_confirmation)
+        registerUser(email, password, passwordConfirmation)
             .then(
-                response => {
+                () => {
                     dispatch(registrationSuccess());
                     dispatch(stopRequest());
                 },
@@ -62,12 +62,12 @@ function registerAction(email, password, password_confirmation ) {
     };
 }
 
-function logoutAction() {
+function logoutAction () {
     return dispatch => {
         dispatch(logoutRequest());
         logoutUser()
             .then(
-                response => {
+                () => {
                     dispatch(logoutSuccess());
                 },
                 error => {

@@ -1,12 +1,16 @@
 .td-registration-page-btn-wrap{
     width: 100%;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 10px 5px;
     margin:10px 0 ;
-    border: 1px solid #222222;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #2c768e;
-    color: #d9d6af;
+    color: #ffffff;
     font-family: "Source Code Pro", Monaco, monospace;
     font-weight: 600;
     font-size: 14px;
+}
+.td-registration-page-btn-wrap:hover{
+    cursor: pointer;
+    background-color: #173d49;
 }

@@ -1,9 +1,9 @@
-import React  from "react";
-import LogoutButton from './LogoutButton';
-import { connect } from 'react-redux';
-import {logoutAction} from "../../redux/actions/authentificate";
-import PropTypes from 'prop-types';
 import './style.css';
+import { connect } from 'react-redux';
+import {logoutAction} from '../../redux/actions/authentificate';
+import LogoutButton from './LogoutButton';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const LogoutButtonContainer = (props) => <LogoutButton {...props} />;
 
@@ -13,8 +13,8 @@ LogoutButtonContainer.propTypes = {
 
 function mapDispatchToProps (dispatch) {
     return ({
-        signOut: () =>  dispatch(logoutAction())
+        signOut: () => dispatch(logoutAction())
     });
 }
 
-export default connect(null,mapDispatchToProps)(LogoutButtonContainer)
+export default connect(null, mapDispatchToProps)(LogoutButtonContainer)

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PropTypes from 'prop-types'
-import './style.css';
+// import './style.css';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Task extends Component{
 
@@ -19,17 +19,17 @@ class Task extends Component{
         this.props.moveTaskUp();
     };
 
-    render(){
-        let upButton = this.props.isFirst ?
-            <i className="td-task-up-disable"></i> :
-            <i className="td-task-up" onClick={this.moveUpHandler} title={'Move up'}></i>;
-        let downButton = this.props.isLast ?
-            <i className="td-task-down-disable"></i> :
-            <i className="td-task-down" onClick={this.moveDownHandler} title={'Move down'}></i>;
+    render () {
+        let upButton = this.props.isFirst
+            ? <i className='td-task-up-disable'></i>
+            : <i className='td-task-up' onClick={this.moveUpHandler} title={'Move up'}></i>;
+        let downButton = this.props.isLast
+            ? <i className='td-task-down-disable'></i>
+            : <i className='td-task-down' onClick={this.moveDownHandler} title={'Move down'}></i>;
         return (
             <div className={ !this.props.task.is_done ? 'td-task-wrap' : 'td-task-wrap td-task-finished'}>
                 <input
-                    type = "checkbox"
+                    type = 'checkbox'
                     onChange = {this.props.changeTaskState}
                     defaultChecked = {this.props.task.is_done}
                 />
@@ -44,7 +44,7 @@ class Task extends Component{
                 {upButton}
                 {downButton}
             </div>
-        )
+        );
     }
 }
 
@@ -57,6 +57,5 @@ Task.propTypes = {
     removeTask: PropTypes.func,
     changeTaskState: PropTypes.func
 };
-
 
 export default Task;

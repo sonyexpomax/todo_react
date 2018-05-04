@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import './style.css';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const LoginPageButton = (props) => {
     const {isRequest, signIn} = props;
     return (
         <button className='td-registration-page-btn-wrap' disabled={isRequest} onClick={signIn}>Send</button>
-    )
+    );
 };
 
 LoginPageButton.propTypes = {

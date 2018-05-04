@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
 import './style.css';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class NewList extends Component{
-
-    constructor(props){
+    constructor (props) {
         super(props);
         this.state = {
             newList: ''
@@ -21,10 +20,10 @@ class NewList extends Component{
         if (newList) {
             this.props.addList(newList);
         }
-        this.setState({newList:''});
+        this.setState({newList: ''});
     };
 
-    render(){
+    render () {
         return (
             <div className='td-new-list-wrap'>
                 <h1> Add new list </h1>
@@ -38,7 +37,7 @@ class NewList extends Component{
 }
 
 NewList.propTypes = {
-    addList: PropTypes.func,
+    addList: PropTypes.func
 };
 
 export default NewList;

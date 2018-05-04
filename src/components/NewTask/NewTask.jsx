@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+// import './style.css';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
 
-class NewTask extends Component{
-
-    constructor(props){
+class NewTask extends Component {
+    constructor (props) {
         super(props);
         this.state = {
-            newTask: '',
+            newTask: ''
         };
     }
 
@@ -24,11 +23,16 @@ class NewTask extends Component{
         this.setState({newTask: ''});
     };
 
-    render(){
+    render () {
         return (
             <div className='td-new-task-wrap'>
                 <form onSubmit={this.onSubmit} className='td-new-task-add-form'>
-                    <input onChange={this.onChangeName} placeholder="Add new task in this list" className='td-new-task-add-text' value={this.state.newTask}/>
+                    <input
+                        onChange={this.onChangeName}
+                        placeholder="Add new task in this list"
+                        className='td-new-task-add-text'
+                        value={this.state.newTask}
+                    />
                     <button type="submit" className='td-new-task-add-btn'>Add</button>
                 </form>
             </div>
@@ -42,5 +46,3 @@ NewTask.propTypes = {
 };
 
 export default NewTask;
-
-

@@ -1,16 +1,15 @@
+import './style.css';
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RegistrationPageButton from '../RegistrationPageButton';
-import {Link} from 'react-router-dom';
-import './style.css';
 
 class RegistrationPage extends Component {
-
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             login: '',
-            email:'',
+            email: '',
             password: '',
             passwordConfirm: '',
             submitted: false,
@@ -21,23 +20,23 @@ class RegistrationPage extends Component {
     }
 
     validateEmail = (email) => {
-        let pattr =  /^[a-z\-0-9_.]+@[a-z\-0-9_]+\.[a-z]{2,5}$/i;
-        if(email.match(pattr)){
+        let pattr = /^[a-z\-0-9_.]+@[a-z\-0-9_]+\.[a-z]{2,5}$/i;
+        if (email.match(pattr)) {
             return true;
         }
         return false;
     };
 
     validatePassword = (password) => {
-        let pattr =  /^[A-Za-z\-0-9_.@]{6,20}$/i;
-        if(password.match(pattr)){
+        let pattr = /^[A-Za-z\-0-9_.@]{6,20}$/i;
+        if (password.match(pattr)) {
             return true;
         }
         return false;
     };
 
     validatePasswordConfirm = () => {
-        return (this.state.password === this.state.passwordConfirm)
+        return (this.state.password === this.state.passwordConfirm);
     };
 
     onSubmit = (e) => {
@@ -75,25 +74,25 @@ class RegistrationPage extends Component {
         });
     };
 
-    render() {
-        let validatePasswordColor = (this.state.validPassword === true) ? "green" : "red";
-        let validatePasswordConfirmColor = (this.state.validConfirmPassword === true) ? "green" : "red";
-        let validateEmailColor = (this.state.validEmail === true) ? "green" : "red";
+    render () {
+        let validatePasswordColor = (this.state.validPassword === true) ? 'green' : 'red';
+        let validatePasswordConfirmColor = (this.state.validConfirmPassword === true) ? 'green' : 'red';
+        let validateEmailColor = (this.state.validEmail === true) ? 'green' : 'red';
         return (
-            <div className="td-registration-page-wrap">
+            <div className='td-registration-page-wrap'>
                 <h2>Registration</h2>
                 <form onSubmit={this.onSubmit}>
                     <p><label>Email:</label>
-                        <input type="email" name="email" value={this.state.email} onChange={this.onEmailChange} style={{borderColor:validateEmailColor}}/>
+                        <input type='email' name='email' value={this.state.email} onChange={this.onEmailChange} style={{borderColor: validateEmailColor}}/>
                     </p>
                     <p><label>Password:</label>
-                        <input type="password" name="password" value={this.state.password} onChange={this.onPasswordChange} style={{borderColor:validatePasswordColor}}/>
+                        <input type='password' name='password' value={this.state.password} onChange={this.onPasswordChange} style={{borderColor: validatePasswordColor}}/>
                     </p>
                     <p><label>Confirm password:</label>
-                        <input type="password" name="confirm_password" value={this.state.passwordConfirm} onChange={this.onPasswordConfirmChange}  style={{borderColor:validatePasswordConfirmColor}}/>
+                        <input type='password' name='confirm_password' value={this.state.passwordConfirm} onChange={this.onPasswordConfirmChange} style={{borderColor: validatePasswordConfirmColor}}/>
                     </p>
                     <p>
-                        <Link to="/login">
+                        <Link to='/login'>
                             <RegistrationPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
                         </Link>
                     </p>

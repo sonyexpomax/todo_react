@@ -1,8 +1,9 @@
-import TodoLists from './TodoLists';
-import React  from 'react';
 import { connect } from 'react-redux';
-import {getListsAction} from "../../redux/actions/list";
+import {getListsAction} from '../../redux/actions/list';
 import PropTypes from 'prop-types';
+import React from 'react';
+import TodoLists from './TodoLists';
+
 const TodoListsContainer = (props) => <TodoLists {...props} />;
 
 TodoListsContainer.propTypes = {
@@ -10,7 +11,7 @@ TodoListsContainer.propTypes = {
     getLists: PropTypes.func
 };
 
-function mapStateToProps(store) {
+function mapStateToProps (store) {
     return {
         lists: store.lists
     };
@@ -18,8 +19,8 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps (dispatch) {
     return ({
-        getLists: () =>  dispatch(getListsAction()),
+        getLists: () => dispatch(getListsAction())
     });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoListsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListsContainer);
