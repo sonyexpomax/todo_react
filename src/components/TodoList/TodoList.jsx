@@ -1,4 +1,4 @@
-// import './style.css';
+import './style.css';
 import React, { Component } from 'react';
 import NewTask from '../NewTask';
 import PropTypes from 'prop-types';
@@ -40,7 +40,7 @@ class TodoList extends Component{
         this.props.removeList(this.props.list.id);
     };
 
-    render(){
+    render () {
         let headText = !this.state.isEditable
             ? (<h2>List '{this.props.list.label}'</h2>)
             : (<input type='text' value={this.state.name} onChange={this.onChangeName}/>);

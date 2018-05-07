@@ -8,15 +8,20 @@ import {
 let initialState = {
     loggedIn: false,
     loggingIn: false,
+    loggingOut: false,
     user: {}
 };
 
 export default function lists (state = initialState, action) {
     switch (action.type) {
     case LOGIN_REQUEST:
-        return {loggingIn: true, user: action.user};
+        return {
+            ...state,
+            loggingIn: true
+        };
     case LOGIN_SUCCESS:
         return {
+            ...state,
             loggedIn: true,
             loggingIn: false,
             user: action.user
@@ -25,9 +30,10 @@ export default function lists (state = initialState, action) {
         return {...state, loggingOut: true};
     case LOGOUT_SUCCESS:
         return {
+            ...state,
             loggedIn: false,
-            loggingIn: false,
-            user: {}
+            user: {},
+            loggingOut: false
         };
     default:
         return state;

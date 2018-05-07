@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 function getLists (token, client, uid) {
+    console.log('real get lists api');
     let headers = {
         headers: {
             'access-token': token,

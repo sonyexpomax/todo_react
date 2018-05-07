@@ -11,8 +11,7 @@ import {
 
 const initialState = {
     items: [],
-    isFetching: false,
-    maxListId: 0
+    isFetching: false
 };
 
 let newState;
@@ -20,7 +19,7 @@ let newState;
 export default function lists (state = initialState, action) {
     switch (action.type) {
     case GET_LISTS_REQUEST:
-        return {...state, isFetching: true,};
+        return {...state, isFetching: true};
     case GET_LISTS_SUCCESS:
         return {
             ...state,

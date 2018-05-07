@@ -9,10 +9,10 @@ let newTasks;
 
 export default function lists (state = initialState, action) {
     switch (action.type) {
-    case taskConstants.GET_TASKS_REQUEST:
-        return {...state, isFetching: true};
-    case taskConstants.GET_TASKS_SUCCESS:
-        return {...state, isFetching: false, items: action.tasks};
+    // case taskConstants.GET_TASKS_REQUEST:
+    //     return {...state, isFetching: true};
+    // case taskConstants.GET_TASKS_SUCCESS:
+    //     return {...state, isFetching: false, items: action.tasks};
     case taskConstants.GET_TASKS_BY_LIST_ID_REQUEST:
         return {...state, isFetching: true};
     case taskConstants.GET_TASKS_BY_LIST_ID_SUCCESS:
@@ -42,7 +42,7 @@ export default function lists (state = initialState, action) {
         return {
             ...state,
             items: newTasks,
-            isFetching: false,
+            isFetching: false
         };
     case taskConstants.REMOVE_TASK_REQUEST:
         return {...state, isFetching: true};
@@ -69,7 +69,10 @@ export default function lists (state = initialState, action) {
             if (list.listId === action.task.list_id) {
                 return {
                     listId: list.listId,
-                    tasks: list.tasks.map(task => (task.id === action.task.id) ? {...task, is_done: !task.is_done} : task)
+                    tasks: list.tasks.map(task => (task.id === action.task.id)
+                        ? {...task, is_done: !task.is_done}
+                        : task
+                    )
                 };
             } else {
                 return list;
@@ -80,9 +83,11 @@ export default function lists (state = initialState, action) {
             items: newTasks,
             isFetching: false
         };
+    case taskConstants.MOVE_TASK_DOWN_REQUEST:
+        return {...state, isFetching: true};
     case taskConstants.MOVE_TASK_DOWN_SUCCESS:
         newTasks = state.items.map(item => {
-            if(item.listId === action.tasks[0].list_id) {
+            if (item.listId === action.tasks[0].list_id) {
                 return {
                     listId: item.listId,
                     tasks: action.tasks
@@ -96,7 +101,8 @@ export default function lists (state = initialState, action) {
             items: newTasks,
             isFetching: false
         };
-
+    case taskConstants.MOVE_TASK_UP_REQUEST:
+        return {...state, isFetching: true};
     case taskConstants.MOVE_TASK_UP_SUCCESS:
         newTasks = state.items.map(item => {
             if (item.listId === action.tasks[0].list_id) {

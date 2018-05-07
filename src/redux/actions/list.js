@@ -22,15 +22,19 @@ const removeListRequest = (list) => { return { type: REMOVE_LIST_REQUEST, list }
 const removeListSuccess = (list) => { return { type: REMOVE_LIST_SUCCESS, list } };
 
 function getListsAction () {
+    console.log(arguments);
+    console.log('++++++++++++++');
     return (dispatch, getState) => {
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(listRequest());
+        console.log(getLists)
         getLists(token, client, uid)
             .then(
                 lists => {
+                    console.log(lists);
                     dispatch(listSuccess(lists));
                     return lists;
                 },
