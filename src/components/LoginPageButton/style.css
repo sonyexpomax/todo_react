@@ -1,15 +1,12 @@
 .td-login-page-btn-wrap{
-    width: 100%;
-    padding: 10px 5px;
-    /*border-radius: 5px;*/
+    width: 35%;
+    padding: 15px 10px;
+    border-radius: 5px;
     margin:10px 0 ;
-    background-color: #3b8e00;
+    background-color: #5aaaef;
     color: #ffffff;
-    font-family: "Source Code Pro", Monaco, monospace;
-    font-weight: 600;
-    font-size: 14px;
     border: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-size: 22px;
 }
 .td-login-page-btn-wrap:hover{
     background-color: #275e00;

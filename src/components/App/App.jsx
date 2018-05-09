@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import RegistrationPage from '../RegistrationPage';
 import {Switch} from 'react-router-dom';
 import TodoLists from '../TodoLists';
+import './style.css';
 
 class App extends Component {
     requireAuth = (nextState, replace) => {
@@ -27,13 +28,19 @@ class App extends Component {
 
     render () {
         return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/lists" component={TodoLists} onEnter={this.requireAuth} />
-                    <Route path="/login" component={LoginPage} onEnter={this.requireAlreadyAuth}/>
-                    <Route path="/registration" component={RegistrationPage} />
-                </Switch>
-            </BrowserRouter>
+            <div>
+                <h1 className='td-app-head'>Sample ToDo List</h1>
+                <div className='td-app-main'>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route path="/lists" component={TodoLists} onEnter={this.requireAuth} />
+                            <Route path="/login" component={LoginPage} onEnter={this.requireAlreadyAuth}/>
+                            <Route path="/registration" component={RegistrationPage} />
+                        </Switch>
+                    </BrowserRouter>
+                </div>
+            </div>
+
         );
     }
 }

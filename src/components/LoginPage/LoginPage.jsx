@@ -44,39 +44,39 @@ class LoginPage extends Component {
         let validateColor = (this.state.valid === true) ? 'green' : 'red';
         return (
             <div className='td-login-page-wrap'>
-                <h2>Login</h2>
+                <h2>Sign Up</h2>
                 <form>
-                    <p className='td-login-page-label'><label>Email:</label>
+                    <div className='td-login-page-input'>
                         <input
                             id='email'
                             type="text"
                             name="login"
                             value={this.state.login}
                             onChange={this.onLoginChange}
-                            style={{borderColor: validateColor}} />
-                    </p>
-                    <p className='td-login-page-label'><label>Password:</label>
+                            style={{borderColor: validateColor}}
+                            placeholder='Email'
+                        />
+                    </div>
+                    <div className='td-login-page-input'>
                         <input
                             id='password'
                             type="password"
                             name="password"
                             value={this.state.password}
-                            onChange={this.onPasswordChange}/>
-                    </p>
+                            onChange={this.onPasswordChange}
+                            placeholder='Password'
+                        />
+                    </div>
                     <p>
-                        <button id = 'b2' onClick={this.onSubmit}>2323</button>
+                        {/*<button id = 'b2' onClick={this.onSubmit}>2323</button>*/}
                         <LoginPageButton isRequset={this.props.isRequest} signIn={this.onSubmit}/>
                     </p>
                 </form>
                 <div className='td-login-page-registration-link'>
-                    {/*<BrowserRouter>*/}
-                        <div>
-                            <Link to='/registration' className='td-login-page-link'>Registration</Link>
-                            <Link to='/lists' className='td-login-page-link'>Lists</Link>
-                        </div>
-                    {/*</BrowserRouter>*/}
+                    Don`t you have an account?
+                    <Link to='/registration' className='td-login-page-link'>Registration</Link>
+                    <Link to='/lists' className='td-login-page-link'>Lists</Link>
                 </div>
-
             </div>
         );
     }
