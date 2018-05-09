@@ -26,10 +26,10 @@ class NewList extends Component{
     render () {
         return (
             <div className='td-new-list-wrap'>
-                <h1> Add new list </h1>
-                <form onSubmit={this.onSubmit}>
-                    <input onChange={this.onChangeName} placeholder="Input list name" className='td-new-list-add-list-text' value={this.state.newList}/>
-                    <button type="submit" className='td-new-list-add-list-btn'>Add</button>
+                <h1>Add new list</h1>
+                <form>
+                    <input id='new-list' onChange={this.onChangeName} placeholder="Input list name" className='td-new-list-add-list-text' value={this.state.newList}/>
+                    <button type="submit" className='td-new-list-add-list-btn' onClick={this.onSubmit}>Add</button>
                 </form>
             </div>
         );

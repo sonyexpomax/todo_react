@@ -56,7 +56,14 @@ export const threeLists = {
 
 export const listsFromServer = [
     {id: 20, label: '66000000000'},
-    {id: 35, label: '5656'},
-    {id: 40, label: 'r44444444444444'},
-    {id: 41, label: 'aaddas'}
+    {id: 21, label: '5656'}
+];
+
+export const tasksPerListFromServer21 = [
+    {id: 1, label: 'aaaaa'},
+    {id: 2, label: 'bbbbb'}
+];
+export const tasksPerListFromServer20 = [
+    {id: 3, label: 'nnnnn'},
+    {id: 4, label: 'ccccc'}
 ];

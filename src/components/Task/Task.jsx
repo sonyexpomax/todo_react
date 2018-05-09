@@ -21,14 +21,15 @@ class Task extends Component{
 
     render () {
         let upButton = this.props.isFirst
-            ? <i className='td-task-up-disable'></i>
-            : <i className='td-task-up' onClick={this.moveUpHandler} title={'Move up'}></i>;
+            ? <i id='up-button' className='td-task-up-disable'/>
+            : <i id='up-button' className='td-task-up' onClick={this.moveUpHandler} title={'Move up'}/>;
         let downButton = this.props.isLast
-            ? <i className='td-task-down-disable'></i>
-            : <i className='td-task-down' onClick={this.moveDownHandler} title={'Move down'}></i>;
+            ? <i id='down-button' className='td-task-down-disable'/>
+            : <i id='down-button' className='td-task-down' onClick={this.moveDownHandler} title={'Move down'}/>;
         return (
             <div className={ !this.props.task.is_done ? 'td-task-wrap' : 'td-task-wrap td-task-finished'}>
                 <input
+                    id='change-state'
                     type = 'checkbox'
                     onChange = {this.props.changeTaskState}
                     defaultChecked = {this.props.task.is_done}

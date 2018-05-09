@@ -1,9 +1,9 @@
 import taskConstants from '../constants/task';
 
-import {addTask, removeTask, getTasks, getTasksByListId, changeTaskState, moveTaskUp, moveTaskDown} from '../api/tasks';
+import {addTask, removeTask, getTasksByListId, changeTaskState, moveTaskUp, moveTaskDown} from '../api/tasks';
 
-const getTaskRequest = (tasks) => { return { type: taskConstants.GET_TASKS_REQUEST, tasks } };
-const getTaskSuccess = (tasks) => { return { type: taskConstants.GET_TASKS_SUCCESS, tasks } };
+// const getTaskRequest = (tasks) => { return { type: taskConstants.GET_TASKS_REQUEST, tasks } };
+// const getTaskSuccess = (tasks) => { return { type: taskConstants.GET_TASKS_SUCCESS, tasks } };
 
 export const getTasksByListIdRequest = (tasks) => { return { type: taskConstants.GET_TASKS_BY_LIST_ID_REQUEST, tasks } };
 export const getTasksByListIdSuccess = (tasks) => { return { type: taskConstants.GET_TASKS_BY_LIST_ID_SUCCESS, tasks } };
@@ -25,24 +25,24 @@ const moveTaskDownSuccess = (tasks) => { return { type: taskConstants.MOVE_TASK_
 
 const setNewList = (listId) => { return { type: taskConstants.SET_NEW_LIST, listId } };
 
-function getTasksAction () {
-    return (dispatch, getState) => {
-        const token = getState().user.user['access-token'];
-        const client = getState().user.user['client'];
-        const uid = getState().user.user['uid'];
-
-        dispatch(getTaskRequest());
-        getTasks(token, client, uid)
-            .then(
-                tasks => {
-                    dispatch(getTaskSuccess(tasks));
-                },
-                error => {
-                    console.error(error);
-                }
-            );
-    };
-}
+// function getTasksAction () {
+//     return (dispatch, getState) => {
+//         const token = getState().user.user['access-token'];
+//         const client = getState().user.user['client'];
+//         const uid = getState().user.user['uid'];
+//
+//         dispatch(getTaskRequest());
+//         getTasks(token, client, uid)
+//             .then(
+//                 tasks => {
+//                     dispatch(getTaskSuccess(tasks));
+//                 },
+//                 error => {
+//                     console.error(error);
+//                 }
+//             );
+//     };
+// }
 
 function getTasksByListIdAction (listId) {
     return (dispatch, getState) => {
@@ -70,7 +70,7 @@ function addTaskAction (content, listId) {
         const uid = getState().user.user['uid'];
 
         dispatch(addTaskRequest(listId));
-        addTask(token, client, uid, content, listId)
+        return addTask(token, client, uid, content, listId)
             .then(
                 task => {
                     dispatch(addTaskSuccess(task));
@@ -89,7 +89,7 @@ function changeTaskStateAction (taskId) {
         const uid = getState().user.user['uid'];
 
         dispatch(changeTaskStateRequest(taskId));
-        changeTaskState(token, client, uid, taskId)
+        return changeTaskState(token, client, uid, taskId)
             .then(
                 response => {
                     dispatch(changeTaskStateSuccess(response));
@@ -108,7 +108,7 @@ function removeTaskAction (taskId) {
         const uid = getState().user.user['uid'];
 
         dispatch(removeTaskRequest(taskId));
-        removeTask(token, client, uid, taskId)
+        return removeTask(token, client, uid, taskId)
             .then(
                 response => {
                     dispatch(removeTaskSuccess(response));
@@ -127,7 +127,7 @@ function moveUpTaskAction (taskId) {
         const uid = getState().user.user['uid'];
 
         dispatch(moveTaskUpRequest(taskId));
-        moveTaskUp(token, client, uid, taskId)
+        return moveTaskUp(token, client, uid, taskId)
             .then(
                 tasks => {
                     dispatch(moveTaskUpSuccess(tasks));
@@ -146,7 +146,7 @@ function moveDownTaskAction (taskId) {
         const uid = getState().user.user['uid'];
 
         dispatch(moveTaskDownRequest(taskId));
-        moveTaskDown(token, client, uid, taskId)
+        return moveTaskDown(token, client, uid, taskId)
             .then(
                 tasks => {
                     dispatch(moveTaskDownSuccess(tasks));
@@ -164,4 +164,4 @@ function setNewListAction (listId) {
     };
 }
 
-export {getTasksAction, getTasksByListIdAction, addTaskAction, removeTaskAction, changeTaskStateAction, moveDownTaskAction, moveUpTaskAction, setNewListAction};
+export {getTasksByListIdAction, addTaskAction, removeTaskAction, changeTaskStateAction, moveDownTaskAction, moveUpTaskAction, setNewListAction};

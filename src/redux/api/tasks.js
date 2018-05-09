@@ -1,24 +1,24 @@
 import axios from 'axios';
 // import axios from "axios/index";
 
-function getTasks (token, client, uid) {
-    let headers = {
-        headers: {
-            'access-token': token,
-            'client': client,
-            'uid': uid
-        }
-    };
-
-    return axios.get('http://localhost:3000/v1/tasks', headers)
-        .then(
-            response => {
-                return response.data;
-            },
-            error => {
-                console.error(error);
-            });
-}
+// function getTasks (token, client, uid) {
+//     let headers = {
+//         headers: {
+//             'access-token': token,
+//             'client': client,
+//             'uid': uid
+//         }
+//     };
+//
+//     return axios.get('http://localhost:3000/v1/tasks', headers)
+//         .then(
+//             response => {
+//                 return response.data;
+//             },
+//             error => {
+//                 console.error(error);
+//             });
+// }
 
 function getTasksByListId (token, client, uid, listId) {
     let headers = {
@@ -130,4 +130,4 @@ function moveTaskDown (token, client, uid, taskId) {
             });
 }
 
-export {getTasks, getTasksByListId, removeTask, addTask, changeTaskState, moveTaskDown, moveTaskUp};
+export {getTasksByListId, removeTask, addTask, changeTaskState, moveTaskDown, moveTaskUp};

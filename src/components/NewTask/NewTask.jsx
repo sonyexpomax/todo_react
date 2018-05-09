@@ -26,14 +26,15 @@ class NewTask extends Component {
     render () {
         return (
             <div className='td-new-task-wrap'>
-                <form onSubmit={this.onSubmit} className='td-new-task-add-form'>
+                <form className='td-new-task-add-form'>
                     <input
+                        id='new-task'
                         onChange={this.onChangeName}
                         placeholder="Add new task in this list"
                         className='td-new-task-add-text'
                         value={this.state.newTask}
                     />
-                    <button type="submit" className='td-new-task-add-btn'>Add</button>
+                    <button type="submit" className='td-new-task-add-btn' onClick={this.onSubmit}>Add</button>
                 </form>
             </div>
         );
@@ -42,7 +43,7 @@ class NewTask extends Component {
 
 NewTask.propTypes = {
     listId: PropTypes.number,
-    createTask: PropTypes.func,
+    createTask: PropTypes.func
 };
 
 export default NewTask;

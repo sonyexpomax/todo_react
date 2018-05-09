@@ -1,6 +1,6 @@
 import './style.css';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 import LoginPageButton from '../LoginPageButton';
 import PropTypes from 'prop-types';
 
@@ -48,6 +48,7 @@ class LoginPage extends Component {
                 <form>
                     <p className='td-login-page-label'><label>Email:</label>
                         <input
+                            id='email'
                             type="text"
                             name="login"
                             value={this.state.login}
@@ -55,15 +56,25 @@ class LoginPage extends Component {
                             style={{borderColor: validateColor}} />
                     </p>
                     <p className='td-login-page-label'><label>Password:</label>
-                        <input type="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/>
+                        <input
+                            id='password'
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onPasswordChange}/>
                     </p>
                     <p>
+                        <button id = 'b2' onClick={this.onSubmit}>2323</button>
                         <LoginPageButton isRequset={this.props.isRequest} signIn={this.onSubmit}/>
                     </p>
                 </form>
                 <div className='td-login-page-registration-link'>
-                    <Link to='/registration' className='td-login-page-link'>Registration</Link>
-                    <Link to='/lists' className='td-login-page-link'>Lists</Link>
+                    {/*<BrowserRouter>*/}
+                        <div>
+                            <Link to='/registration' className='td-login-page-link'>Registration</Link>
+                            <Link to='/lists' className='td-login-page-link'>Lists</Link>
+                        </div>
+                    {/*</BrowserRouter>*/}
                 </div>
 
             </div>

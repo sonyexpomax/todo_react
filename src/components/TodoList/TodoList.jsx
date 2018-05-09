@@ -43,8 +43,7 @@ class TodoList extends Component{
     render () {
         let headText = !this.state.isEditable
             ? (<h2>List '{this.props.list.label}'</h2>)
-            : (<input type='text' value={this.state.name} onChange={this.onChangeName}/>);
-
+            : (<input id='editable-field' type='text' value={this.state.name} onChange={this.onChangeName}/>);
         let tasks = this.props.tasks.length > 0
             ? (<ol>
                 {this.props.tasks.map((item, index) => {
@@ -63,9 +62,14 @@ class TodoList extends Component{
             <div className='td-todo-list-wrap'>
                 <div className='td-todo-list-head'>
                     <div className='td-todo-list-head-text'>
-                        <i onClick={this.onChangeState} className = {!this.state.isOpen ? 'td-todo-list-arrow-right' : 'td-todo-list-arrow-down' }></i>
+                        <i
+                            id='open-close'
+                            onClick={this.onChangeState}
+                            className = {!this.state.isOpen ? 'td-todo-list-arrow-right' : 'td-todo-list-arrow-down' }
+                        />
                         {headText}
                         <button
+                            id='setChangeName'
                             onClick={this.setChangeName}
                             className='td-todo-list-head-text'
                             style={{display: this.state.isEditable ? 'inline-block' : 'none' }}>
@@ -73,8 +77,8 @@ class TodoList extends Component{
                         </button>
                     </div>
                     <div className='td-todo-list-head-actions'>
-                        <small className='td-todo-list-remove' onClick={this.onRemove}>delete</small>
-                        <small className='td-todo-list-rename' onClick={this.onEdit}>rename</small>
+                        <small id='remove-btn' className='td-todo-list-remove' onClick={this.onRemove}>delete</small>
+                        <small id='rename-btn' className='td-todo-list-rename' onClick={this.onEdit}>rename</small>
                     </div>
                 </div>
                 <div style={{display: this.state.isOpen ? 'block' : 'none' }}>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function loginUser(email, password) {
+function loginUser (email, password) {
     const requestOptions = { email, password };
     return axios.post('http://localhost:3000/auth/sign_in', requestOptions)
         .then(
@@ -18,7 +18,7 @@ function loginUser(email, password) {
         });
 }
 
-function logoutUser() {
+function logoutUser () {
     return axios.delete('http://localhost:3000/auth/sign_out')
         .then(
             response => {
@@ -35,22 +35,22 @@ function logoutUser() {
         });
 }
 
-function registerUser(email, password, password_confirmation) {
+function registerUser (email, password, passwordConfirmation) {
     const options = {
         email: email,
         password: password,
-        password_confirmation: password_confirmation,
+        password_confirmation: passwordConfirmation,
         confirm_success_url: ''
     };
 
     return axios.post('http://localhost:3000/auth/', options)
-        .then(response => {
-            if (!response.ok) {
-                return Promise.reject(response.statusText);
-            }
-            return response.json();
-        }
-    );
+        .then(
+            response => {
+                return response;
+            },
+            error => {
+                console.error(error);
+            });
 }
 
 export {loginUser, logoutUser, registerUser};

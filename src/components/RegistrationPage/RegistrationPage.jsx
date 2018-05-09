@@ -1,6 +1,6 @@
 import './style.css';
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RegistrationPageButton from '../RegistrationPageButton';
 
@@ -81,20 +81,43 @@ class RegistrationPage extends Component {
         return (
             <div className='td-registration-page-wrap'>
                 <h2>Registration</h2>
-                <form onSubmit={this.onSubmit}>
+                <form>
                     <p><label>Email:</label>
-                        <input type='email' name='email' value={this.state.email} onChange={this.onEmailChange} style={{borderColor: validateEmailColor}}/>
+                        <input
+                            id='email'
+                            type='email'
+                            name='email'
+                            value={this.state.email}
+                            onChange={this.onEmailChange}
+                            style={{borderColor: validateEmailColor}}
+                        />
                     </p>
                     <p><label>Password:</label>
-                        <input type='password' name='password' value={this.state.password} onChange={this.onPasswordChange} style={{borderColor: validatePasswordColor}}/>
+                        <input
+                            id='password'
+                            type='password'
+                            name='password'
+                            value={this.state.password}
+                            onChange={this.onPasswordChange}
+                            style={{borderColor: validatePasswordColor}}
+                        />
                     </p>
                     <p><label>Confirm password:</label>
-                        <input type='password' name='confirm_password' value={this.state.passwordConfirm} onChange={this.onPasswordConfirmChange} style={{borderColor: validatePasswordConfirmColor}}/>
+                        <input
+                            id='confirm-password'
+                            type='password'
+                            name='confirm_password'
+                            value={this.state.passwordConfirm}
+                            onChange={this.onPasswordConfirmChange}
+                            style={{borderColor: validatePasswordConfirmColor}}
+                        />
                     </p>
                     <p>
-                        <Link to='/login'>
-                            <RegistrationPageButton isRequset={this.props.isRequest} signIn={this.props.signIn}/>
-                        </Link>
+                        <BrowserRouter>
+                            <Link to='/login'>
+                                <RegistrationPageButton id='reg-btn' isRequset={this.props.isRequest} signIn={this.onSubmit}/>
+                            </Link>
+                        </BrowserRouter>
                     </p>
                 </form>
             </div>

@@ -1,7 +1,6 @@
 import {
     LOGIN_SUCCESS,
     LOGIN_REQUEST,
-    REGISTER_FAILURE,
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
     LOGOUT_SUCCESS,
@@ -14,7 +13,6 @@ import { startRequest, stopRequest } from '../ui/button';
 
 const registrationRequest = (user) => { return { type: REGISTER_REQUEST, user } };
 const registrationSuccess = (user) => { return { type: REGISTER_SUCCESS, user } };
-const registrationFailure = (error) => { return { type: REGISTER_FAILURE, error } };
 
 const loginRequest = (user) => { return { type: LOGIN_REQUEST, user } };
 const loginSuccess = (user) => { return { type: LOGIN_SUCCESS, user } };
@@ -24,9 +22,9 @@ const logoutSuccess = (user) => { return { type: LOGOUT_SUCCESS, user } };
 
 function loginAction (email, password) {
     return dispatch => {
-        dispatch(startRequest());
+        // dispatch(startRequest());
         dispatch(loginRequest({ email }));
-        loginUser(email, password)
+        return loginUser(email, password)
             .then(
                 user => {
                     dispatch(loginSuccess(user));
@@ -46,17 +44,16 @@ function loginAction (email, password) {
 
 function registerAction (email, password, passwordConfirmation) {
     return dispatch => {
-        dispatch(startRequest());
+        // dispatch(startRequest());
         dispatch(registrationRequest(email));
-        registerUser(email, password, passwordConfirmation)
+        return registerUser(email, password, passwordConfirmation)
             .then(
                 () => {
                     dispatch(registrationSuccess());
-                    dispatch(stopRequest());
+                    // dispatch(stopRequest());
                 },
                 error => {
                     console.warn('error', error);
-                    dispatch(registrationFailure(error));
                 }
             );
     };
@@ -65,7 +62,7 @@ function registerAction (email, password, passwordConfirmation) {
 function logoutAction () {
     return dispatch => {
         dispatch(logoutRequest());
-        logoutUser()
+        return logoutUser()
             .then(
                 () => {
                     dispatch(logoutSuccess());

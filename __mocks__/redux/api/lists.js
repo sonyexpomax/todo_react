@@ -1,12 +1,14 @@
 import { listsFromServer } from '../../data/listData';
 
-export function getLists () {
-    console.log('MOCK get lists api');
-    return new Promise((resolve) => {
-        process.nextTick(() => {
-            resolve(listsFromServer);
+export default class getLists {
+    getLists () {
+        console.log('MOCK get lists api');
+        return new Promise((resolve) => {
+            process.nextTick(() => {
+                resolve(listsFromServer);
+            });
         });
-    });
+    }
 }
 
 // createComment = (commentableType, commentableId, data, headers) => {

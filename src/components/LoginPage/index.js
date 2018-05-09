@@ -23,4 +23,4 @@ function mapDispatchToProps (dispatch) {
     });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPageContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPageContainer);

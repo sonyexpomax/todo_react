@@ -22,19 +22,14 @@ const removeListRequest = (list) => { return { type: REMOVE_LIST_REQUEST, list }
 const removeListSuccess = (list) => { return { type: REMOVE_LIST_SUCCESS, list } };
 
 function getListsAction () {
-    console.log(arguments);
-    console.log('++++++++++++++');
     return (dispatch, getState) => {
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
-
         dispatch(listRequest());
-        console.log(getLists)
-        getLists(token, client, uid)
+        return getLists(token, client, uid)
             .then(
                 lists => {
-                    console.log(lists);
                     dispatch(listSuccess(lists));
                     return lists;
                 },
@@ -59,7 +54,7 @@ function addListAction (list) {
         const uid = getState().user.user['uid'];
 
         dispatch(addListRequest(list));
-        addList(token, client, uid, list)
+        return addList(token, client, uid, list)
             .then(
                 list => {
                     dispatch(addListSuccess(list));
@@ -79,13 +74,12 @@ function addListAction (list) {
 
 function removeListAction (listId) {
     return (dispatch, getState) => {
-
         const token = getState().user.user['access-token'];
         const client = getState().user.user['client'];
         const uid = getState().user.user['uid'];
 
         dispatch(removeListRequest(listId));
-        removeList(token, client, uid, listId)
+        return removeList(token, client, uid, listId)
             .then(
                 () => {
                     dispatch(removeListSuccess(listId));
@@ -104,7 +98,7 @@ function renameListAction (listId, newName) {
         const uid = getState().user.user['uid'];
 
         dispatch(renameListRequest(listId));
-        renameList(token, client, uid, listId, newName)
+        return renameList(token, client, uid, listId, newName)
             .then(
                 list => {
                     dispatch(renameListSuccess(list));
