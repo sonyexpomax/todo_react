@@ -7,6 +7,7 @@ import TodoList from './TodoList';
 const TodoListContainer = (props) => <TodoList {...props} />;
 
 TodoListContainer.propTypes = {
+    position: PropTypes.number,
     list: PropTypes.object,
     tasks: PropTypes.array,
     renameList: PropTypes.func,

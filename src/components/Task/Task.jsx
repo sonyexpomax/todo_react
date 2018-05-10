@@ -1,5 +1,7 @@
-import './style.css';
+import './style.scss';
 import React, { Component } from 'react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faPencilAlt, faTrashAlt, faArrowDown, faArrowUp } from '@fortawesome/fontawesome-free-solid';
 import PropTypes from 'prop-types';
 
 class Task extends Component{
@@ -20,30 +22,40 @@ class Task extends Component{
     };
 
     render () {
-        let upButton = this.props.isFirst
-            ? <i id='up-button' className='td-task-up-disable'/>
-            : <i id='up-button' className='td-task-up' onClick={this.moveUpHandler} title={'Move up'}/>;
-        let downButton = this.props.isLast
-            ? <i id='down-button' className='td-task-down-disable'/>
-            : <i id='down-button' className='td-task-down' onClick={this.moveDownHandler} title={'Move down'}/>;
+
         return (
             <div className={ !this.props.task.is_done ? 'td-task-wrap' : 'td-task-wrap td-task-finished'}>
-                <input
-                    id='change-state'
-                    type = 'checkbox'
-                    onChange = {this.props.changeTaskState}
-                    defaultChecked = {this.props.task.is_done}
-                />
+                <div className='td-task-arrows td-task-visible-icon'>
+                    <FontAwesomeIcon
+                        icon={faArrowUp}
+                        size='xs'
+                        className = {!this.props.isFirst ? 'td-task-arrow' : 'td-task-arrow-non-active' }
+                        onClick={!this.props.isFirst ? this.moveUpHandler : ''}
+                    />
+                    <FontAwesomeIcon
+                        icon={faArrowDown}
+                        size='xs'
+                        className = {!this.props.isLast ? 'td-task-arrow' : 'td-task-arrow-non-active' }
+                        onClick={!this.props.isLast ? this.moveDownHandler : ''}
+                    />
+                </div>
+                <label className='td-task-change-state'>
+                    <input
+                        id='change-state'
+                        type='checkbox'
+                        onChange = {this.props.changeTaskState}
+                        defaultChecked = {this.props.task.is_done}
+                    />
+                        <span></span>
+                </label>
                 {this.props.task.content}
-                <button
-                    className = 'td-task-remove'
-                    title = {'Remove'}
+                <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    size='xs'
                     ref = {this.props.task.id}
-                    onClick = {this.removeHandler}
-                >x</button>
-
-                {upButton}
-                {downButton}
+                    className = {'td-task-visible-icon td-task-remove'}
+                    onClick={this.removeHandler}
+                />
             </div>
         );
     }

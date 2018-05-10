@@ -1,0 +1,16 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+.td-new-list-wrap{
+    margin: $margin-small 0;
+    @extend %input-text;
+}
+
+.td-new-list-add-btn{
+ @extend %confirm-btn;
+}
+.td-new-list-cancel-btn{
+    @extend %cancel-btn;
+}
+.td-new-list-visible-btn{
+    display: inline-block !important;
+}

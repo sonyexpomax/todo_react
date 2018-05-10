@@ -1,0 +1,11 @@
+@import '../../utils/vars';
+.td-todo-lists-wrap{
+    width:70%;
+    //max-width: 700px;
+    margin: $margin-middle auto;
+
+    h1 {
+        margin: $margin-large 0;
+        font-size: $font-size-h2;
+    }
+}

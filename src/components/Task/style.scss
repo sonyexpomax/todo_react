@@ -1,0 +1,60 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+
+.td-task-wrap{
+    margin: 5px;
+    padding: 5px;
+    &:hover .td-task-visible-icon  {
+        display: block;
+    }
+}
+
+
+.td-task-finished{
+    text-decoration: line-through;
+}
+.td-task-arrow{
+    @extend %task-icon;
+    float: left;
+}
+.td-task-arrow-non-active{
+    color: #bac2cb;
+    float: left;
+    margin: 0 3px 0 0;
+}
+.td-task-arrows{
+    position: absolute;
+    margin-top: -3px;
+    margin-left: -15px;
+    width: 100%;
+    max-width: 20px;
+}
+.td-task-remove{
+    @extend %task-icon;
+    float: right;
+}
+
+.td-task-visible-icon{
+    display: none;
+}
+
+.td-task-change-state {
+    margin: 0 10px 0 5px;
+    input {
+        display: none;
+    }
+    span {
+        height: 8px;
+        width: 8px;
+        border: 1px solid $list-header-color;
+        border-radius: 2px;
+        display: inline-block;
+        position: relative;
+    }
+    [type=checkbox]:checked + span:before {
+        content: '\2714';
+        position: absolute;
+        top: -5px;
+        left: 0;
+    }
+}

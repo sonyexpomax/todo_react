@@ -1,12 +1,13 @@
-import './style.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import './style.scss';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import LoginPage from '../LoginPage';
+import LogoutButton from '../LogoutButton';
 import PropTypes from 'prop-types';
 import RegistrationPage from '../RegistrationPage';
 import {Switch} from 'react-router-dom';
 import TodoLists from '../TodoLists';
-import './style.css';
+import './style.scss';
 
 class App extends Component {
     requireAuth = (nextState, replace) => {
@@ -28,19 +29,28 @@ class App extends Component {
 
     render () {
         return (
-            <div>
-                <h1 className='td-app-head'>Sample ToDo List</h1>
-                <div className='td-app-main'>
-                    <BrowserRouter>
-                        <Switch>
-                            <Route path="/lists" component={TodoLists} onEnter={this.requireAuth} />
-                            <Route path="/login" component={LoginPage} onEnter={this.requireAlreadyAuth}/>
-                            <Route path="/registration" component={RegistrationPage} />
-                        </Switch>
-                    </BrowserRouter>
+            <BrowserRouter>
+                <div>
+                    <h1 className='td-app-head'>
+                        Sample ToDo List
+                            {
+                                this.props.loggedIn ? (
+                                    <Link to='/login'>
+                                        <LogoutButton />
+                                    </Link>
+                            )
+                                : ''
+                            }
+                    </h1>
+                    <div className='td-app-main'>
+                    </div>
+                    <Switch>
+                        <Route path="/lists" component={TodoLists} onEnter={this.requireAuth} />
+                        <Route path="/login" component={LoginPage} onEnter={this.requireAlreadyAuth}/>
+                        <Route path="/registration" component={RegistrationPage} />
+                    </Switch>
                 </div>
-            </div>
-
+            </BrowserRouter>
         );
     }
 }

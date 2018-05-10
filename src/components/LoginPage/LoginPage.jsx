@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import React, { Component } from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import LoginPageButton from '../LoginPageButton';
@@ -12,39 +12,72 @@ class LoginPage extends Component {
             login: '',
             password: '',
             submitted: false,
-            valid: false
+            validLogin: false,
+            validPassword: false,
+            isChangingLogin: false,
+            isChangingPassword: false
         };
     }
 
-    validate = (val) => {
+    validateLogin = (val) => {
         let pattr = /^[a-z\-0-9_.]+@[a-z\-0-9_]+\.[a-z]{2,5}$/i;
         return val.match(pattr);
+    };
+
+    validatePassword = (val) => {
+        return val.length > 8;
     };
 
     onSubmit = (e) => {
         e.preventDefault();
         const { login, password } = this.state;
-        if (login && password && this.validate(login)) {
+        if (
+            login
+            && password
+            && this.validateLogin(login)
+            && this.validatePassword(password)
+        ) {
             this.props.signIn(login, password);
         }
     };
 
     onPasswordChange = (e) => {
-        this.setState({password: e.target.value});
+        this.setState({
+            password: e.target.value,
+            isChangingPassword: true,
+            validPassword: this.validatePassword(e.target.value)
+        });
     };
 
     onLoginChange = (e) => {
         this.setState({
             login: e.target.value,
-            valid: this.validate(e.target.value)
+            isChangingLogin: true,
+            validLogin: this.validateLogin(e.target.value)
         });
     };
 
     render () {
-        let validateColor = (this.state.valid === true) ? 'green' : 'red';
+        let validateColor = (this.state.validLogin === true) ? 'green' : 'red';
+        console.log(!(this.state.isChangingLogin || this.state.isChangingPassword));
+
+        let info;
+        if(this.state.isChangingLogin || this.state.isChangingPassword){
+           info = (this.validateLogin(this.state.login) && this.validatePassword(this.state.password))
+                ? ''
+                : 'Incorrect login or(and) password';
+        } else {
+            info = '';
+        }
+
+
+        // switch ()
         return (
             <div className='td-login-page-wrap'>
-                <h2>Sign Up</h2>
+                <h2>Sign In</h2>
+                <div className='td-login-page-info'>
+                    {info}
+                </div>
                 <form>
                     <div className='td-login-page-input'>
                         <input
@@ -53,8 +86,8 @@ class LoginPage extends Component {
                             name="login"
                             value={this.state.login}
                             onChange={this.onLoginChange}
-                            style={{borderColor: validateColor}}
                             placeholder='Email'
+                            className= { info === '' ? '' : 'td-login-page-input-info'}
                         />
                     </div>
                     <div className='td-login-page-input'>
@@ -65,12 +98,11 @@ class LoginPage extends Component {
                             value={this.state.password}
                             onChange={this.onPasswordChange}
                             placeholder='Password'
+                            className= { info === '' ? '' : 'td-login-page-input-info'}
                         />
                     </div>
-                    <p>
                         {/*<button id = 'b2' onClick={this.onSubmit}>2323</button>*/}
                         <LoginPageButton isRequset={this.props.isRequest} signIn={this.onSubmit}/>
-                    </p>
                 </form>
                 <div className='td-login-page-registration-link'>
                     Don`t you have an account?

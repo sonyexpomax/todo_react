@@ -1,0 +1,45 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+
+.td-modal-wrap {
+  position: fixed;
+  display: block;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+.td-modal-disable{
+  display: none; !important;
+}
+
+.td-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.td-modal-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  &:hover, &:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+.td-modal-ok{
+  @extend %confirm-btn;
+}
+.td-modal-cancel{
+  @extend %cancel-btn;
+}

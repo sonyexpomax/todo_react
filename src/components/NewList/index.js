@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import {addListAction} from '../../redux/actions/list';
 import { connect } from 'react-redux';
 import NewList from './NewList';

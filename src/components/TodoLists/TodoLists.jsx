@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../LogoutButton';
@@ -13,14 +13,15 @@ class TodoLists extends Component{
     }
 
     render () {
+        console.log(this.props.lists.items);
         return (
             <div className={'td-todo-lists-wrap'}>
-                <Link to='/login'>
-                    <LogoutButton />
-                </Link>
-                <h1>Task lists</h1>
+                {/*<Link to='/login'>*/}
+                    {/*<LogoutButton />*/}
+                {/*</Link>*/}
+                <h1>Lists</h1>
                 {(this.props.lists.items)
-                    ? this.props.lists.items.map(list => (<TodoList key={list.id} list={list} />))
+                    ? this.props.lists.items.map((list, index) => (<TodoList key={list.id} list={list} position={index} />))
                     : <p>No lists</p>
                 }
                 <NewList/>

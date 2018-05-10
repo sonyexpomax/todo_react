@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import { connect } from 'react-redux';
 import {loginAction} from '../../redux/actions/authentificate';
 import LoginPage from './LoginPage';

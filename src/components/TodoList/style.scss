@@ -1,0 +1,98 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+
+.td-todo-list-wrap{
+width: 100%;
+}
+
+.td-todo-list-head-open{
+    @extend %list-item;
+    background-color: $header-bg-color;
+    margin-bottom: 0;
+}
+.td-todo-list-head-close{
+    @extend %list-item;
+    background-color: $color-white;
+    input{
+        margin: 0;
+        padding: 0 1%;
+        display: inline-block;
+        font-size: 19px;
+        border: none;
+        width: 98%;
+    }
+}
+.list-line{
+    width: 100%;
+    color: #222222;
+    margin: 0;
+}
+.td-todo-list-head-text{
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+}
+.td-todo-list-head-text h2{
+    margin: 0;
+    padding: 0 10px;
+    display: inline-block;
+    color: $list-header-color;
+    font-size: $font-size-h2-list;
+}
+.empty-list{
+    margin: 10px 40px;
+}
+.td-todo-list-arrow-right {
+    @extend %list-arrow;
+    border-width: 6px 0 6px 6px;
+    border-color: transparent transparent transparent $list-header-color;
+}
+.td-todo-list-arrow-down{
+    @extend %list-arrow;
+    padding-top: 5px;
+    border-width: 6px 6px 0 6px;
+    border-color: $list-header-color transparent transparent transparent;
+}
+.td-todo-list-head-actions{
+    float: right;
+    display: none;
+}
+.td-todo-list-head-actions-visible{
+    display: inline-block;
+}
+.td-todo-list-icon{
+    margin-right: 15px;
+    color: $list-header-color;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.td-todo-list-list{
+    margin: 0;
+    list-style-type: none;
+}
+.td-todo-list-item{
+    width: 96.5%;
+    margin: 0;
+    padding: 0.5% 1.5%;
+    border: solid 1px $color-light-gray2;
+    border-top:none;
+    color: $color-black;
+    font-size: 16px;
+}
+
+.td-todo-list-add-btn{
+    @extend %confirm-btn;
+
+}
+.td-todo-list-cancel-btn{
+    @extend %cancel-btn;
+}
+.td-todo-list-visible-btn{
+    margin: 0;
+    display: inline-block !important;
+}
+.td-todo-list-selected{
+    border-color: $color-blue;
+}

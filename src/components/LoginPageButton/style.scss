@@ -1,0 +1,6 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+.td-login-page-btn-wrap{
+   @extend %confirm-btn;
+  display: block;
+}

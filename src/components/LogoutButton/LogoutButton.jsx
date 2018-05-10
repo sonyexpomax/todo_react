@@ -1,10 +1,17 @@
 import './style.css';
 import PropTypes from 'prop-types';
 import React from 'react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {faSignOutAlt} from "@fortawesome/fontawesome-free-solid/index";
 
 const LogoutButton = (props) => {
     return (
-        <div className='td-logout-btn-wrap' onClick={props.signOut}>Log out</div>
+        <FontAwesomeIcon
+            icon={faSignOutAlt}
+            size='xs'
+            className = 'td-app-sign-out'
+            onClick={props.signOut}
+        />
     );
 };
 

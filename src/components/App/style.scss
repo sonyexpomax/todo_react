@@ -1,0 +1,29 @@
+@import '../../utils/vars';
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+}
+.td-app-head{
+    margin: 0;
+    width: 100%;
+    padding: 22px 0;
+    font-size: $font-size-h1;
+    background-color: $header-bg-color;
+    text-align: center;
+    font-weight: 400;
+}
+
+.td-app-main{
+    width: 70%;
+    margin: 8% auto;
+
+}
+.td-app-sign-out{
+  float: right;
+  //margin-right: 20px;
+  right: 20px;
+  position: absolute;
+  color: $list-header-color;
+}

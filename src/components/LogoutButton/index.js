@@ -8,7 +8,7 @@ import React from 'react';
 const LogoutButtonContainer = (props) => <LogoutButton {...props} />;
 
 LogoutButtonContainer.propTypes = {
-    singOut: PropTypes.func
+    singOut: PropTypes.func,
 };
 
 function mapDispatchToProps (dispatch) {

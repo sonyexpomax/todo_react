@@ -1,0 +1,37 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+
+.td-login-page-wrap {
+    width: 45%;
+    margin: 0 auto;
+    padding: 5px;
+    h2 {
+        margin: $margin-middle 0;
+        font-size: $font-size-h2;
+    }
+}
+.td-login-page-input {
+  @extend %input-text;
+}
+.td-login-page-input-info{
+    border-color: $color-red !important;
+}
+.td-login-page-registration-link {
+    font-size: $font-size-small;
+    a {
+        text-decoration: none;
+        color: $color-light-blue;
+        font-size: $font-size-small;
+    }
+    a:visited {
+        color: $color-light-blue;
+    }
+}
+.td-login-page-link{
+    padding: 5px 10px;
+}
+.td-login-page-info{
+    color: $color-red;
+    font-size: $font-size-small;
+    height: $font-size-small;
+}
