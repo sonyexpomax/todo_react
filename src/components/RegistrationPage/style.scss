@@ -1,0 +1,54 @@
+@import '../../utils/vars';
+@import '../../utils/templates';
+
+.td-registration-page-wrap {
+    width: 45%;
+    margin: 0 auto;
+    padding: 5px;
+    h2 {
+        margin: $margin-middle 0;
+        font-size: $font-size-h2;
+    }
+}
+.td-registration-page-login-link {
+    font-size: $font-size-small;
+    a {
+        text-decoration: none;
+        color: $color-light-blue;
+        font-size: $font-size-small;
+    }
+    a:visited {
+        color: $color-light-blue;
+    }
+}
+.td-registration-page-link{
+    padding: 5px 10px;
+}
+.td-registration-page-info{
+    color: $color-red;
+    font-size: $font-size-small;
+    height: $font-size-small;
+}
+.td-registration-page-input {
+    @extend %input-text;
+}
+.td-registration-page-input-info{
+    border-color: $color-red !important;
+}
+//.td-registration-page-wrap p{
+//    width: 60%;
+//    margin: 0 auto;
+//    padding: 5px 0;
+//}
+//.td-registration-page-wrap p label{
+//    width: 50px;
+//}
+//.td-registration-page-wrap p input{
+//    width: 97%;
+//    padding: 1.5%;
+//    font-family: "Source Code Pro", Monaco, monospace;
+//    font-size: 16px;
+//    margin: 5px 0;
+//    border: 1px solid #222222;
+//    border-bottom: 4px solid #222222;
+//}

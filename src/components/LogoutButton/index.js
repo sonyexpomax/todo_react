@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import { connect } from 'react-redux';
 import {logoutAction} from '../../redux/actions/authentificate';
 import LogoutButton from './LogoutButton';

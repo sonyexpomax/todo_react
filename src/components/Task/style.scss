@@ -39,22 +39,28 @@
 }
 
 .td-task-change-state {
-    margin: 0 10px 0 5px;
+    margin: 0 10px 0 15px;
     input {
         display: none;
     }
     span {
-        height: 8px;
-        width: 8px;
+        height: 12px;
+        width: 12px;
         border: 1px solid $list-header-color;
         border-radius: 2px;
         display: inline-block;
         position: relative;
     }
     [type=checkbox]:checked + span:before {
-        content: '\2714';
+        content: '\2716';
         position: absolute;
-        top: -5px;
-        left: 0;
+        top: -6px;
+        left: -2px;
+        color: $color-dark-gray;
     }
+}
+.td-todo-list-empty{
+    padding: 10px;
+    text-align: center;
+    color: $color-red;
 }

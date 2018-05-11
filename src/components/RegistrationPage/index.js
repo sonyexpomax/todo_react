@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -9,7 +9,8 @@ const RegistrationPageContainer = (props) => <RegistrationPage {...props} />;
 
 RegistrationPageContainer.propTypes = {
     register: PropTypes.func,
-    isRequest: PropTypes.bool
+    isRequest: PropTypes.bool,
+    loggedIn: PropTypes.bool
 };
 
 function mapStateToProps (store) {

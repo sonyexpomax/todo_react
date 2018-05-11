@@ -14,8 +14,6 @@ const initialState = {
     isFetching: false
 };
 
-let newState;
-
 export default function lists (state = initialState, action) {
     switch (action.type) {
     case GET_LISTS_REQUEST:
@@ -45,15 +43,14 @@ export default function lists (state = initialState, action) {
     case RENAME_LIST_REQUEST:
         return {...state, isFetching: true};
     case RENAME_LIST_SUCCESS:
-        newState = state.items.map((item) => {
-            if (item.id === action.list.id) {
-                item.label = action.list.label;
-            }
-            return item;
-        });
-        return {
+         return {
             ...state,
-            items: newState,
+            items: state.items.map((item) => {
+                if (item.id === action.list.id) {
+                    item.label = action.list.label;
+                }
+                return item;
+            }),
             isFetching: false
         };
     default:

@@ -19,7 +19,8 @@ function loginUser (email, password) {
 }
 
 function logoutUser () {
-    return axios.delete('http://localhost:3000/auth/sign_out')
+    return axios.post('http://localhost:3000/auth/sign_out')
+        // return axios.delete('http://api-ornull-list.herokuapp.com/auth/sign_out')
         .then(
             response => {
                 return response;

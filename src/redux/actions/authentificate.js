@@ -9,7 +9,6 @@ import {
 // import { browserHistory } from 'react-router';
 
 import {logoutUser, loginUser, registerUser} from '../api/user';
-import { startRequest, stopRequest } from '../ui/button';
 
 const registrationRequest = (user) => { return { type: REGISTER_REQUEST, user } };
 const registrationSuccess = (user) => { return { type: REGISTER_SUCCESS, user } };

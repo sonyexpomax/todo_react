@@ -17,6 +17,8 @@ const removeTaskSuccess = (task) => { return { type: taskConstants.REMOVE_TASK_S
 const changeTaskStateRequest = (task) => { return { type: taskConstants.CHANGE_TASK_STATE_REQUEST, task } };
 const changeTaskStateSuccess = (task) => { return { type: taskConstants.CHANGE_TASK_STATE_SUCCESS, task } };
 
+const checkForFinishList = (task) => { return { type: taskConstants.CHECK_FOR_FINISH_LIST, task } };
+
 const moveTaskUpRequest = (task) => { return { type: taskConstants.MOVE_TASK_UP_REQUEST,task } };
 const moveTaskUpSuccess = (tasks) => { return { type: taskConstants.MOVE_TASK_UP_SUCCESS,tasks } };
 
@@ -93,6 +95,7 @@ function changeTaskStateAction (taskId) {
             .then(
                 response => {
                     dispatch(changeTaskStateSuccess(response));
+                    dispatch(checkForFinishList(response));
                 },
                 error => {
                     console.error(error);

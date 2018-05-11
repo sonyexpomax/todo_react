@@ -19,17 +19,28 @@ beforeEach(() => {
 
 describe('Component NewTask', () => {
     it('should render NewTask', () => {
-        expect(enzymeWrapper.find('button').text()).toBe('Add');
+        expect(enzymeWrapper.hasClass('td-new-task-wrap'));
     });
     it('should not call addList with empty label', () => {
-        const button = enzymeWrapper.find('button');
+        enzymeWrapper.find('#new-task').simulate('change', {target: {value: 'aaaaaa'}});
+        const button = enzymeWrapper.find('.td-new-task-add-btn');
+        button.simulate('click', { preventDefault: () => {} });
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+    });
+    it('should  call addList', () => {
+        const button = enzymeWrapper.find('.td-new-task-add-btn');
         button.simulate('click', { preventDefault: () => {} });
         expect(store.dispatch).toHaveBeenCalledTimes(0);
     });
-    it('should not call addList', () => {
-        const button = enzymeWrapper.find('button');
-        enzymeWrapper.find('#new-task').simulate('change', {target: {value: 'aaaaaa'}});
+    it('should onCancel', () => {
+        const button = enzymeWrapper.find('.td-new-task-cancel-btn');
         button.simulate('click', { preventDefault: () => {} });
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledTimes(0);
+    });
+    it('should call onFocus', () => {
+        const input = enzymeWrapper.find('#new-task');
+        input.simulate('click', { preventDefault: () => {} });
+        expect(enzymeWrapper.find('.td-new-task-btn').hasClass('td-new-task-visible-btn'));
+
     });
 });

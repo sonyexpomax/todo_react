@@ -1,11 +1,13 @@
 import './style.scss';
-import React, { Component } from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link, Redirect} from 'react-router-dom';
 import LoginPageButton from '../LoginPageButton';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {faInfoCircle} from '@fortawesome/fontawesome-free-solid';
 import PropTypes from 'prop-types';
 
 class LoginPage extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -30,7 +32,7 @@ class LoginPage extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { login, password } = this.state;
+        const {login, password} = this.state;
         if (
             login
             && password
@@ -57,57 +59,62 @@ class LoginPage extends Component {
         });
     };
 
-    render () {
-        let validateColor = (this.state.validLogin === true) ? 'green' : 'red';
-        console.log(!(this.state.isChangingLogin || this.state.isChangingPassword));
-
+    render() {
         let info;
-        if(this.state.isChangingLogin || this.state.isChangingPassword){
-           info = (this.validateLogin(this.state.login) && this.validatePassword(this.state.password))
+        if (this.state.isChangingLogin || this.state.isChangingPassword) {
+            info = (this.validateLogin(this.state.login) && this.validatePassword(this.state.password))
                 ? ''
-                : 'Incorrect login or(and) password';
+                : (<div>
+                        <FontAwesomeIcon
+                            icon={faInfoCircle}
+                            size='xs'
+                            className='td-login-page-info-icon'
+                            onClick={this.onEdit}
+                        />
+                        Incorrect login or(and) password
+                    </div>
+                )
         } else {
             info = '';
         }
-
-
-        // switch ()
         return (
             <div className='td-login-page-wrap'>
-                <h2>Sign In</h2>
-                <div className='td-login-page-info'>
-                    {info}
-                </div>
-                <form>
-                    <div className='td-login-page-input'>
-                        <input
-                            id='email'
-                            type="text"
-                            name="login"
-                            value={this.state.login}
-                            onChange={this.onLoginChange}
-                            placeholder='Email'
-                            className= { info === '' ? '' : 'td-login-page-input-info'}
-                        />
+                {this.props.loggedIn && <Redirect to='/lists' />}
+                <div>
+                    <h2>Sign In</h2>
+                    <div className='td-login-page-info'>
+                        {info}
                     </div>
-                    <div className='td-login-page-input'>
-                        <input
-                            id='password'
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onPasswordChange}
-                            placeholder='Password'
-                            className= { info === '' ? '' : 'td-login-page-input-info'}
-                        />
-                    </div>
-                        {/*<button id = 'b2' onClick={this.onSubmit}>2323</button>*/}
+                    <form>
+                        <div className='td-login-page-input'>
+                            <input
+                                id='email'
+                                type="text"
+                                name="login"
+                                value={this.state.login}
+                                onChange={this.onLoginChange}
+                                placeholder='Email'
+                                className={info === '' ? '' : 'td-login-page-input-info'}
+                            />
+                        </div>
+                        <div className='td-login-page-input'>
+                            <input
+                                id='password'
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.onPasswordChange}
+                                placeholder='Password'
+                                className={info === '' ? '' : 'td-login-page-input-info'}
+                            />
+                        </div>
                         <LoginPageButton isRequset={this.props.isRequest} signIn={this.onSubmit}/>
-                </form>
-                <div className='td-login-page-registration-link'>
-                    Don`t you have an account?
-                    <Link to='/registration' className='td-login-page-link'>Registration</Link>
-                    <Link to='/lists' className='td-login-page-link'>Lists</Link>
+                    </form>
+                    <div className='td-login-page-registration-link'>
+                        Don`t you have an account?
+                        <Link to='/registration' className='td-login-page-link'>Registration</Link>
+                        <Link to='/lists' className='td-login-page-link'>Lists</Link>
+                    </div>
                 </div>
             </div>
         );
@@ -116,6 +123,7 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
     signIn: PropTypes.func,
+    loggedIn: PropTypes.bool,
     isRequest: PropTypes.bool
 };
 

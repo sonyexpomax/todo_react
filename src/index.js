@@ -7,6 +7,7 @@ import { createLogger } from 'redux-logger';
 import reducer from './redux/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './components/App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {

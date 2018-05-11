@@ -23,6 +23,7 @@ export const twoTasks = {
     items: [
         {
             listId: 20,
+            isFinished: false,
             tasks: [
                 {
                     id: 311,

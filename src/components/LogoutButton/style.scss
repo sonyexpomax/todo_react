@@ -5,8 +5,8 @@
     padding: 5px;
     background-color: #8c6800;
     float: right;
-}
-.td-logout-btn-wrap:hover{
-    cursor: pointer;
-    background-color: #5b4400;
+    &:hover {
+        cursor: pointer;
+        background-color: #5b4400;
+    }
 }

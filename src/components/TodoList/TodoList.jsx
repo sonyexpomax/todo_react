@@ -2,10 +2,12 @@ import './style.scss';
 import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/fontawesome-free-solid';
+import { Alert } from 'reactstrap';
 import NewTask from '../NewTask';
 import PropTypes from 'prop-types';
 import Task from '../Task';
 import ModalWindow from '../ModalWindow';
+
 
 class TodoList extends Component{
 
@@ -15,7 +17,8 @@ class TodoList extends Component{
             isOpen: this.props.position === 0,
             isEditable: false,
             name: this.props.list.label,
-            isRemoving: false
+            isRemoving: false,
+            isFinished: false
         };
     }
 
@@ -107,12 +110,25 @@ class TodoList extends Component{
                     );
                 })}
             </div>)
-            : (<p className={'empty-list'}>List is empty</p>);
+            : (
+                <div className='td-todo-list-item'>
+                    <div className='td-todo-list-empty'>
+                       ... List is empty ...
+                    </div>
+                </div>
+            );
+
 
         return (
             <div className='td-todo-list-wrap'>
-
-                <ModalWindow handleClick={this.handleRemove}/>
+                {
+                    this.props.isFinished
+                    && (
+                        <Alert color="success" className='td-todo-list-alert'>
+                            <b>Well done!</b> You have successfully done all tasks.
+                        </Alert>
+                    )
+                }
                 {content}
                 <div style={{display: this.state.isOpen ? 'block' : 'none' }}>
                     {tasks}
@@ -129,7 +145,9 @@ class TodoList extends Component{
                     onClick={this.onCancel}>
                     Cancel
                 </button>
-
+                {
+                    this.state.isRemoving && <ModalWindow listName={this.props.list.label} handleClick={this.handleRemove}/>
+                }
             </div>
         );
     }
@@ -140,7 +158,8 @@ TodoList.propTypes = {
     list: PropTypes.object,
     tasks: PropTypes.array,
     renameList: PropTypes.func,
-    removeList: PropTypes.func
+    removeList: PropTypes.func,
+    isFinished: PropTypes.bool
 };
 
 export default TodoList;

@@ -11,13 +11,16 @@ TodoListContainer.propTypes = {
     list: PropTypes.object,
     tasks: PropTypes.array,
     renameList: PropTypes.func,
-    removeList: PropTypes.func
+    removeList: PropTypes.func,
+    isFinished: PropTypes.bool
 };
 
 function mapStateToProps (store, ownProps) {
     let tasksTemp = store.tasks.items.filter(item => item.listId === ownProps.list.id);
-    let tasks = tasksTemp[0] ? tasksTemp[0].tasks : [];
-    return {tasks: tasks};
+    return {
+        tasks: tasksTemp[0] ? tasksTemp[0].tasks : [],
+        isFinished: tasksTemp[0] ? tasksTemp[0].isFinished : false
+    };
 }
 
 function mapDispatchToProps (dispatch) {

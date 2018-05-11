@@ -4,7 +4,6 @@
 .td-todo-list-wrap{
 width: 100%;
 }
-
 .td-todo-list-head-open{
     @extend %list-item;
     background-color: $header-bg-color;
@@ -67,13 +66,12 @@ width: 100%;
         cursor: pointer;
     }
 }
-
 .td-todo-list-list{
     margin: 0;
     list-style-type: none;
 }
 .td-todo-list-item{
-    width: 96.5%;
+    width: 96.6%;
     margin: 0;
     padding: 0.5% 1.5%;
     border: solid 1px $color-light-gray2;
@@ -81,10 +79,8 @@ width: 100%;
     color: $color-black;
     font-size: 16px;
 }
-
 .td-todo-list-add-btn{
     @extend %confirm-btn;
-
 }
 .td-todo-list-cancel-btn{
     @extend %cancel-btn;
@@ -95,4 +91,7 @@ width: 100%;
 }
 .td-todo-list-selected{
     border-color: $color-blue;
+}
+.td-todo-list-alert{
+    width: 97%;
 }

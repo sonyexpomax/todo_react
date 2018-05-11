@@ -99,12 +99,13 @@ describe('REDUCER --- Test list Reducers for tasks', () => {
     it('+++ reducer for GET_TASKS_BY_LIST_ID_SUCCESS', () => {
         const tasks = {
             listId: 20,
+            isFinished: false,
             items: [
                 {
                     id: 311,
                     position: 1,
                     is_done: true,
-                    list_id: 20
+                    list_id: 20,
                 },
                 {
                     id: 312,
@@ -115,7 +116,7 @@ describe('REDUCER --- Test list Reducers for tasks', () => {
         };
         expect(tasksReducer(noTasks, { type: tasksConstants.GET_TASKS_BY_LIST_ID_SUCCESS, tasks })).toEqual(twoTasks);
     });
-    it('+++ reducer for GET_TASKS_BY_LIST_ID_SUCCESS', () => {
+    it('+++ reducer for SET_NEW_LIST', () => {
         const listId = 10;
         expect(tasksReducer(noTasks, { type: tasksConstants.SET_NEW_LIST, listId })).toEqual(noTasksWithOneEmptyList);
     });

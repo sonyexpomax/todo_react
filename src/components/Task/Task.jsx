@@ -1,7 +1,7 @@
 import './style.scss';
 import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faPencilAlt, faTrashAlt, faArrowDown, faArrowUp } from '@fortawesome/fontawesome-free-solid';
+import { faTrashAlt, faArrowDown, faArrowUp } from '@fortawesome/fontawesome-free-solid';
 import PropTypes from 'prop-types';
 
 class Task extends Component{
@@ -13,31 +13,39 @@ class Task extends Component{
 
     moveDownHandler = (e) => {
         e.preventDefault();
-        this.props.moveTaskDown();
+        if(!this.props.isLast) {
+            this.props.moveTaskDown();
+        }
     };
 
     moveUpHandler = (e) => {
         e.preventDefault();
-        this.props.moveTaskUp();
+        if(!this.props.isFirst) {
+            this.props.moveTaskUp();
+        }
     };
 
     render () {
-
         return (
             <div className={ !this.props.task.is_done ? 'td-task-wrap' : 'td-task-wrap td-task-finished'}>
                 <div className='td-task-arrows td-task-visible-icon'>
-                    <FontAwesomeIcon
-                        icon={faArrowUp}
-                        size='xs'
-                        className = {!this.props.isFirst ? 'td-task-arrow' : 'td-task-arrow-non-active' }
-                        onClick={!this.props.isFirst ? this.moveUpHandler : ''}
-                    />
-                    <FontAwesomeIcon
-                        icon={faArrowDown}
-                        size='xs'
-                        className = {!this.props.isLast ? 'td-task-arrow' : 'td-task-arrow-non-active' }
-                        onClick={!this.props.isLast ? this.moveDownHandler : ''}
-                    />
+                    <div id='up-button'>
+                        <FontAwesomeIcon
+                            icon={faArrowUp}
+                            size='xs'
+                            className = {!this.props.isFirst ? 'td-task-arrow' : 'td-task-arrow-non-active' }
+                            onClick={this.moveUpHandler}
+                        />
+                    </div>
+                    <div id='down-button'>
+                        <FontAwesomeIcon
+                            icon={faArrowDown}
+                            size='xs'
+                            className = {!this.props.isLast ? 'td-task-arrow' : 'td-task-arrow-non-active' }
+                            onClick={this.moveDownHandler}
+                        />
+                    </div>
+
                 </div>
                 <label className='td-task-change-state'>
                     <input
@@ -49,10 +57,11 @@ class Task extends Component{
                         <span></span>
                 </label>
                 {this.props.task.content}
+
                 <FontAwesomeIcon
+                    id='remove-task'
                     icon={faTrashAlt}
                     size='xs'
-                    ref = {this.props.task.id}
                     className = {'td-task-visible-icon td-task-remove'}
                     onClick={this.removeHandler}
                 />

@@ -9,12 +9,14 @@ const LoginPageContainer = (props) => <LoginPage {...props} />;
 
 LoginPageContainer.propTypes = {
     signIn: PropTypes.func,
-    isRequest: PropTypes.bool
+    loggedIn: PropTypes.bool,
+    isRequest: PropTypes.bool,
 };
 
 function mapStateToProps (store) {
     return {
-        isRequest: store.ui.button
+        isRequest: store.ui.button,
+        loggedIn: store.user.loggedIn
     };
 }
 function mapDispatchToProps (dispatch) {

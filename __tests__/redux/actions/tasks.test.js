@@ -97,7 +97,7 @@ describe('async actions', () => {
     });
     it('creates CHANGE_TASK_STATE_SUCCESS when changing task state has been done', () => {
         let mock = new MockAdapter(axios);
-        mock.onPut('http://localhost:3000/v1/tasks/4').reply(200, {id: 4, is_done: true});
+        mock.onPatch('http://localhost:3000/v1/tasks/4/check').reply(200, {id: 4, is_done: true});
         const expectedActions = [
             {
                 type: taskConstants.CHANGE_TASK_STATE_REQUEST,
@@ -106,23 +106,9 @@ describe('async actions', () => {
             {
                 type: taskConstants.CHANGE_TASK_STATE_SUCCESS,
                 task: {id: 4, is_done: true}
-            }
-        ];
-        const store = mockStore(initialState);
-        return store.dispatch(changeTaskStateAction(4)).then(() => {
-            expect(store.getActions()).toEqual(expectedActions);
-        });
-    });
-    it('creates CHANGE_TASK_STATE_SUCCESS when changing task state has been done', () => {
-        let mock = new MockAdapter(axios);
-        mock.onPut('http://localhost:3000/v1/tasks/4').reply(200, {id: 4, is_done: true});
-        const expectedActions = [
-            {
-                type: taskConstants.CHANGE_TASK_STATE_REQUEST,
-                task: 4
             },
             {
-                type: taskConstants.CHANGE_TASK_STATE_SUCCESS,
+                type: taskConstants.CHECK_FOR_FINISH_LIST,
                 task: {id: 4, is_done: true}
             }
         ];
@@ -131,4 +117,22 @@ describe('async actions', () => {
             expect(store.getActions()).toEqual(expectedActions);
         });
     });
+    // it('creates CHANGE_TASK_STATE_SUCCESS when changing task state has been done', () => {
+    //     let mock = new MockAdapter(axios);
+    //     mock.onPut('http://localhost:3000/v1/tasks/4').reply(200, {id: 4, is_done: true});
+    //     const expectedActions = [
+    //         {
+    //             type: taskConstants.CHANGE_TASK_STATE_REQUEST,
+    //             task: 4
+    //         },
+    //         {
+    //             type: taskConstants.CHANGE_TASK_STATE_SUCCESS,
+    //             task: {id: 4, is_done: true}
+    //         }
+    //     ];
+    //     const store = mockStore(initialState);
+    //     return store.dispatch(changeTaskStateAction(4)).then(() => {
+    //         expect(store.getActions()).toEqual(expectedActions);
+    //     });
+    // });
 });

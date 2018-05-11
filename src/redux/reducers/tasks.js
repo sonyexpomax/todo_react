@@ -22,6 +22,7 @@ export default function lists (state = initialState, action) {
             items: [
                 ...state.items,
                 {
+                    'isFinished': false,
                     'listId': action.tasks.listId,
                     'tasks': action.tasks.items
                 }
@@ -126,6 +127,21 @@ export default function lists (state = initialState, action) {
                 ...state.items,
                 {listId: action.listId, tasks: []}
             ]
+        };
+    case taskConstants.CHECK_FOR_FINISH_LIST:
+        newTasks = state.items.map(item => {
+            let b = false;
+            if (item.listId === action.task.list_id) {
+                 b = !(item.tasks.filter(task => task.is_done === false).length > 0)
+            }
+            return {
+                isFinished: b,
+                ...item
+            };
+        });
+        return {
+            ...state,
+            items: newTasks
         };
     default:
         return state;

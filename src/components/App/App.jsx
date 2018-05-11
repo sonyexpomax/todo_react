@@ -5,28 +5,12 @@ import LoginPage from '../LoginPage';
 import LogoutButton from '../LogoutButton';
 import PropTypes from 'prop-types';
 import RegistrationPage from '../RegistrationPage';
+import RouterCreate from '../RouterCreate';
 import {Switch} from 'react-router-dom';
 import TodoLists from '../TodoLists';
 import './style.scss';
 
 class App extends Component {
-    requireAuth = (nextState, replace) => {
-        if (!this.props.loggedIn) {
-            replace({
-                pathname: '/sign_in'
-            });
-        }
-    };
-
-    requireAlreadyAuth = (nextState, replace, cb) => {
-        if (this.props.loggedIn) {
-            replace({
-                pathname: '/lists'
-            });
-        }
-        cb();
-    };
-
     render () {
         return (
             <BrowserRouter>
@@ -45,8 +29,8 @@ class App extends Component {
                     <div className='td-app-main'>
                     </div>
                     <Switch>
-                        <Route path="/lists" component={TodoLists} onEnter={this.requireAuth} />
-                        <Route path="/login" component={LoginPage} onEnter={this.requireAlreadyAuth}/>
+                        <RouterCreate path="/lists" component={TodoLists} onEnter={this.props.loggedIn} />
+                        <Route path="/login" component={LoginPage} />
                         <Route path="/registration" component={RegistrationPage} />
                     </Switch>
                 </div>

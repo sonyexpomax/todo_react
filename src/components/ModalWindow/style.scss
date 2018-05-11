@@ -15,15 +15,17 @@
   background-color: rgba(0,0,0,0.4);
 }
 .td-modal-disable{
-  display: none; !important;
+  display: none !important;
 }
 
 .td-modal-content {
   background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  padding: 5px 20px;
+  width: 50%;
+
 }
 
 .td-modal-close {
@@ -31,6 +33,7 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-top: -40px;
   &:hover, &:focus {
     color: #000;
     text-decoration: none;
@@ -39,7 +42,16 @@
 }
 .td-modal-ok{
   @extend %confirm-btn;
+  width: 45%;
+  margin-right: 2%;
+  display: inline-block;
 }
 .td-modal-cancel{
+  width: 45%;
   @extend %cancel-btn;
+  display: inline-block;
+}
+.td-modal-btn{
+  width: 30%;
+  float: right;
 }

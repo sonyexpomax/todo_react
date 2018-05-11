@@ -47,13 +47,15 @@ function changeTaskState (token, client, uid, taskId) {
         'uid': uid
     };
 
-    return axios.put(`http://localhost:3000/v1/tasks/${taskId}`, {id: taskId}, {'headers': headers})
+    return axios.patch(`http://localhost:3000/v1/tasks/${taskId}/check`, {}, {'headers': headers})
         .then(
             response => {
+                console.log(taskId);
+                console.log(response.data);
                 return response.data;
             },
             error => {
-                console.error(error);
+                // console.error(error);
             });
 }
 
@@ -131,3 +133,4 @@ function moveTaskDown (token, client, uid, taskId) {
 }
 
 export {getTasksByListId, removeTask, addTask, changeTaskState, moveTaskDown, moveTaskUp};
+

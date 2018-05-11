@@ -1,11 +1,13 @@
-import './style.css';
-import React, { Component } from 'react';
-import {Link, BrowserRouter} from 'react-router-dom';
+import './style.scss';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RegistrationPageButton from '../RegistrationPageButton';
+import {faInfoCircle} from "@fortawesome/fontawesome-free-solid/index";
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
 class RegistrationPage extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             login: '',
@@ -15,7 +17,10 @@ class RegistrationPage extends Component {
             submitted: false,
             validEmail: false,
             validPassword: false,
-            validConfirmPassword: false
+            validConfirmPassword: false,
+            isChangingLogin: false,
+            isChangingPassword: false,
+            isChangingConfirmPassword: false
         };
     }
 
@@ -35,13 +40,13 @@ class RegistrationPage extends Component {
         return false;
     };
 
-    validatePasswordConfirm = () => {
-        return (this.state.password === this.state.passwordConfirm);
+    validatePasswordConfirm = (confirmPassword) => {
+        return (this.state.password === confirmPassword);
     };
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { email, password, passwordConfirm } = this.state;
+        const {email, password, passwordConfirm} = this.state;
         if (
             email &&
             password &&
@@ -56,6 +61,7 @@ class RegistrationPage extends Component {
     onPasswordChange = (e) => {
         this.setState({
             password: e.target.value,
+            isChangingPassword: true,
             validPassword: this.validatePassword(e.target.value)
         });
     };
@@ -63,63 +69,89 @@ class RegistrationPage extends Component {
     onEmailChange = (e) => {
         this.setState({
             email: e.target.value,
+            isChangingLogin: true,
             validEmail: this.validateEmail(e.target.value)
         });
     };
 
     onPasswordConfirmChange = (e) => {
         this.setState({
+            isChangingConfirmPassword: true,
             passwordConfirm: e.target.value,
-            validConfirmPassword: this.validatePasswordConfirm()
+            validConfirmPassword: this.validatePasswordConfirm(e.target.value)
         });
     };
 
-    render () {
-        let validatePasswordColor = (this.state.validPassword === true) ? 'green' : 'red';
-        let validatePasswordConfirmColor = (this.state.validConfirmPassword === true) ? 'green' : 'red';
-        let validateEmailColor = (this.state.validEmail === true) ? 'green' : 'red';
+    render() {
+        let info = '';
+
+        if (this.state.isChangingLogin && !this.state.validEmail) {
+            info = 'Invalid email';
+        }
+        else if (this.state.isChangingPassword && !this.state.validPassword) {
+            info = 'Password does not meet minimal requirements (should be 6 characters)';
+        }
+        else if (this.state.isChangingConfirmPassword && !this.state.validConfirmPassword) {
+            info = 'Password and Confirm password fields does not match';
+        }
+
         return (
             <div className='td-registration-page-wrap'>
-                <h2>Registration</h2>
+                <h2>Sign Up</h2>
+                <div className='td-registration-page-info'>
+                    {info && (
+                        <div>
+                            <FontAwesomeIcon
+                                icon={faInfoCircle}
+                                size='xs'
+                                className='td-login-page-info-icon'
+                                onClick={this.onEdit}
+                            />
+                            {info}
+                        </div>
+                    )}
+                </div>
                 <form>
-                    <p><label>Email:</label>
+                    <div className='td-registration-page-input'>
                         <input
                             id='email'
-                            type='email'
-                            name='email'
+                            type="text"
+                            name="login"
                             value={this.state.email}
                             onChange={this.onEmailChange}
-                            style={{borderColor: validateEmailColor}}
+                            placeholder='Email'
+                            className={(this.state.isChangingLogin && !this.state.validEmail) ? 'td-registration-page-input-info' : ''}
                         />
-                    </p>
-                    <p><label>Password:</label>
+                    </div>
+                    <div className='td-registration-page-input'>
                         <input
                             id='password'
-                            type='password'
-                            name='password'
+                            type="password"
+                            name="password"
                             value={this.state.password}
                             onChange={this.onPasswordChange}
-                            style={{borderColor: validatePasswordColor}}
+                            placeholder='Password'
+                            className={(this.state.isChangingPassword && !this.state.validPassword) ? 'td-registration-page-input-info' : ''}
                         />
-                    </p>
-                    <p><label>Confirm password:</label>
+                    </div>
+                    <div className='td-registration-page-input'>
                         <input
                             id='confirm-password'
                             type='password'
                             name='confirm_password'
+                            placeholder='Confirm Password'
                             value={this.state.passwordConfirm}
                             onChange={this.onPasswordConfirmChange}
-                            style={{borderColor: validatePasswordConfirmColor}}
+                            className={(this.state.isChangingPassword && !this.state.validConfirmPassword) ? 'td-registration-page-input-info' : ''}
                         />
-                    </p>
-                    <p>
-                        <BrowserRouter>
-                            <Link to='/login'>
-                                <RegistrationPageButton id='reg-btn' isRequset={this.props.isRequest} signIn={this.onSubmit}/>
-                            </Link>
-                        </BrowserRouter>
-                    </p>
+                    </div>
+                    <RegistrationPageButton isRequset={this.props.isRequest} signIn={this.onSubmit}/>
                 </form>
+
+                <div className='td-registration-page-login-link'>
+                    Already a member?
+                    <Link to='/login' className='td-registration-page-link'>Login</Link>
+                </div>
             </div>
         );
     }
