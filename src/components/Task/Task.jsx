@@ -32,6 +32,7 @@ class Task extends Component{
                     <div id='up-button'>
                         <FontAwesomeIcon
                             icon={faArrowUp}
+                            id='up-button-icon'
                             size='xs'
                             className = {!this.props.isFirst ? 'td-task-arrow' : 'td-task-arrow-non-active' }
                             onClick={this.moveUpHandler}
@@ -40,6 +41,7 @@ class Task extends Component{
                     <div id='down-button'>
                         <FontAwesomeIcon
                             icon={faArrowDown}
+                            id='down-button-icon'
                             size='xs'
                             className = {!this.props.isLast ? 'td-task-arrow' : 'td-task-arrow-non-active' }
                             onClick={this.moveDownHandler}
@@ -57,14 +59,15 @@ class Task extends Component{
                         <span></span>
                 </label>
                 {this.props.task.content}
-
-                <FontAwesomeIcon
-                    id='remove-task'
-                    icon={faTrashAlt}
-                    size='xs'
-                    className = {'td-task-visible-icon td-task-remove'}
-                    onClick={this.removeHandler}
-                />
+                <div id='remove-task'>
+                    <FontAwesomeIcon
+                        id='remove-task-icon'
+                        icon={faTrashAlt}
+                        size='xs'
+                        className = {'td-task-visible-icon td-task-remove'}
+                        onClick={this.removeHandler}
+                    />
+                </div>
             </div>
         );
     }

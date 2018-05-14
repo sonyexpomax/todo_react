@@ -15,10 +15,10 @@ beforeEach(() => {
 
 describe('Component LogoutButton', () => {
     it('should render logout button and find button', () => {
-        expect(enzymeWrapper.find('div').hasClass('td-logout-btn-wrap')).toBe(true);
+        expect(enzymeWrapper).toMatchSnapshot();
     });
     it('should call sign out', () => {
-        const button = enzymeWrapper.find('div');
+        const button = enzymeWrapper.find('#logout-btn').at(1);
         button.simulate('click', { preventDefault: () => {} });
         expect(store.dispatch).toHaveBeenCalledTimes(1);
     });

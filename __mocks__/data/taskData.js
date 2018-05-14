@@ -42,6 +42,30 @@ export const twoTasks = {
     ]
 };
 
+export const twoTasksWithFinishedList = {
+    isFetching: false,
+    items: [
+        {
+            listId: 20,
+            isFinished: true,
+            tasks: [
+                {
+                    id: 311,
+                    position: 1,
+                    is_done: true,
+                    list_id: 20
+                },
+                {
+                    id: 312,
+                    position: 2,
+                    is_done: true,
+                    list_id: 20
+                }
+            ]
+        }
+    ]
+};
+
 export const twoTasksWithOneAdditionEmtylist = {
     isFetching: false,
     items: [

@@ -1,14 +1,10 @@
 import configureStore from 'redux-mock-store';
-import {mountWithStore} from '../../shallowWrapper';
+import {mountWithStore, shallowWithStore} from '../../shallowWrapper';
 import React from 'react';
 import TaskContainer from '../../../src/components/Task';
 
 const props = {
-    task: {
-        id: 2,
-        content: 'das',
-        is_done: false
-    },
+    task: {id: 2, content: 'das', is_done: false},
     isFirst: false,
     isLast: false,
     moveTaskDown: jest.fn(() => Promise.resolve('3')),
@@ -31,43 +27,57 @@ describe('Component Task', () => {
         expect(enzymeWrapper.hasClass('td-task-wrap'));
     });
     it('should render finished Task', () => {
-        enzymeWrapper.setProps({
-            task: {
-                id: 2,
-                content: 'das',
-                is_done: true
-            }
-        });
+        let props = {task: {id: 2, content: 'das', is_done: true}, isFirst: true, isLast: true};
+        enzymeWrapper = mountWithStore(<TaskContainer {...props}/>, store);
         expect(enzymeWrapper.hasClass('td-task-finished'));
     });
-    it('should render fist Task', () => {
-        enzymeWrapper.setProps({isFirst: true});
-        expect( enzymeWrapper.find('#up-button').hasClass('td-task-arrow-non-active'));
+    it('should render just one task', () => {
+         let props = {task: {id: 2, content: 'das', is_done: false}, isFirst: true, isLast: true};
+        enzymeWrapper = mountWithStore(<TaskContainer {...props}/>, store);
+        expect( enzymeWrapper.hasClass('td-task-arrow-non-active'));
     });
     it('should render last Task', () => {
         enzymeWrapper.setProps({isLast: true});
-        expect( enzymeWrapper.find('#down-button').hasClass('td-task-arrow-non-active'));
+        let downButton = enzymeWrapper.find('#down-button').first();
+        expect( downButton.hasClass('td-task-arrow-non-active'));
     });
     it('should change state of task', () => {
         const stateButton = enzymeWrapper.find('#change-state');
         stateButton.simulate('change', { preventDefault: () => {} });
         expect(store.dispatch).toHaveBeenCalledTimes(1);
     });
-    // it('should move task upper', () => {
-    //     const upButton = enzymeWrapper.find('#down-button');
-    //     console.log(upButton.first());
-    //     upButton.first().simulate('click', { preventDefault: () => {} });
-    //     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    // });
-    // it('should move task lower', () => {
-    //     const downButton = enzymeWrapper.find('#down-button');
-    //     downButton.simulate('click', { preventDefault: () => {} });
-    //     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    // });
-    // it('should remove task from list', () => {
-    //     const removeButton = enzymeWrapper.find('svg');
-    //     console.log(removeButton);
-    //     removeButton.simulate('click', { preventDefault: () => {} });
-    //     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    // });
+    it('should not move task upper', () => {
+        let props = {task: {id: 2, content: 'das', is_done: true}, isFirst: true, isLast: true};
+        enzymeWrapper = mountWithStore(<TaskContainer {...props}/>, store);
+        const upButton = enzymeWrapper.find('#up-button-icon').at(1);
+         upButton.simulate('click', { preventDefault: () => {} });
+         expect(store.dispatch).toHaveBeenCalledTimes(0);
+    });
+    it('should move task upper', () => {
+        let props = {task: {id: 2, content: 'das', is_done: true}, isFirst: false, isLast: true};
+        enzymeWrapper = mountWithStore(<TaskContainer {...props}/>, store);
+        const upButton = enzymeWrapper.find('#up-button-icon').at(1);
+        upButton.simulate('click', { preventDefault: () => {} });
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+    });
+    it('should move task lower', () => {
+        let props = {task: {id: 2, content: 'das', is_done: true}, isFirst: false, isLast: false};
+        enzymeWrapper = mountWithStore(<TaskContainer {...props}/>, store);
+        const downButton = enzymeWrapper.find('#down-button-icon').at(1);
+        downButton.simulate('click', { preventDefault: () => {} });
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+    });
+    it('should not move task lower', () => {
+        let props = {task: {id: 2, content: 'das', is_done: true}, isFirst: false, isLast: true};
+        enzymeWrapper = mountWithStore(<TaskContainer {...props}/>, store);
+        const downButton = enzymeWrapper.find('#down-button-icon').at(1);
+        downButton.simulate('click', { preventDefault: () => {} });
+        expect(store.dispatch).toHaveBeenCalledTimes(0);
+    });
+    it('should remove task from list', () => {
+        const removeButton = enzymeWrapper.find('#remove-task-icon').at(1);
+        console.log(removeButton);
+        removeButton.simulate('click', { preventDefault: () => {} });
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+    });
 });

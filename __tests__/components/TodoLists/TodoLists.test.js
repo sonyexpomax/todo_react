@@ -26,7 +26,7 @@ const { enzymeWrapper } = setup();
 
 describe('Component TodoList', () => {
     it('should render TodoLists component', () => {
-        expect(enzymeWrapper.find('h1').text()).toBe('Task lists');
+        expect(enzymeWrapper.find('h1').text()).toBe('Lists');
     });
     it('should render TodoLists component without lists', () => {
         enzymeWrapper.setProps({lists: {}});

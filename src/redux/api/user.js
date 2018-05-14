@@ -8,7 +8,7 @@ function loginUser (email, password) {
                 return response.headers;
             },
             error => {
-                console.error(error);
+                console.error('error');
             })
         .then(headers => {
             localStorage.setItem('access-token', headers['access-token']);
@@ -19,14 +19,14 @@ function loginUser (email, password) {
 }
 
 function logoutUser () {
-    return axios.post('http://localhost:3000/auth/sign_out')
+    return axios.delete('http://localhost:3000/auth/sign_out')
         // return axios.delete('http://api-ornull-list.herokuapp.com/auth/sign_out')
         .then(
             response => {
                 return response;
             },
             error => {
-                console.error(error);
+                console.error('error');
             })
         .then(res => {
             localStorage.removeItem('access-token');
@@ -50,7 +50,7 @@ function registerUser (email, password, passwordConfirmation) {
                 return response;
             },
             error => {
-                console.error(error);
+                console.error('error');
             });
 }
 

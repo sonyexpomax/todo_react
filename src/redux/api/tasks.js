@@ -50,8 +50,6 @@ function changeTaskState (token, client, uid, taskId) {
     return axios.patch(`http://localhost:3000/v1/tasks/${taskId}/check`, {}, {'headers': headers})
         .then(
             response => {
-                console.log(taskId);
-                console.log(response.data);
                 return response.data;
             },
             error => {

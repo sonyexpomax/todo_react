@@ -78,14 +78,17 @@ class TodoList extends Component{
                         {head}
                     </div>
                     <div className='td-todo-list-head-actions'>
+
                         <FontAwesomeIcon
                             icon={faTrashAlt}
+                            id='remove-list-icon'
                             size='xs'
                             className = 'td-todo-list-icon'
                             onClick={this.onRemove}
                         />
                         <FontAwesomeIcon
                             icon={faPencilAlt}
+                            id='edit-list-icon'
                             size='xs'
                             className = 'td-todo-list-icon'
                             onClick={this.onEdit}
@@ -136,11 +139,13 @@ class TodoList extends Component{
                 </div>
                 <button
                     type="submit"
+                    id='on-submit-btn'
                     className={this.state.isEditable ? 'td-todo-list-add-btn td-todo-list-visible-btn' : 'td-todo-list-add-btn'}
                     onClick={this.setChangeName}>
                     Save
                 </button>
                 <button
+                    id='on-cancel-btn'
                     className={this.state.isEditable ? 'td-todo-list-cancel-btn td-todo-list-visible-btn' : 'td-todo-list-cancel-btn'}
                     onClick={this.onCancel}>
                     Cancel

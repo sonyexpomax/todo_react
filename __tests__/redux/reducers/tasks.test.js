@@ -7,7 +7,8 @@ import {
     noTasksWithFetching,
     noTasksWithOneEmptyList,
     twoTasksWithOneAdditionEmtylist,
-    threeTasksWithOneAdditionEmtylist
+    threeTasksWithOneAdditionEmtylist,
+    twoTasksWithFinishedList
 } from '../../../__mocks__/data/taskData';
 import tasksConstants from '../../../src/redux/constants/task';
 import {default as tasksReducer} from '../../../src/redux/reducers/tasks';
@@ -120,6 +121,11 @@ describe('REDUCER --- Test list Reducers for tasks', () => {
         const listId = 10;
         expect(tasksReducer(noTasks, { type: tasksConstants.SET_NEW_LIST, listId })).toEqual(noTasksWithOneEmptyList);
     });
+    it('+++ reducer for CHECK_FOR_FINISH_LIST', () => {
+        const task = {list_id: 20};
+        expect(tasksReducer(twoTasks, { type: tasksConstants.CHECK_FOR_FINISH_LIST, task })).toEqual(twoTasksWithFinishedList);
+    });
+
     it('+++ reducer for non-existent action type', () => {
         expect(tasksReducer(twoTasks, { type: 'SOME_ACTION_TYPE' })).toEqual(twoTasks);
     });

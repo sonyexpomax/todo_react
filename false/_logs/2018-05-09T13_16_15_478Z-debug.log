@@ -13,7 +13,7 @@
 12 info lifecycle todos@0.1.0~test: Failed to exec test script
 13 verbose stack Error: todos@0.1.0 test: `jest --config jest.config.json -u`
 13 verbose stack Exit status 1
-13 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:285:16)
+13 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-lifecycle/client.js:285:16)
 13 verbose stack     at EventEmitter.emit (events.js:180:13)
 13 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
 13 verbose stack     at ChildProcess.emit (events.js:180:13)

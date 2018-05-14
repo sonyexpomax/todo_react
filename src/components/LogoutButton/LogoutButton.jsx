@@ -8,6 +8,7 @@ const LogoutButton = (props) => {
     return (
         <FontAwesomeIcon
             icon={faSignOutAlt}
+            id='logout-btn'
             size='xs'
             className = 'td-app-sign-out'
             onClick={props.signOut}

@@ -6,7 +6,6 @@ import {
     LOGOUT_SUCCESS,
     LOGOUT_REQUEST
 } from '../constants/authentificate';
-// import { browserHistory } from 'react-router';
 
 import {logoutUser, loginUser, registerUser} from '../api/user';
 
@@ -21,21 +20,15 @@ const logoutSuccess = (user) => { return { type: LOGOUT_SUCCESS, user } };
 
 function loginAction (email, password) {
     return dispatch => {
-        // dispatch(startRequest());
         dispatch(loginRequest({ email }));
         return loginUser(email, password)
             .then(
                 user => {
                     dispatch(loginSuccess(user));
-
-                    // window.location.assign('/lists');
-                    // browserHistory.push('/lists');
-                    // console.info(user);
                 },
                 error => {
-                    // dispatch(loginFailure(error));
-                    // dispatch(stopRequest());
-                    console.error(error);
+
+                    console.error('error');
                 }
             );
     };
@@ -43,16 +36,14 @@ function loginAction (email, password) {
 
 function registerAction (email, password, passwordConfirmation) {
     return dispatch => {
-        // dispatch(startRequest());
         dispatch(registrationRequest(email));
         return registerUser(email, password, passwordConfirmation)
             .then(
                 () => {
                     dispatch(registrationSuccess());
-                    // dispatch(stopRequest());
                 },
                 error => {
-                    console.warn('error', error);
+                    console.warn('error');
                 }
             );
     };
@@ -67,7 +58,7 @@ function logoutAction () {
                     dispatch(logoutSuccess());
                 },
                 error => {
-                    console.error(error);
+                    console.error('error');
                 }
             );
     };
