@@ -1,4 +1,4 @@
 require('babel-core/register');
-['.css', '.less', '.sass', '.scss'].forEach((ext) => require.extensions[ext] = () => {});
+['.css', '.less', '.sass', '.scss', 'jsx', 'js', '.ttf', '.woff', '.woff2'].forEach((ext) => require.extensions[ext] = () => {});
 require('babel-polyfill');
-require('server.js');
+require('server/index.js');

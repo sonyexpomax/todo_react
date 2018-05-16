@@ -1,6 +1,6 @@
 import './style.scss';
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 import LoginPageButton from '../LoginPageButton';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import {faInfoCircle} from '@fortawesome/fontawesome-free-solid';
@@ -77,9 +77,10 @@ class LoginPage extends Component {
         } else {
             info = '';
         }
+        console.log('loggedIn', this.props.loggedIn);
         return (
             <div className='td-login-page-wrap'>
-                {this.props.loggedIn && <Redirect to='/lists' />}
+                {this.props.loggedIn && <Redirect to='/lists' /> }
                 <div>
                     <h2>Sign In</h2>
                     <div className='td-login-page-info'>
@@ -127,4 +128,4 @@ LoginPage.propTypes = {
     isRequest: PropTypes.bool
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);

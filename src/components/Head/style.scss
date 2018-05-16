@@ -1,0 +1,10 @@
+@import '../../utils/vars';
+.td-head-wrapper{
+  margin: 0;
+  width: 100%;
+  padding: 22px 0;
+  font-size: $font-size-h1;
+  background-color: $header-bg-color;
+  text-align: center;
+  font-weight: 400;
+}

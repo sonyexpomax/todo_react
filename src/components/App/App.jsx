@@ -1,40 +1,28 @@
 import './style.scss';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import React, {Component} from 'react';
 import LoginPage from '../LoginPage';
-import LogoutButton from '../LogoutButton';
 import PropTypes from 'prop-types';
 import RegistrationPage from '../RegistrationPage';
+import HomePage from '../HomePage';
 import RouterCreate from '../RouterCreate';
 import {Switch} from 'react-router-dom';
 import TodoLists from '../TodoLists';
-import './style.scss';
+import Head from '../Head';
 
 class App extends Component {
-    render () {
+    render() {
         return (
-            <BrowserRouter>
-                <div>
-                    <h1 className='td-app-head'>
-                        Sample ToDo List
-                            {
-                                this.props.loggedIn ? (
-                                    <Link to='/login'>
-                                        <LogoutButton />
-                                    </Link>
-                            )
-                                : ''
-                            }
-                    </h1>
-                    <div className='td-app-main'>
-                    </div>
-                    <Switch>
-                        <RouterCreate path="/lists" component={TodoLists} onEnter={this.props.loggedIn} />
-                        <Route path="/login" component={LoginPage} />
-                        <Route path="/registration" component={RegistrationPage} />
-                    </Switch>
-                </div>
-            </BrowserRouter>
+            <div>
+                <Head />
+                <Switch>
+                    {/*<RouterCreate path="/lists" component={TodoLists} onEnter={this.props.loggedIn}/>*/}
+                    <Route path="/lists" component={TodoLists}/>
+                    <Route path="/login" component={LoginPage}/>
+                    <Route path="/registration" component={RegistrationPage}/>
+                    <Route path="/" component={HomePage}/>
+                </Switch>
+            </div>
         );
     }
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import NewList from '../NewList';
 import PropTypes from 'prop-types';
 import TodoList from '../TodoList';
+import { withRouter } from 'react-router-dom';
 
 class TodoLists extends Component{
 
@@ -30,4 +31,4 @@ TodoLists.propTypes = {
     getTasks: PropTypes.func
 };
 
-export default TodoLists;
+export default withRouter(TodoLists);

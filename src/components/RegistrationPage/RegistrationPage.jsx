@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import RegistrationPageButton from '../RegistrationPageButton';
 import {faInfoCircle} from "@fortawesome/fontawesome-free-solid/index";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
 
 class RegistrationPage extends Component {
     constructor(props) {
@@ -162,4 +163,4 @@ RegistrationPage.propTypes = {
     isRequest: PropTypes.bool
 };
 
-export default RegistrationPage;
+export default withRouter(RegistrationPage);
